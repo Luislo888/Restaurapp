@@ -1,0 +1,259 @@
+
+strong{
+    font-weight: 600;
+    color: rgb(45, 45, 45);
+}
+
+h6{
+    margin-bottom: 0px!important;
+}
+
+.alert-success{
+    margin-bottom: 17px!important;
+}
+
+.text-md-start{
+    margin-left: 18px!important;
+}
+
+.text-md-start {
+    margin-left: 0px!important;
+}
+
+.card{
+    max-width: 357px;
+}
+
+.btn-primary{
+    background-color: #3d8bfd!important;
+    border-color: #3d8bfd!important;    
+}
+
+.btn-danger{
+    background-color: #df4957!important;
+    border-color: #df4957!important;    
+}
+
+.navbar-brand{
+    font-family: 'Lucida Handwriting', sans-serif;
+    font-size: 24px;
+}
+
+button{
+    height: 30px!important;
+    padding-top: 0px!important;
+    padding-bottom: 0px!important;
+    font-size: 14px!important;
+    margin-top: 10px!important;
+}
+
+.fa-circle-plus::before {
+    content: "\f055";
+    font-size: 25px;
+    color: green;
+}
+
+.fa-circle-plus30::before {
+    content: "\f055";
+    font-size: 30px;
+    color: green;
+}
+
+.fa-circle-minus::before {
+    content: "\f056";
+    font-size: 25px;
+    color: red;
+}
+
+.fa-circle-minus30::before {
+    content: "\f056";
+    font-size: 30px;
+    color: red;
+}
+
+
+
+
+/* CUSTOM IDS AND CLASSES ----------------------------------------------------------------------------- */
+
+.miDiv {
+    margin-left: -111px!important;
+    margin-right: -106px!important;
+}
+
+.tituloCabecera{
+    color: rgb(117, 1, 1);
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+.tituloRol{
+    margin-right: 20px;
+    margin-top: 0px;
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'Lucida Handwriting', sans-serif;
+}
+
+.comandasNavTabs button {
+    height: 30px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.botonesAdmin{
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"!important;
+}
+
+.botonCantidad{
+    margin-top: -5px;    
+}
+
+.botonCantidad:nth-child(even){
+    margin-left: -22px;
+}
+
+.marginTopBody{
+    margin-top: 120px;
+}
+
+#anchorCrearComanda{
+    margin-top: -100px!important;
+}
+
+.titulosComandas{
+    margin-bottom: -1px!important;
+}
+
+#tituloCrearComanda{
+    color: #0a58ca!important;
+}
+
+#bodyCrearComanda{
+    background-color: #f0f6ff;
+}
+
+#tituloComandaAbierta{
+    color: #e5ad06;
+}
+
+.bodyComandas div{
+    margin-left: 30px;
+    margin-top: -28px;
+    margin-bottom: -28px;
+}
+
+.bodyComandasAbiertas{    
+    background-color: #fff7e1;
+    padding-top: 6px;
+    padding-bottom: 9px;
+}
+
+#tituloComandaEnCurso{
+    color: #f91629;
+}
+
+.bodyComandasEnCurso{
+    background-color: #F8D7DA;
+    padding-top: 6px;
+    padding-bottom: 9px;
+}
+
+#tituloComandaCerrada{
+    color: #26a46c;
+}
+
+.bodyComandasCerradas{
+    background-color: #D1E7DD;
+    padding-top: 6px;
+    padding-bottom: 9px;
+}
+
+#cardCrear{    
+    min-width: 472px;
+}
+
+/* LOGIN */
+
+#tituloLogin{
+    margin-right: 160px;
+    margin-top: 0px;
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'Lucida Handwriting', sans-serif;
+}
+
+#cardLogin{
+    max-width: initial;
+}
+
+/* ADMINISTRADOR */
+
+#tituloAdministrador{
+    margin-right: 160px;
+    margin-top: -10px;
+    font-size: 30px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    font-family: 'Lucida Handwriting', sans-serif;
+}
+
+.sinFocus:focus {
+    box-shadow: none!important;
+}
+
+
+/* RESPONSIVE */
+
+@media (min-width: 1400px) { 
+
+    .titulosComandas{
+        margin-bottom: -1px!important;
+    }
+
+    .miDiv{
+        margin-left: initial;
+        margin-right: initial;
+    }
+
+    .card{
+        margin: auto;
+    }
+
+    .navbar{
+        margin-right: -78px;    
+    }
+ }
+
+@media (max-width: 767px) { 
+
+    .titulosComandas{
+        margin-bottom: -1px!important;
+    }
+
+    .miDiv{
+        margin-left: initial;
+        margin-right: initial;
+    }
+
+    .card{
+        max-width: initial;
+        margin-left: 100px;
+        margin-right: 50px;
+    }
+
+    .comandasNavTabs{
+        margin-top: -4px;
+        position: absolute;
+        margin-left: 132px;
+    }
+
+    .comandasBody{
+        margin-top: 135px;
+    }
+}
+ 
+
