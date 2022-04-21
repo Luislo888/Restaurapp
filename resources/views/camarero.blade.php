@@ -53,13 +53,23 @@
 
 
                             <div class="row mb-3">
+
                                 <label for="entrantes"
                                     class="col-md-3 col-form-label text-md-start">{{ __('Entrantes ') }}</label>
 
-                                <div class="col-md-5">
+                                <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
+                                    <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarEntrante"></i>
+                                </button>
+                                {{-- </div> --}}
+                                {{-- <div class="col-md-1 botonCantidad"> --}}
+                                <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
+                                    <i class="fa-solid fa-circle-minus botonRedondo" id="botonQuitarEntrante"></i>
+                                </button>
+
+                                <div class="col-md-5 inputProductos" id="col">
 
                                     <select id="entrantes" name="productos[]"
-                                        class="form-control @error('entrantes') is-invalid @enderror"
+                                        class="form-control @error('entrantes') is-invalid @enderror "
                                         value="{{ old('entrantes') }}" required autocomplete="entrantes">
                                         <option selected disabled>Elige un entrante</option>
                                         @foreach ($entrantes as $entrante)
@@ -79,26 +89,29 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-1 botonCantidad ">
-                                    <button type="button" class="btn sinFocus" id="botonAgregarEntrante">
-                                        <i class="fa-solid fa-circle-plus "></i>
-                                    </button>
-                                </div>
-                                <div class="col-md-1 botonCantidad">
-                                    <button type="button" class="btn sinFocus" id="botonQuitarEntrante">
-                                        <i class="fa-solid fa-circle-minus"></i>
-                                    </button>
-                                </div>
+                                {{-- <div class="col-md-1 botonCantidad "> --}}
+
+                                {{-- </div> --}}
                             </div>
 
                             <div class="row mb-3">
-                                <label for="primeros"
-                                    class="col-md-3 col-form-label text-md-start">{{ __('Primeros ') }}</label>
+                                <label for="primeros" class="col-md-3 col-form-label text-md-start">{{ __('Primeros ') }}
+                                </label>
+                                {{-- <div class="col-md-1 botonCantidad">< --}}
+                                <button type="button" class="btn sinFocus botonMasMenos col-md-1" id="botonAgregarPrimero">
+                                    <i class="fa-solid fa-circle-plus botonRedondo"></i>
+                                </button>
+                                {{-- </div> --}}
+                                {{-- <div class="col-md-1 botonCantidad"> --}}
+                                <button type="button" class="btn sinFocus botonMasMenos col-md-1" id="botonQuitarPrimero">
+                                    <i class="fa-solid fa-circle-minus botonRedondo"></i>
+                                </button>
+                                {{-- </div> --}}
 
-                                <div class="col-md-5">
+                                <div class="col-md-5 inputProductos" id="col">
 
                                     <select id="primeros" name="productos[]"
-                                        class="form-control @error('primeros') is-invalid @enderror"
+                                        class="form-control @error('primeros') is-invalid @enderror "
                                         value="{{ old('primeros') }}" required autocomplete="primeros">
                                         <option selected disabled>Elige un primero</option>
                                         @foreach ($primeros as $primero)
@@ -123,16 +136,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-1 botonCantidad">
-                                    <button type="button" class="btn sinFocus" id="botonAgregarPrimero">
-                                        <i class="fa-solid fa-circle-plus"></i>
-                                    </button>
-                                </div>
-                                <div class="col-md-1 botonCantidad">
-                                    <button type="button" class="btn sinFocus" id="botonQuitarPrimero">
-                                        <i class="fa-solid fa-circle-minus"></i>
-                                    </button>
-                                </div>
+
 
                             </div>
 
@@ -140,7 +144,17 @@
                                 <label for="segundos"
                                     class="col-md-3 col-form-label text-md-start">{{ __('Segundos ') }}</label>
 
-                                <div class="col-md-5">
+                                {{-- <div class="col-md-1 botonCantidad"> --}}
+                                <button type="button" class="btn sinFocus botonMasMenos col-md-1" id="botonAgregarSegundo">
+                                    <i class="fa-solid fa-circle-plus botonRedondo"></i>
+                                </button>
+                                {{-- </div> --}}
+                                {{-- <div class="col-md-1 botonCantidad "> --}}
+                                <button type="button" class="btn sinFocus botonMasMenos col-md-1" id="botonQuitarSegundo">
+                                    <i class="fa-solid fa-circle-minus botonRedondo"></i>
+                                </button>
+                                {{-- </div> --}}
+                                <div class="col-md-5 inputProductos">
 
                                     <select id="segundos" name="productos[]"
                                         class="form-control @error('segundos') is-invalid @enderror"
@@ -168,23 +182,24 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-1 botonCantidad">
-                                    <button type="button" class="btn sinFocus" id="botonAgregarSegundo">
-                                        <i class="fa-solid fa-circle-plus"></i>
-                                    </button>
-                                </div>
-                                <div class="col-md-1 botonCantidad">
-                                    <button type="button" class="btn sinFocus" id="botonQuitarSegundo">
-                                        <i class="fa-solid fa-circle-minus"></i>
-                                    </button>
-                                </div>
+
                             </div>
 
                             <div class="row mb-3">
                                 <label for="bebidas"
                                     class="col-md-3 col-form-label text-md-start">{{ __('Bebidas ') }}</label>
 
-                                <div class="col-md-5">
+                                {{-- <div class="col-md-1 botonCantidad"> --}}
+                                <button type="button" class="btn sinFocus botonMasMenos col-md-1" id="botonAgregarSegundo">
+                                    <i class="fa-solid fa-circle-plus botonRedondo"></i>
+                                </button>
+                                {{-- </div> --}}
+                                {{-- <div class="col-md-1 botonCantidad"> --}}
+                                <button type="button" class="btn sinFocus botonMasMenos col-md-1" id="botonQuitarSegundo">
+                                    <i class="fa-solid fa-circle-minus botonRedondo"></i>
+                                </button>
+                                {{-- </div> --}}
+                                <div class="col-md-5 inputProductos">
 
                                     <select id="bebidas" name="productos[]"
                                         class="form-control @error('bebidas') is-invalid @enderror"
@@ -212,16 +227,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-1 botonCantidad">
-                                    <button type="button" class="btn sinFocus" id="botonAgregarSegundo">
-                                        <i class="fa-solid fa-circle-plus"></i>
-                                    </button>
-                                </div>
-                                <div class="col-md-1 botonCantidad">
-                                    <button type="button" class="btn sinFocus" id="botonQuitarSegundo">
-                                        <i class="fa-solid fa-circle-minus"></i>
-                                    </button>
-                                </div>
+
                             </div>
 
 

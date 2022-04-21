@@ -52,7 +52,6 @@ button{
     font-size: 25px;
     color: green;
 }
-/* tfgdhg */
 
 .fa-circle-plus30::before {
     content: "\f055";
@@ -109,13 +108,15 @@ button{
     font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"!important;
 }
 
-.botonCantidad{
-    margin-top: -5px;    
+.botonRedondo {
+    margin-left: -10px;
 }
 
-.botonCantidad:nth-child(even){
-    margin-left: -22px;
+.botonMasMenos{
+    margin-top: 5px!important;
+
 }
+
 
 .marginTopBody{
     margin-top: 120px;
@@ -175,6 +176,24 @@ button{
 
 #cardCrear{    
     min-width: 472px;
+}
+
+.nuevoProducto{
+    margin-left: 192px;;
+    width: 168.5px;
+    margin-bottom: 16px;
+}
+
+.nuevaCantidad{
+    margin-left: 385px;
+    width: 53.5px;
+    margin-top: -54px;
+    margin-bottom: 14px;
+}
+
+.botonMas{
+margin-top: -29px!important;
+    margin-left: 23px;
 }
 
 /* LOGIN */
@@ -254,6 +273,31 @@ button{
 
     .comandasBody{
         margin-top: 135px;
+    }
+
+    .nuevoProducto{
+        margin-left: initial;
+        width: initial;
+        margin-bottom: initial;
+    }
+
+    .nuevaCantidad{
+        margin-left: initial;
+        width: initial;
+        margin-top: initial;
+        margin-bottom: 13px;
+    }
+    
+    .botonMas{
+        margin-left: 241px;
+        margin-bottom: 5px;
+        width: 10px;
+    }
+    
+    .botonMenos{
+        margin-top: -29px!important;
+        margin-left: 11px;
+        width: 10px;
     }
 }
  
