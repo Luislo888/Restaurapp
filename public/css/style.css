@@ -112,6 +112,10 @@ button{
     margin-left: -10px;
 }
 
+.botonMasMenos{
+    margin-top: 5px!important;
+}
+
 .marginTopBody{
     margin-top: 120px;
 }
@@ -179,10 +183,16 @@ button{
 }
 
 .nuevaCantidad{
-    margin-left: 385px;
-    width: 53.5px;
+    margin-left: 367px;
+    width: 70.5px;
     margin-top: -54px;
     margin-bottom: 14px;
+}
+
+
+.cantidad{
+    width: 94px!important;
+    margin-left: -17px!important;
 }
 
 /* LOGIN */
@@ -270,23 +280,37 @@ button{
         margin-bottom: initial;
     }
 
+    .cantidad{
+        width: 100%!important;
+        margin-left: initial!important;
+    }
+
     .nuevaCantidad{
         margin-left: initial;
         width: initial;
         margin-top: initial;
         margin-bottom: 13px;
     }
+
+    .botonMasMenos{
+        margin-bottom: 10px;
+    }
     
     .botonMas{
         margin-left: 241px;
-        margin-bottom: 5px;
-        width: 10px;
+    /* margin-bottom: z; */
+    width: 10px;
+    margin-top: 4px!important;
     }
     
     .botonMenos{
-        margin-top: 9px!important;
+        margin-top: 4px!important;
         margin-left: 11px;
         width: 10px;
+    }
+
+    select{
+        margin-bottom: 10px;
     }
 }
  

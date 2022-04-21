@@ -5,19 +5,64 @@ $(function () {
 
     $('.botonMas').on('click', function () {
 
-        let cantidad = "<div class='col-md-2 nuevaCantidad'>        <input id='' min='1' type='number'            class='form-control @error('cantidad') s-invalid @enderror' name='cantidad[]'            value='{{ old('cantidad') }}' placeholder='1' autocomplete='cantidad' autofocus>            </div > ";
+        let cantidad = "<div class='col-md-2 nuevaCantidad'> <input id='' min='1' type='number' class='form-control @error('cantidad') s-invalid @enderror' name='cantidad[]' value='{{ old('cantidad') }}' autocomplete='cantidad' autofocus> </div > ";
 
         let nuevoProducto = $(this).closest('.row').children('.inputProductos').clone().addClass('nuevoProducto');
 
         $(this).closest('.row').after(cantidad);
         $(this).closest('.row').after(nuevoProducto);
 
+        // let select = $(this).closest('.row').children('.inputProductos').children().children('option');
+
+        // let valor = null;
+
+        // $.each(select, function (index, value) {
+
+        //     if ($(this).is(':selected')) {
+        //         valor = $(this).val();
+        //     }
+
+        //     if ($(this).val() == valor) {
+        //         $(this).prop('disabled', true);
+        //         alert($(this).val());
+        //     }
+        //     alert($('option:selected', this.index).text());
+        // });
+
+        // let contador = 1;
+
+        // $('option').each(function () {
+        //     if ($(this).val() == valor) {
+        //         $(this).attr('disabled', 'disabled');
+
+        //         // alert($(this).val());
+        //     }
+        // });
+
+        // for (let index = 0; index < select.length; index++) {
+
+        //     if (select[index].value == valor) {
+
+        //         alert(select[index].value);
+        //     }
+        // }
+        // cambiar();
     });
 
+    // function cambiar() {
 
+    //     $('select').on('change', function () {
+    //         let valor = $(this).val();
+    //         alert($(this).val());
 
+    //         if ($('option').val() == valor) {
+    //             $(this).attr('disabled', 'disabled');
+    //             // alert($(this).val());
+    //         }
+    //     });
+    // }
 
-
+    // cambiar();
 
     $('.fa-circle-plus').on('click', function () {
 

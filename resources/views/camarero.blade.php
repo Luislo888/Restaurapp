@@ -34,6 +34,8 @@
                         <form method="POST" action="{{ route('comanda') }}" class="">
                             @csrf
 
+                            {{-- Nº MESA --}}
+
                             <div class="row mb-4">
                                 <label for="mesa"
                                     class="col-md-9 col-form-label text-md-start">{{ __('Nº Mesa') }}</label>
@@ -51,7 +53,7 @@
                                 </div>
                             </div>
 
-
+                            {{-- ENTRANTES --}}
                             <div class="row mb-3">
 
                                 <label for="entrantes"
@@ -60,8 +62,6 @@
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
                                     <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarEntrante"></i>
                                 </button>
-                                {{-- </div> --}}
-                                {{-- <div class="col-md-1 botonCantidad"> --}}
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
                                     <i class="fa-solid fa-circle-minus botonRedondo" id="botonQuitarEntrante"></i>
                                 </button>
@@ -78,10 +78,10 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-2 cantidad">
                                     <input id="" min="1" type="number"
                                         class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
-                                        value="{{ old('cantidad') }}" placeholder="1" autocomplete="cantidad" autofocus>
+                                        value="{{ old('cantidad') }}" autocomplete="cantidad" autofocus>
 
                                     @error('cantidad')
                                         <span class="invalid-feedback" role="alert">
@@ -89,24 +89,21 @@
                                         </span>
                                     @enderror
                                 </div>
-                                {{-- <div class="col-md-1 botonCantidad "> --}}
-
-                                {{-- </div> --}}
                             </div>
+
+                            {{-- PRIMEROS --}}
 
                             <div class="row mb-3">
                                 <label for="primeros" class="col-md-3 col-form-label text-md-start">{{ __('Primeros ') }}
                                 </label>
-                                {{-- <div class="col-md-1 botonCantidad">< --}}
-                                <button type="button" class="btn sinFocus botonMasMenos col-md-1" id="botonAgregarPrimero">
+                                <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
+                                    id="botonAgregarPrimero">
                                     <i class="fa-solid fa-circle-plus botonRedondo"></i>
                                 </button>
-                                {{-- </div> --}}
-                                {{-- <div class="col-md-1 botonCantidad"> --}}
-                                <button type="button" class="btn sinFocus botonMasMenos col-md-1" id="botonQuitarPrimero">
+                                <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos"
+                                    id="botonQuitarPrimero">
                                     <i class="fa-solid fa-circle-minus botonRedondo"></i>
                                 </button>
-                                {{-- </div> --}}
 
                                 <div class="col-md-5 inputProductos" id="col">
 
@@ -125,10 +122,10 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2 cantidad">
                                     <input id="" min="1" type="number"
                                         class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
-                                        value="{{ old('cantidad') }}" placeholder="1" autocomplete="cantidad" autofocus>
+                                        value="{{ old('cantidad') }}" autocomplete="cantidad" autofocus>
 
                                     @error('cantidad')
                                         <span class="invalid-feedback" role="alert">
@@ -136,24 +133,22 @@
                                         </span>
                                     @enderror
                                 </div>
-
-
                             </div>
 
+                            {{-- SEGUNDOS --}}
                             <div class="row mb-3">
                                 <label for="segundos"
                                     class="col-md-3 col-form-label text-md-start">{{ __('Segundos ') }}</label>
 
-                                {{-- <div class="col-md-1 botonCantidad"> --}}
-                                <button type="button" class="btn sinFocus botonMasMenos col-md-1" id="botonAgregarSegundo">
+                                <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
+                                    id="botonAgregarSegundo">
                                     <i class="fa-solid fa-circle-plus botonRedondo"></i>
                                 </button>
-                                {{-- </div> --}}
-                                {{-- <div class="col-md-1 botonCantidad "> --}}
-                                <button type="button" class="btn sinFocus botonMasMenos col-md-1" id="botonQuitarSegundo">
+
+                                <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos"
+                                    id="botonQuitarSegundo">
                                     <i class="fa-solid fa-circle-minus botonRedondo"></i>
                                 </button>
-                                {{-- </div> --}}
                                 <div class="col-md-5 inputProductos">
 
                                     <select id="segundos" name="productos[]"
@@ -171,10 +166,10 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2 cantidad">
                                     <input id="" min="1" type="number"
                                         class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
-                                        value="{{ old('cantidad') }}" placeholder="1" autocomplete="cantidad" autofocus>
+                                        value="{{ old('cantidad') }}" autocomplete="cantidad" autofocus>
 
                                     @error('cantidad')
                                         <span class="invalid-feedback" role="alert">
@@ -182,23 +177,22 @@
                                         </span>
                                     @enderror
                                 </div>
-
                             </div>
+
+                            {{-- BEBIDAS --}}
 
                             <div class="row mb-3">
                                 <label for="bebidas"
                                     class="col-md-3 col-form-label text-md-start">{{ __('Bebidas ') }}</label>
 
-                                {{-- <div class="col-md-1 botonCantidad"> --}}
-                                <button type="button" class="btn sinFocus botonMasMenos col-md-1" id="botonAgregarSegundo">
+                                <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
+                                    id="botonAgregarSegundo">
                                     <i class="fa-solid fa-circle-plus botonRedondo"></i>
                                 </button>
-                                {{-- </div> --}}
-                                {{-- <div class="col-md-1 botonCantidad"> --}}
-                                <button type="button" class="btn sinFocus botonMasMenos col-md-1" id="botonQuitarSegundo">
+                                <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos"
+                                    id="botonQuitarSegundo">
                                     <i class="fa-solid fa-circle-minus botonRedondo"></i>
                                 </button>
-                                {{-- </div> --}}
                                 <div class="col-md-5 inputProductos">
 
                                     <select id="bebidas" name="productos[]"
@@ -216,10 +210,10 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2 cantidad">
                                     <input id="" min="1" type="number"
                                         class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
-                                        value="{{ old('cantidad') }}" placeholder="1" autocomplete="cantidad" autofocus>
+                                        value="{{ old('cantidad') }}" autocomplete="cantidad" autofocus>
 
                                     @error('cantidad')
                                         <span class="invalid-feedback" role="alert">
@@ -227,9 +221,9 @@
                                         </span>
                                     @enderror
                                 </div>
-
                             </div>
 
+                            {{-- COMENTARIOS --}}
 
                             <div class="row mb-3">
                                 <label for="comentarios"
