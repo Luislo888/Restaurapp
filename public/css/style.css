@@ -112,12 +112,6 @@ button{
     margin-left: -10px;
 }
 
-.botonMasMenos{
-    margin-top: 5px!important;
-
-}
-
-
 .marginTopBody{
     margin-top: 120px;
 }
@@ -189,11 +183,6 @@ button{
     width: 53.5px;
     margin-top: -54px;
     margin-bottom: 14px;
-}
-
-.botonMas{
-margin-top: -29px!important;
-    margin-left: 23px;
 }
 
 /* LOGIN */
@@ -295,7 +284,7 @@ margin-top: -29px!important;
     }
     
     .botonMenos{
-        margin-top: -29px!important;
+        margin-top: 9px!important;
         margin-left: 11px;
         width: 10px;
     }
