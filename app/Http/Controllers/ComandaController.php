@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comanda;
+use App\Models\Producto;
 use App\Models\UsersComandas;
+use App\Models\ComandasProductos;
 use App\Http\Controllers\UsersComandasController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -66,7 +68,17 @@ class ComandaController extends Controller
      */
     public function show(Comanda $comanda)
     {
-        //
+        $productos = Producto::all();
+
+        // dd($productos);
+
+        $comanda = Comanda::find($comanda->id);
+        // dd($comanda);
+
+        $comandasProductos = ComandasProductos::where('comanda_id', $comanda->id)->get();
+
+        // dd($ComandasProductos);
+        return view('comanda', ['comanda' => $comanda, 'todosProductos' => $productos, 'comandasProductos' => $comandasProductos]);
     }
 
     /**

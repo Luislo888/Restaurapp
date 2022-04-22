@@ -45,7 +45,8 @@ Route::resource('/camarero', CamareroController::class);
 Route::resource('/cocinero', CocineroController::class);
 Route::resource('/comanda', ComandaController::class);
 
-// Route::post('/comanda', [App\Http\Controllers\ComandaController::class, 'store'])->name('comanda');
+Route::post('/comanda', [App\Http\Controllers\ComandaController::class, 'store'])->name('comanda');
+Route::get('/comanda/{id}', [App\Http\Controllers\ComandaController::class, 'show'])->name('comanda-edit');
 
 
 // Route::resource('/comanda', ComandaController::class);

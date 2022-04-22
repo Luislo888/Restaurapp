@@ -320,9 +320,10 @@
                         <h6 id="tituloComandaAbierta">Comandas Abiertas</h6>
                     </div>
                 </div>
-                <form method="GET" action="{{ route('comanda') }}" class="">
-                    @foreach ($comandas as $comanda)
-                        @if ($comanda->id != null && $comanda->estado == 'abierta')
+                @foreach ($comandas as $comanda)
+                    @if ($comanda->id != null && $comanda->estado == 'abierta')
+                        <form method="GET" action="{{ route('comanda-edit', ['id' => $comanda->id]) }}"
+                            class="">
                             <div class="card mb-3">
                                 <div class="card-header">
                                     {{ $comanda->created_at }}
@@ -384,9 +385,9 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
-                    @endforeach
-                </form>
+                        </form>
+                    @endif
+                @endforeach
             </div>
 
             {{-- ----------------------------------- FIN COMANDAS ABIERTAS --------------------------------- --}}
