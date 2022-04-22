@@ -81,6 +81,21 @@ class ComandasProductosSeeder extends Seeder
             'producto_id' => 13,
             'cantidad' => 1,
         ]);
+        $comanda = ComandasProductos::create([
+            'comanda_id' => 1,
+            'producto_id' => 14,
+            'cantidad' => 2,
+        ]);
+        $comanda = ComandasProductos::create([
+            'comanda_id' => 1,
+            'producto_id' => 15,
+            'cantidad' => 1,
+        ]);
+        $comanda = ComandasProductos::create([
+            'comanda_id' => 1,
+            'producto_id' => 16,
+            'cantidad' => 1,
+        ]);
         // COMANDA ID 2 -----------------------------------
         $comanda = ComandasProductos::create([
             'comanda_id' => 2,

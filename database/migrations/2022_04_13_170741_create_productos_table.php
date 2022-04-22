@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->double('precio', 5, 2);
-            $table->enum('categoria', ['entrantes', 'primeros', 'segundos', 'bebidas']);
+            $table->enum('categoria', ['entrantes', 'primeros', 'segundos', 'postres', 'bebidas']);
             $table->timestamps();
         });
     }

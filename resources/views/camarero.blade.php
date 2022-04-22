@@ -19,8 +19,8 @@
 
             {{-- ----------------------------------- INICIO CREAR COMANDA --------------------------------- --}}
 
-            <div id="anchorCrearComanda"></div>
-            <div class="col-md-auto">
+            {{-- <div id="anchorCrearComanda"></div> --}}
+            <div class="col-md-auto" id="crearComanda">
                 <div class="card cardCrear" id="cardCrear">
                     <div class="card-header">
                         <h6 class="" id="tituloCrearComanda">{{ __('Crear Comanda') }}</h6>
@@ -38,9 +38,9 @@
 
                             <div class="row mb-4">
                                 <label for="mesa"
-                                    class="col-md-9 col-form-label text-md-start">{{ __('Nº Mesa') }}</label>
+                                    class="col-md-9 col-form-label text-md-start"><strong>{{ __('Nº Mesa') }}</strong></label>
 
-                                <div class="col-md-3">
+                                <div class="col-md-2 cantidad numeroMesa">
                                     <input id="mesa" min="1" max="6" type="number"
                                         class="form-control @error('mesa') is-invalid @enderror" name="mesa"
                                         value="{{ old('mesa') }}" required autocomplete="mesa" autofocus>
@@ -57,7 +57,7 @@
                             <div class="row mb-3">
 
                                 <label for="entrantes"
-                                    class="col-md-3 col-form-label text-md-start">{{ __('Entrantes ') }}</label>
+                                    class="col-md-3 col-form-label text-md-start"><strong>{{ __('Entrantes ') }}</strong></label>
 
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
                                     <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarEntrante"></i>
@@ -94,7 +94,8 @@
                             {{-- PRIMEROS --}}
 
                             <div class="row mb-3">
-                                <label for="primeros" class="col-md-3 col-form-label text-md-start">{{ __('Primeros ') }}
+                                <label for="primeros"
+                                    class="col-md-3 col-form-label text-md-start"><strong>{{ __('Primeros ') }}</strong>
                                 </label>
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
                                     id="botonAgregarPrimero">
@@ -138,7 +139,7 @@
                             {{-- SEGUNDOS --}}
                             <div class="row mb-3">
                                 <label for="segundos"
-                                    class="col-md-3 col-form-label text-md-start">{{ __('Segundos ') }}</label>
+                                    class="col-md-3 col-form-label text-md-start"><strong>{{ __('Segundos ') }}</strong></label>
 
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
                                     id="botonAgregarSegundo">
@@ -179,11 +180,55 @@
                                 </div>
                             </div>
 
+                            {{-- POSTRES --}}
+
+                            <div class="row mb-3">
+                                <label for="postres"
+                                    class="col-md-3 col-form-label text-md-start"><strong>{{ __('Postres ') }}</strong></label>
+
+                                <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
+                                    id="botonAgregarSegundo">
+                                    <i class="fa-solid fa-circle-plus botonRedondo"></i>
+                                </button>
+                                <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos"
+                                    id="botonQuitarSegundo">
+                                    <i class="fa-solid fa-circle-minus botonRedondo"></i>
+                                </button>
+                                <div class="col-md-5 inputProductos">
+
+                                    <select id="postres" name="productos[]"
+                                        class="form-control @error('postres') is-invalid @enderror"
+                                        value="{{ old('postres') }}" required autocomplete="postres">
+                                        <option selected disabled>Elige un postre</option>
+                                        @foreach ($postres as $postre)
+                                            <option value="{{ $postre->id }}">{{ $postre->nombre }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('postres')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-2 cantidad">
+                                    <input id="" min="1" type="number"
+                                        class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
+                                        value="{{ old('cantidad') }}" autocomplete="cantidad" autofocus>
+
+                                    @error('cantidad')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             {{-- BEBIDAS --}}
 
                             <div class="row mb-3">
                                 <label for="bebidas"
-                                    class="col-md-3 col-form-label text-md-start">{{ __('Bebidas ') }}</label>
+                                    class="col-md-3 col-form-label text-md-start"><strong>{{ __('Bebidas ') }}</strong></label>
 
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
                                     id="botonAgregarSegundo">
@@ -226,11 +271,12 @@
                             {{-- COMENTARIOS --}}
 
                             <div class="row mb-3">
-                                <label for="comentarios"
-                                    class="col-md-3 col-form-label text-md-start">{{ __('Comentarios') }}</label>
+                                <label for="comentarios" class="col-md-3 col-form-label text-md-start"
+                                    id="comentarioLabel"><strong>{{ __('Comentarios') }}</strong></label>
 
-                                <div class="col-md-9">
-                                    <textarea id="comentarios" min="1" max="6" type="number" class="form-control @error('comentarios') is-invalid @enderror"
+                                <div class="col-md-8">
+                                    <textarea id="comentarioInput" min="1" max="6" type="number"
+                                        class="form-control @error('comentarios') is-invalid @enderror"
                                         name="comentarios" value="{{ old('comentarios') }}"
                                         autocomplete="comentarios" autofocus></textarea>
 
@@ -268,7 +314,7 @@
             {{-- ----------------------------------- INICIO COMANDAS ABIERTAS --------------------------------- --}}
 
             {{-- <div id="anchorComandasAbiertas"></div> --}}
-            <div class="col-md-auto" id="anchorComandasAbiertas">
+            <div class="col-md-auto" id="comandasAbiertas">
                 <div class="card">
                     <div class="card-header text-warning titulosComandas">
                         <h6 id="tituloComandaAbierta">Comandas Abiertas</h6>
@@ -303,6 +349,13 @@
                                 <strong>Segundos:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
+                                        <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                    @endif
+                                @endforeach
+                                <br>
+                                <strong>Postres:</strong>
+                                @foreach ($productos as $producto)
+                                    @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'postres')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
@@ -342,7 +395,7 @@
             {{-- ----------------------------------- INICIO COMANDAS EN CURSO --------------------------------- --}}
 
             {{-- <div id="anchorComandasCerradas"></div> --}}
-            <div class="col-md-auto" id="anchorComandasEnCurso">
+            <div class="col-md-auto" id="comandasEnCurso">
                 <div class="card">
                     <div class="card-header text-warning titulosComandas">
                         <h6 id="tituloComandaEnCurso">Comandas en Curso</h6>
@@ -381,6 +434,13 @@
                                     @endif
                                 @endforeach
                                 <br>
+                                <strong>Postres:</strong>
+                                @foreach ($productos as $producto)
+                                    @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'postres')
+                                        <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                    @endif
+                                @endforeach
+                                <br>
                                 <strong>Bebidas:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'bebidas')
@@ -415,7 +475,7 @@
             {{-- ----------------------------------- INICIO COMANDAS CERRADAS --------------------------------- --}}
 
             {{-- <div id="anchorComandasCerradas"></div> --}}
-            <div class="col-md-auto" id="anchorComandasCerradas">
+            <div class="col-md-auto" id="comandasCerradas">
                 <div class="card">
                     <div class="card-header text-warning titulosComandas">
                         <h6 id="tituloComandaCerrada">Comandas Cerradas</h6>
@@ -454,6 +514,13 @@
                                     @endif
                                 @endforeach
                                 <br>
+                                <strong>Postres:</strong>
+                                @foreach ($productos as $producto)
+                                    @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'postres')
+                                        <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                    @endif
+                                @endforeach
+                                <br>
                                 <strong>Bebidas:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'bebidas')
@@ -474,4 +541,8 @@
 
         </div>
     </div>
+    <button id="ocultarCrear" type="button" class="btn alert alert-primary botonOcultar">Crear</button>
+    <button id="ocultarAbiertas" type="button" class="btn alert alert-warning botonOcultar">Abiertas</button>
+    <button id="ocultarEnCurso" type="button" class="btn alert alert-danger botonOcultar">En Curso</button>
+    <button id="ocultarCerradas" type="button" class="btn alert alert-success botonOcultar">Cerradas</button>
 @endsection

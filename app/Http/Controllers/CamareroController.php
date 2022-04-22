@@ -35,6 +35,7 @@ class CamareroController extends Controller
         $entrantes = Producto::all()->where('categoria', 'entrantes');
         $primeros = Producto::all()->where('categoria', 'primeros');
         $segundos = Producto::all()->where('categoria', 'segundos');
+        $postres = Producto::all()->where('categoria', 'postres');
         $bebidas = Producto::all()->where('categoria', 'bebidas');
 
         $camarero = Auth::user()->name;
@@ -63,7 +64,7 @@ class CamareroController extends Controller
             ->select('productos.*', 'comandas_productos.*')->get();
 
 
-        return view('camarero', ['camarero' => $camarero, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'bebidas' => $bebidas, 'comandas' => $comandas, 'productos' => $productos]);
+        return view('camarero', ['camarero' => $camarero, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'postres' => $postres, 'bebidas' => $bebidas, 'comandas' => $comandas, 'productos' => $productos]);
     }
 
     /**

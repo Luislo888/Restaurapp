@@ -50,9 +50,10 @@ class ComandaController extends Controller
         $user_comanda->store($comanda->id);
 
         $productos = $request->input('productos');
+        $cantidad = $request->input('cantidad');
 
         $comanda_producto = new ComandasProductosController();
-        $comanda_producto->store($comanda->id, $productos);
+        $comanda_producto->store($comanda->id, $productos, $cantidad);
 
         return redirect('/camarero')->with('success', 'Comanda creada');
     }

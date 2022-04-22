@@ -224,6 +224,45 @@ button{
     box-shadow: none!important;
 }
 
+.numeroMesa {
+    margin-left: 21px!important;
+}
+
+#comentarioLabel{
+    width: 135px;
+}
+
+#comentarioInput{
+    width: 302px;
+}
+
+.botonOcultar{
+    position: fixed;
+    transform: rotate(-90deg);
+    right: -10px;
+    height: 55px!important;
+    padding-bottom: 24px!important;
+}
+
+#ocultarCrear{
+    top: 200px;    
+}
+
+#ocultarAbiertas{
+    top: 276px;
+    right: -19px;
+}
+
+#ocultarEnCurso{
+    top: 363px;
+    right: -21px;
+}
+
+#ocultarCerradas{
+    top: 451px;
+    right: -21px;
+}
+
 
 /* RESPONSIVE */
 
@@ -249,8 +288,17 @@ button{
 
 @media (max-width: 767px) { 
 
+    .marginTopBody {
+        margin-top: 139px;
+    }
+
+    .col-md-auto{
+        margin-top: 20px;
+    }
+
     .titulosComandas{
         margin-bottom: -1px!important;
+        /* margin-top: 20px; */
     }
 
     .miDiv{

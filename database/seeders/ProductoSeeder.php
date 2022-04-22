@@ -15,6 +15,7 @@ class ProductoSeeder extends Seeder
      */
     public function run()
     {
+        // ENTRANTES -----------------------------------
         $producto = Producto::create([
             'nombre' => 'Cebiche',
             'precio' => '118.50',
@@ -32,6 +33,8 @@ class ProductoSeeder extends Seeder
             'precio' => '6.25',
             'categoria' => 'entrantes',
         ]);
+
+        // PRIMEROS -----------------------------------
 
         $producto4 = Producto::create([
             'nombre' => 'Ensalada Mixta',
@@ -51,6 +54,8 @@ class ProductoSeeder extends Seeder
             'categoria' => 'primeros',
         ]);
 
+        // SEGUNDOS -----------------------------------
+
         $producto7 = Producto::create([
             'nombre' => 'Solomillo',
             'precio' => '15.9',
@@ -69,25 +74,47 @@ class ProductoSeeder extends Seeder
             'categoria' => 'segundos',
         ]);
 
+        // POSTRES -----------------------------------
+
         $producto10 = Producto::create([
+            'nombre' => 'Tiramisú',
+            'precio' => '7.8',
+            'categoria' => 'postres',
+        ]);
+
+        $producto11 = Producto::create([
+            'nombre' => 'Cheescake',
+            'precio' => '8.2',
+            'categoria' => 'postres',
+        ]);
+
+        $producto12 = Producto::create([
+            'nombre' => 'Fruta',
+            'precio' => '6.75',
+            'categoria' => 'postres',
+        ]);
+
+        // BEBIDAS -----------------------------------
+
+        $producto13 = Producto::create([
             'nombre' => 'Agua',
             'precio' => '1.25',
             'categoria' => 'bebidas',
         ]);
 
-        $producto11 = Producto::create([
+        $producto14 = Producto::create([
             'nombre' => 'Cocacola',
             'precio' => '2.1',
             'categoria' => 'bebidas',
         ]);
 
-        $producto12 = Producto::create([
+        $producto15 = Producto::create([
             'nombre' => 'Vino',
             'precio' => '4',
             'categoria' => 'bebidas',
         ]);
 
-        $producto13 = Producto::create([
+        $producto16 = Producto::create([
             'nombre' => 'Cerveza',
             'precio' => '3.5',
             'categoria' => 'bebidas',
