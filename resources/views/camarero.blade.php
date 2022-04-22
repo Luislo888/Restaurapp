@@ -320,71 +320,73 @@
                         <h6 id="tituloComandaAbierta">Comandas Abiertas</h6>
                     </div>
                 </div>
-                @foreach ($comandas as $comanda)
-                    @if ($comanda->id != null && $comanda->estado == 'abierta')
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                {{ $comanda->created_at }}
-                                <br>
-                                <strong>Mesa:</strong> {{ $comanda->mesa }}
-                                <span class="textoDerecha"><strong>Nº Comanda:</strong>
-                                    {{ $comanda->id }}</span>
-                            </div>
+                <form method="GET" action="{{ route('comanda') }}" class="">
+                    @foreach ($comandas as $comanda)
+                        @if ($comanda->id != null && $comanda->estado == 'abierta')
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    {{ $comanda->created_at }}
+                                    <br>
+                                    <strong>Mesa:</strong> {{ $comanda->mesa }}
+                                    <span class="textoDerecha"><strong>Nº Comanda:</strong>
+                                        {{ $comanda->id }}</span>
+                                </div>
 
-                            <div class="card-body bodyComandas bodyComandasAbiertas">
-                                <strong>Entrantes:</strong>
-                                @foreach ($productos as $producto)
-                                    @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
-                                        <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
-                                    @endif
-                                @endforeach
-                                <br>
-                                <strong>Primeros:</strong>
-                                @foreach ($productos as $producto)
-                                    @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
-                                        <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
-                                    @endif
-                                @endforeach
-                                <br>
-                                <strong>Segundos:</strong>
-                                @foreach ($productos as $producto)
-                                    @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
-                                        <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
-                                    @endif
-                                @endforeach
-                                <br>
-                                <strong>Postres:</strong>
-                                @foreach ($productos as $producto)
-                                    @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'postres')
-                                        <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
-                                    @endif
-                                @endforeach
-                                <br>
-                                <strong>Bebidas:</strong>
-                                @foreach ($productos as $producto)
-                                    @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'bebidas')
-                                        <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
-                                    @endif
-                                @endforeach
-                                <br>
-                                <strong>Comentarios:</strong> {{ $comanda->comentarios }}
-                                <br>
+                                <div class="card-body bodyComandas bodyComandasAbiertas">
+                                    <strong>Entrantes:</strong>
+                                    @foreach ($productos as $producto)
+                                        @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
+                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                        @endif
+                                    @endforeach
+                                    <br>
+                                    <strong>Primeros:</strong>
+                                    @foreach ($productos as $producto)
+                                        @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
+                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                        @endif
+                                    @endforeach
+                                    <br>
+                                    <strong>Segundos:</strong>
+                                    @foreach ($productos as $producto)
+                                        @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
+                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                        @endif
+                                    @endforeach
+                                    <br>
+                                    <strong>Postres:</strong>
+                                    @foreach ($productos as $producto)
+                                        @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'postres')
+                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                        @endif
+                                    @endforeach
+                                    <br>
+                                    <strong>Bebidas:</strong>
+                                    @foreach ($productos as $producto)
+                                        @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'bebidas')
+                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                        @endif
+                                    @endforeach
+                                    <br>
+                                    <strong>Comentarios:</strong> {{ $comanda->comentarios }}
+                                    <br>
 
-                                <div class="row mb-1 mt-1 botonesComandas">
-                                    <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
-                                        <button type="submit" class="btn btn-primary">
-                                            {{ __('Editar ') }}
-                                        </button>
+                                    <div class="row mb-1 mt-1 botonesComandas">
+                                        <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
+                                            <button type="submit" class="btn btn-primary">
+                                                {{ __('Editar ') }}
+                                            </button>
 
-                                        <button type="submit" class="btn btn-danger">
-                                            {{ __('Cancelar ') }}
-                                        </button>
+                                            <button type="submit" class="btn btn-danger">
+                                                {{ __('Cancelar ') }}
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endif
-                @endforeach
+                        @endif
+                    @endforeach
+                </form>
             </div>
 
             {{-- ----------------------------------- FIN COMANDAS ABIERTAS --------------------------------- --}}
