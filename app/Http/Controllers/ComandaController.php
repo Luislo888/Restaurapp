@@ -101,7 +101,20 @@ class ComandaController extends Controller
      */
     public function update(Request $request, Comanda $comanda)
     {
-        //
+        $comanda = Comanda::find($comanda->id);
+
+        $comanda->mesa = $request->input('mesa');
+        $comanda->comentarios = $request->input('comentarios');
+
+        $comanda->save();
+
+        $productos = $request->input('productos');
+        $cantidad = $request->input('cantidad');
+
+        $comanda_producto = new ComandasProductosController();
+        $comanda_producto->update($comanda->id, $productos, $cantidad);
+
+        return redirect('/camarero')->with('asdf', 'Comanda actualizada');
     }
 
     /**

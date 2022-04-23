@@ -17,9 +17,6 @@
     <div class="container marginTopBody">
         <div class="row justify-content-center miDiv">
 
-            {{-- {{ $comanda->id }} --}}
-
-
 
             <div class="col-md-auto" id="crearComanda">
                 <div class="card cardCrear" id="cardCrear">
@@ -32,12 +29,19 @@
                             <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6>
                         @endif
 
-                        <form method="POST" action="{{ route('comanda') }}" class="">
+                        <form method="POST" action="{{ route('comanda-update', ['id' => $comanda->id]) }}"
+                            class="">
+                            @method('PATCH')
                             @csrf
 
                             {{-- Nº MESA --}}
 
                             <div class="row mb-4">
+                                <span class="textoDerecha">{{ $comanda->created_at }}</span>
+                                <br>
+                                <span class="textoDerecha"><strong>Nº Comanda:</strong>
+                                    {{ $comanda->id }}</span>
+
                                 <label for="mesa"
                                     class="col-md-9 col-form-label text-md-start"><strong>{{ __('Nº Mesa') }}</strong></label>
 
@@ -81,7 +85,7 @@
                                             <select id="entrantes" name="productos[]"
                                                 class="form-control @error('entrantes') is-invalid @enderror "
                                                 value="{{ old('entrantes') }}" required autocomplete="entrantes">
-
+                                                <option selected>Elige un entrante</option>
                                                 @foreach ($todosProductos as $todosProducto)
                                                     @if ($todosProducto->id == $producto->id)
                                                         <option value="{{ $todosProducto->id }}" selected>
@@ -96,16 +100,9 @@
                                         <div class="col-md-2 cantidad">
                                             @foreach ($comandasProductos as $comandasProducto)
                                                 @if ($producto->id == $comandasProducto->producto_id)
-                                                    <input id="" min="1" type="number"
-                                                        class="form-control @error('cantidad') is-invalid @enderror"
-                                                        name="cantidad[]" value="{{ $comandasProducto->cantidad }}"
-                                                        placeholder="{{ $comandasProducto->cantidad }}"
-                                                        autocomplete="cantidad" autofocus>
-                                                    @error('cantidad')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                    <input id="" min="1" type="number" class="form-control"
+                                                        name="cantidad[]" value='{{ $comandasProducto->cantidad }}'
+                                                        placeholder="{{ $comandasProducto->cantidad }}">
                                                 @endif
                                             @endforeach
                                         </div>
@@ -160,7 +157,7 @@
                                                         name="cantidad[]" value="{{ $comandasProducto->cantidad }}"
                                                         placeholder="{{ $comandasProducto->cantidad }}"
                                                         autocomplete="cantidad" autofocus>
-                                                    @error('cantidad')
+                                                    @error(' cantidad')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -353,15 +350,15 @@
 
                             {{-- COMENTARIOS --}}
 
-                            {{-- <div class="row mb-3">
+                            <div class="row mb-3">
                                 <label for="comentarios" class="col-md-3 col-form-label text-md-start"
                                     id="comentarioLabel"><strong>{{ __('Comentarios') }}</strong></label>
 
                                 <div class="col-md-8">
                                     <textarea id="comentarioInput" min="1" max="6" type="number"
                                         class="form-control @error('comentarios') is-invalid @enderror"
-                                        name="comentarios" value="{{ old('comentarios') }}"
-                                        autocomplete="comentarios" autofocus></textarea>
+                                        name="comentarios" value="" autocomplete="comentarios" autofocus
+                                        placeholder="">{{ $comanda->comentarios }}</textarea>
 
                                     @error('comentarios')
                                         <span class="invalid-feedback" role="alert">
@@ -369,13 +366,13 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div> --}}
+                            </div>
 
 
                             <div class="row mb-0 justify-content-center">
                                 <div class="col-md-12 offset-md-3">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Crear Comanda') }}
+                                        {{ __('Confirmar') }}
                                     </button>
 
                                     <button type="reset" class="btn btn-danger">

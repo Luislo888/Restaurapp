@@ -30,6 +30,9 @@
                         @if (session('success'))
                             <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6>
                         @endif
+                        @if (session('asdf'))
+                            <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6>
+                        @endif
 
                         <form method="POST" action="{{ route('comanda') }}" class="">
                             @csrf

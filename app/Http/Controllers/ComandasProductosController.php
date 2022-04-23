@@ -73,9 +73,13 @@ class ComandasProductosController extends Controller
      * @param  \App\Models\ComandasProductos  $comandasProductos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ComandasProductos $comandasProductos)
+    public function update($comanda_id, $producto_id, $cantidad)
     {
-        //
+        for ($i = 0; $i < count($producto_id); $i++) {
+            $comandas_productos = ComandasProductos::where('comanda_id', $comanda_id)->where('producto_id', $producto_id[$i])->first();
+            $comandas_productos->cantidad = $cantidad[$i];
+            $comandas_productos->save();
+        }
     }
 
     /**

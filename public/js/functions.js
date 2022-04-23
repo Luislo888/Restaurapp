@@ -2,6 +2,8 @@
 
 $(function () {
 
+    // INICIO BOTONES OCULTAR COMANDAS
+
     let estadoBotonCrear = true;
 
     $('#ocultarCrear').on('click', function () {
@@ -94,11 +96,19 @@ $(function () {
         }
     });
 
+    // FIN BOTONES OCULTAR COMANDAS
+
+
+    // INICIO BOTONES AGREGAR/QUITAR PRODUCTOS
 
     $('.botonMenos').on('click', function () {
 
+        let borrado = $(this).closest('.row').next('.nuevoProducto').children().val();
+
         $(this).closest('.row').next('.nuevoProducto').remove();
         $(this).closest('.row').next('.nuevaCantidad').remove();
+        alert(borrado);
+        cambiar(borrado);
     });
 
 
@@ -110,58 +120,53 @@ $(function () {
 
         $(this).closest('.row').after(cantidad);
         $(this).closest('.row').after(nuevoProducto);
-
-        // let select = $(this).closest('.row').children('.inputProductos').children().children('option');
-
-        // let valor = null;
-
-        // $.each(select, function (index, value) {
-
-        //     if ($(this).is(':selected')) {
-        //         valor = $(this).val();
-        //     }
-
-        //     if ($(this).val() == valor) {
-        //         $(this).prop('disabled', true);
-        //         alert($(this).val());
-        //     }
-        //     alert($('option:selected', this.index).text());
-        // });
-
-        // let contador = 1;
-
-        // $('option').each(function () {
-        //     if ($(this).val() == valor) {
-        //         $(this).attr('disabled', 'disabled');
-
-        //         // alert($(this).val());
-        //     }
-        // });
-
-        // for (let index = 0; index < select.length; index++) {
-
-        //     if (select[index].value == valor) {
-
-        //         alert(select[index].value);
-        //     }
-        // }
-        // cambiar();
+        cambiar();
     });
 
-    // function cambiar() {
+    function recuperar() {
 
-    //     $('select').on('change', function () {
-    //         let valor = $(this).val();
-    //         alert($(this).val());
 
-    //         if ($('option').val() == valor) {
-    //             $(this).attr('disabled', 'disabled');
-    //             // alert($(this).val());
-    //         }
-    //     });
-    // }
+    }
 
-    // cambiar();
+
+    function cambiar(borrado = null) {
+
+        var valorAnterior;
+        $("select").on('focus', function () {
+            valorAnterior = this.value;
+        }).on('change', function () {
+
+            let valor = $(this).val();
+
+            $('option').each(function () {
+                if ($(this).val() == valor) {
+                    $(this).attr('disabled', 'disabled');
+                }
+
+                if ($(this).val() == valorAnterior) {
+                    $(this).removeAttr('disabled');
+                }
+                if (borrado != null) {
+                    if ($(this).val() == borrado) {
+                        $(this).removeAttr('disabled');
+                    }
+                }
+
+            });
+            valorAnterior = this.value;
+        });
+    }
+
+
+    $("select").on('focus', function () {
+        cambiar();
+    });
+
+
+    // FIN BOTONES QUITAR PRODUCTOS
+
+
+    // INICIO ANIMACIÓN BOTONES AGREGAR/QUITAR PRODUCTOS
 
     $('.fa-circle-plus').on('click', function () {
 
@@ -201,7 +206,17 @@ $(function () {
         }
     });
 
+    // FIN ANIMACIÓN BOTONES AGREGAR/QUITAR PRODUCTOS
+
+
+    // INICIO ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
+
     $('.notificacionSucces').delay(3000).fadeOut(3000);
+
+    // FIN ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
+
+
+    // INICIO ANCHORS COMANDAS
 
     $('#botonCrear').on('click', function () {
         location.href = '#crearComanda';
@@ -218,4 +233,6 @@ $(function () {
     $('#botonCerradas').on('click', function () {
         location.href = '#comandasCerradas';
     });
+
+    // FIN ANCHORS COMANDAS
 });

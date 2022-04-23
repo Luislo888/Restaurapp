@@ -47,6 +47,7 @@ Route::resource('/comanda', ComandaController::class);
 
 Route::post('/comanda', [App\Http\Controllers\ComandaController::class, 'store'])->name('comanda');
 Route::get('/comanda/{id}', [App\Http\Controllers\ComandaController::class, 'show'])->name('comanda-edit');
+Route::post('/comanda/{id}', [App\Http\Controllers\ComandaController::class, 'update'])->name('comanda-update');
 
 
 // Route::resource('/comanda', ComandaController::class);
