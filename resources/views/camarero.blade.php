@@ -377,7 +377,7 @@
 
                                     <div class="row mb-1 mt-1 botonesComandas">
                                         <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
-                                            <button type="submit" class="btn btn-primary">
+                                            <button type="submit" class="btn btn-primary" name="editarComanda">
                                                 {{ __('Editar ') }}
                                             </button>
 
@@ -551,4 +551,15 @@
     <button id="ocultarAbiertas" type="button" class="btn alert alert-warning botonOcultar">Abiertas</button>
     <button id="ocultarEnCurso" type="button" class="btn alert alert-danger botonOcultar">En Curso</button>
     <button id="ocultarCerradas" type="button" class="btn alert alert-success botonOcultar">Cerradas</button>
+
+
+    {{-- @isset($request->has('storeid'))
+        asdf
+    @endisset --}}
+
+    @if (isset($_POST['editarComanda']))
+        asdf
+    @endif
 @endsection
+
+{{-- @yield('asdf') --}}

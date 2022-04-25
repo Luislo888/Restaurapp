@@ -1,6 +1,7 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app') --}}
+@extends('camarero')
 
-@section('cabecera')
+{{-- @section('cabecera')
     <h6 class="tituloRol">Editar Comanda</h6>
     <div class="collapse navbar-collapse text-center justify-content-center comandasNavTabs" id="navbarSupportedContent">
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
@@ -11,9 +12,10 @@
 
         </div>
     </div>
-@endsection
+@endsection --}}
 
-@section('content')
+@section('asdf')
+    {{-- @if (isset($_GET['editarComanda'])) --}}
     <div class="container marginTopBody">
         <div class="row justify-content-center miDiv">
 
@@ -387,4 +389,5 @@
             </div>
         </div>
     </div>
+    {{-- @endif --}}
 @endsection

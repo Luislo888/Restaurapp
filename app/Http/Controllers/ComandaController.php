@@ -7,6 +7,7 @@ use App\Models\Producto;
 use App\Models\UsersComandas;
 use App\Models\ComandasProductos;
 use App\Http\Controllers\UsersComandasController;
+use App\Http\Controllers\CamareroController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,8 +69,11 @@ class ComandaController extends Controller
      */
     public function show(Comanda $comanda)
     {
-        $productos = Producto::all();
-
+        $entrantes = Producto::all()->where('categoria', 'entrantes');
+        $primeros = Producto::all()->where('categoria', 'primeros');
+        $segundos = Producto::all()->where('categoria', 'segundos');
+        $postres = Producto::all()->where('categoria', 'postres');
+        $bebidas = Producto::all()->where('categoria', 'bebidas');
         // dd($productos);
 
         $comanda = Comanda::find($comanda->id);
@@ -77,8 +81,33 @@ class ComandaController extends Controller
 
         $comandasProductos = ComandasProductos::where('comanda_id', $comanda->id)->get();
 
-        // dd($ComandasProductos);
-        return view('comanda', ['comanda' => $comanda, 'todosProductos' => $productos, 'comandasProductos' => $comandasProductos]);
+        $camarero = Auth::user()->name;
+
+        if (Auth::user()->rol == 1) {
+            $comandas =  Comanda::addSelect([
+                'id' => UsersComandas::select('id')
+                    ->whereColumn('comanda_id', 'comandas.id')
+                // ->where('user_id', Auth::user()->id)
+                // ->where('comandas.estado', 'abierta')
+            ])->get();
+        } else {
+            $comandas =  Comanda::addSelect([
+                'id' => UsersComandas::select('id')
+                    ->whereColumn('comanda_id', 'comandas.id')
+                    ->where('user_id', Auth::user()->id)
+                // ->where('comandas.estado', 'abierta')
+            ])->get();
+        }
+
+
+        $productos = ComandasProductos::addSelect([
+            'id' => Producto::select('id')
+                ->whereColumn('productos.id', 'comandas_productos.producto_id')
+        ])->join('productos', 'comandas_productos.producto_id', '=', 'productos.id')
+            ->select('productos.*', 'comandas_productos.*')->get();
+
+
+        return view('comanda', ['comanda' => $comanda, 'comandas' => $comandas, 'todosProductos' => $productos, 'productos' => $productos, 'comandasProductos' => $comandasProductos, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'postres' => $postres, 'bebidas' => $bebidas]);
     }
 
     /**
