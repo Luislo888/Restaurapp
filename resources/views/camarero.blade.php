@@ -27,14 +27,16 @@
                     </div>
 
                     <div class="card-body" id="bodyCrearComanda">
-                        @if (session('success'))
+                        {{-- @if (session('success'))
                             <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6>
                         @endif
+                        <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6>
                         @if (session('asdf'))
                             <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6>
-                        @endif
-
-                        <form method="POST" action="{{ route('comanda') }}" class="">
+                        @endif --}}
+                        <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6>
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <form method="POST" action="{{ route('comanda') }}" class="" id="formCrearComanda">
                             @csrf
 
                             {{-- Nº MESA --}}
@@ -45,8 +47,8 @@
 
                                 <div class="col-md-2 cantidad numeroMesa">
                                     <input id="mesa" min="1" max="6" type="number"
-                                        class="form-control @error('mesa') is-invalid @enderror" name="mesa"
-                                        value="{{ old('mesa') }}" required autocomplete="mesa" autofocus>
+                                        class="form-control @error('mesa') is-invalid @enderror" name="mesa" required
+                                        autocomplete="mesa" autofocus>
 
                                     @error('mesa')
                                         <span class="invalid-feedback" role="alert">
@@ -84,7 +86,7 @@
                                 <div class="col-md-2 cantidad">
                                     <input id="" min="1" type="number"
                                         class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
-                                        value="{{ old('cantidad') }}" autocomplete="cantidad" autofocus>
+                                        autocomplete="cantidad" autofocus>
 
                                     @error('cantidad')
                                         <span class="invalid-feedback" role="alert">
@@ -112,9 +114,9 @@
                                 <div class="col-md-5 inputProductos" id="col">
 
                                     <select id="primeros" name="productos[]"
-                                        class="form-control @error('primeros') is-invalid @enderror "
-                                        value="{{ old('primeros') }}" required autocomplete="primeros">
-                                        <option selected disabled>Elige un primero</option>
+                                        class="form-control @error('primeros') is-invalid @enderror " required
+                                        autocomplete="primeros">
+                                        <option value="0" selected disabled>Elige un primero</option>
                                         @foreach ($primeros as $primero)
                                             <option value="{{ $primero->id }}">{{ $primero->nombre }}</option>
                                         @endforeach
@@ -129,7 +131,7 @@
                                 <div class="col-md-2 cantidad">
                                     <input id="" min="1" type="number"
                                         class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
-                                        value="{{ old('cantidad') }}" autocomplete="cantidad" autofocus>
+                                        autocomplete="cantidad" autofocus>
 
                                     @error('cantidad')
                                         <span class="invalid-feedback" role="alert">
@@ -156,9 +158,9 @@
                                 <div class="col-md-5 inputProductos">
 
                                     <select id="segundos" name="productos[]"
-                                        class="form-control @error('segundos') is-invalid @enderror"
-                                        value="{{ old('segundos') }}" required autocomplete="segundos">
-                                        <option selected disabled>Elige un segundo</option>
+                                        class="form-control @error('segundos') is-invalid @enderror" required
+                                        autocomplete="segundos">
+                                        <option value="0" selected disabled>Elige un segundo</option>
                                         @foreach ($segundos as $segundo)
                                             <option value="{{ $segundo->id }}">{{ $segundo->nombre }}</option>
                                         @endforeach
@@ -173,7 +175,7 @@
                                 <div class="col-md-2 cantidad">
                                     <input id="" min="1" type="number"
                                         class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
-                                        value="{{ old('cantidad') }}" autocomplete="cantidad" autofocus>
+                                        autocomplete="cantidad" autofocus>
 
                                     @error('cantidad')
                                         <span class="invalid-feedback" role="alert">
@@ -200,9 +202,9 @@
                                 <div class="col-md-5 inputProductos">
 
                                     <select id="postres" name="productos[]"
-                                        class="form-control @error('postres') is-invalid @enderror"
-                                        value="{{ old('postres') }}" required autocomplete="postres">
-                                        <option selected disabled>Elige un postre</option>
+                                        class="form-control @error('postres') is-invalid @enderror" required
+                                        autocomplete="postres">
+                                        <option value="0" selected disabled>Elige un postre</option>
                                         @foreach ($postres as $postre)
                                             <option value="{{ $postre->id }}">{{ $postre->nombre }}</option>
                                         @endforeach
@@ -217,7 +219,7 @@
                                 <div class="col-md-2 cantidad">
                                     <input id="" min="1" type="number"
                                         class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
-                                        value="{{ old('cantidad') }}" autocomplete="cantidad" autofocus>
+                                        autocomplete="cantidad" autofocus>
 
                                     @error('cantidad')
                                         <span class="invalid-feedback" role="alert">
@@ -244,9 +246,9 @@
                                 <div class="col-md-5 inputProductos">
 
                                     <select id="bebidas" name="productos[]"
-                                        class="form-control @error('bebidas') is-invalid @enderror"
-                                        value="{{ old('bebidas') }}" required autocomplete="bebidas">
-                                        <option selected disabled>Elige una bebida</option>
+                                        class="form-control @error('bebidas') is-invalid @enderror" required
+                                        autocomplete="bebidas">
+                                        <option value="0" selected disabled>Elige una bebida</option>
                                         @foreach ($bebidas as $bebida)
                                             <option value="{{ $bebida->id }}">{{ $bebida->nombre }}</option>
                                         @endforeach
@@ -261,7 +263,7 @@
                                 <div class="col-md-2 cantidad">
                                     <input id="" min="1" type="number"
                                         class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
-                                        value="{{ old('cantidad') }}" autocomplete="cantidad" autofocus>
+                                        autocomplete="cantidad" autofocus>
 
                                     @error('cantidad')
                                         <span class="invalid-feedback" role="alert">
@@ -280,8 +282,7 @@
                                 <div class="col-md-8">
                                     <textarea id="comentarioInput" min="1" max="6" type="number"
                                         class="form-control @error('comentarios') is-invalid @enderror"
-                                        name="comentarios" value="{{ old('comentarios') }}"
-                                        autocomplete="comentarios" autofocus></textarea>
+                                        name="comentarios" autocomplete="comentarios" autofocus></textarea>
 
                                     @error('comentarios')
                                         <span class="invalid-feedback" role="alert">
@@ -294,7 +295,7 @@
 
                             <div class="row mb-0 justify-content-center">
                                 <div class="col-md-12 offset-md-3">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary" id="botonCrearComanda">
                                         {{ __('Crear Comanda') }}
                                     </button>
 

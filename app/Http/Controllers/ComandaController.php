@@ -42,6 +42,8 @@ class ComandaController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
+
         $comanda = new Comanda();
 
         $comanda->mesa = $request->input('mesa');
@@ -58,7 +60,9 @@ class ComandaController extends Controller
         $comanda_producto = new ComandasProductosController();
         $comanda_producto->store($comanda->id, $productos, $cantidad);
 
-        return redirect('/camarero')->with('success', 'Comanda creada');
+        echo json_encode($comanda);
+
+        // return redirect('/camarero')->with('success', 'Comanda creada');
     }
 
     /**

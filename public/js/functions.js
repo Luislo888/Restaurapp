@@ -1,6 +1,179 @@
-
-
 $(function () {
+
+    $('.notificacionSucces').hide();
+    $('.fa-spin').hide();
+
+    $("#formCrearComanda").on('submit', function (e) {
+
+
+        $('.fa-spin').show();
+
+
+        e.preventDefault();
+
+        var form = $(this);
+        var url = form.attr('action');
+
+        $('option').each(function () {
+
+
+            if ($(this).val() != 0) {
+
+                $(this).removeAttr('disabled');
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(),
+            beforeSend: function () {
+
+            },
+
+            success: function (resultado) {
+                // alert(resultado);
+                $('.notificacionSucces').show().text('Comanda creada correctamente');
+                $('.notificacionSucces').delay(3000).fadeOut(3000);
+                $('.fa-spin').hide();
+                let obj = JSON.parse(resultado);
+
+                for (let i in obj.data) { //recorremos el objeto
+                    let mesa = obj.data[i]['mesa'];
+                }
+
+            }
+        });
+
+    });
+
+    // INICIO BOTONES AGREGAR/QUITAR PRODUCTOS
+
+    $('.botonMenos').on('click', function () {
+
+        $('option').each(function () {
+
+            if ($(this).is(':selected') && $(this).val() != 0) {
+
+                // cambiar(this.value);
+
+                let valor = $(this).val();
+
+                $('option').each(function () {
+
+                    if ($(this).val() == valor) {
+
+                        $(this).removeAttr('disabled');
+                    }
+                });
+            }
+        });
+
+        $(this).closest('.row').next('.nuevoProducto').remove();
+        $(this).closest('.row').next('.nuevaCantidad').remove();
+    });
+
+
+    // $("select").on('change', function () {
+
+    //     let valor = $(this).val();
+
+    //     // $('option').each(function () {
+    //     //     if ($(this).val() == valor) {
+    //     //         // $(this).attr('disabled', 'disabled');
+    //     //         return false;
+    //     //         $(this).attr('selected', 'selected');
+    //     //     }
+
+    //     // });
+
+    //     for (let index = 0; index < $('option').length; index++) {
+    //         const element = array[index];
+    //         alert($(this).val());
+
+    //     }
+
+    // });
+
+
+    $('.botonMas').on('click', function () {
+
+        let cantidad = "<div class='col-md-2 nuevaCantidad'> <input id='' min='1' type='number' class='form-control @error('cantidad') s-invalid @enderror' name='cantidad[]' value='{{ old('cantidad') }}' autocomplete='cantidad' autofocus> </div > ";
+
+        let nuevoProducto = $(this).closest('.row').children('.inputProductos').clone().addClass('nuevoProducto');
+
+        $(this).closest('.row').after(cantidad);
+        $(this).closest('.row').after(nuevoProducto);
+        // cambiar();
+
+        $('option').each(function () {
+
+            if ($(this).is(':selected') && $(this).val() != 0) {
+
+                // cambiar(this.value);
+
+                let valor = $(this).val();
+                // $(this).attr('disabled', 'disabled');
+
+                // if ($(this).val() == valor) {
+
+                //     $(this).attr('disabled', 'disabled');
+                // }
+
+
+                // $(this).attr('selected', 'selected');
+
+                $('option').each(function () {
+
+                    if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
+
+                        $(this).attr('disabled', 'disabled');
+                        // $(this).attr('selected', 'selected');
+                    }
+                });
+            }
+        });
+
+
+    });
+
+    function cambiar(borrado = null) {
+
+        var valorAnterior;
+        $("select").on('focus', function () {
+            valorAnterior = this.value;
+        }).on('change', function () {
+
+            let valor = $(this).val();
+
+            $('option').each(function () {
+                if ($(this).val() == valor) {
+                    $(this).attr('disabled', 'disabled');
+                    // $(this).attr("selected", "selected");
+                }
+
+                if ($(this).val() == valorAnterior) {
+                    $(this).removeAttr('disabled');
+                }
+                if (borrado != null) {
+                    if ($(this).val() == borrado) {
+                        $(this).removeAttr('disabled');
+                    }
+                }
+
+            });
+            valorAnterior = this.value;
+        });
+    }
+
+    $("select").on('focus', function () {
+        cambiar();
+
+    });
+
+    // FIN BOTONES AGREGAR/QUITAR PRODUCTOS
+
+
 
     // INICIO BOTONES OCULTAR COMANDAS
 
@@ -96,102 +269,7 @@ $(function () {
         }
     });
 
-    // FIN BOTONES OCULTAR COMANDAS
-
-
-    // INICIO BOTONES AGREGAR/QUITAR PRODUCTOS
-
-    $('.botonMenos').on('click', function () {
-
-        $('option').each(function () {
-
-            if ($(this).is(':selected')) {
-
-                cambiar(this.value);
-
-                let valor = $(this).val();
-
-                $('option').each(function () {
-
-                    if ($(this).val() == valor) {
-
-                        $(this).removeAttr('disabled');
-                    }
-                });
-            }
-        });
-
-        $(this).closest('.row').next('.nuevoProducto').remove();
-        $(this).closest('.row').next('.nuevaCantidad').remove();
-    });
-
-
-    $('.botonMas').on('click', function () {
-
-        let cantidad = "<div class='col-md-2 nuevaCantidad'> <input id='' min='1' type='number' class='form-control @error('cantidad') s-invalid @enderror' name='cantidad[]' value='{{ old('cantidad') }}' autocomplete='cantidad' autofocus> </div > ";
-
-        let nuevoProducto = $(this).closest('.row').children('.inputProductos').clone().addClass('nuevoProducto');
-
-        $(this).closest('.row').after(cantidad);
-        $(this).closest('.row').after(nuevoProducto);
-        cambiar();
-
-        $('option').each(function () {
-
-            if ($(this).is(':selected')) {
-
-                cambiar(this.value);
-
-                let valor = $(this).val();
-
-                $('option').each(function () {
-
-                    if ($(this).val() == valor) {
-
-                        $(this).attr('disabled', 'disabled');
-                    }
-                });
-            }
-        });
-
-
-    });
-
-    function cambiar(borrado = null) {
-
-        var valorAnterior;
-        $("select").on('focus', function () {
-            valorAnterior = this.value;
-        }).on('change', function () {
-
-            let valor = $(this).val();
-
-            $('option').each(function () {
-                if ($(this).val() == valor) {
-                    $(this).attr('disabled', 'disabled');
-                }
-
-                if ($(this).val() == valorAnterior) {
-                    $(this).removeAttr('disabled');
-                }
-                if (borrado != null) {
-                    if ($(this).val() == borrado) {
-                        $(this).removeAttr('disabled');
-                    }
-                }
-
-            });
-            valorAnterior = this.value;
-        });
-    }
-
-
-    $("select").on('focus', function () {
-        cambiar();
-    });
-
-
-    // FIN BOTONES AGREGAR/QUITAR PRODUCTOS
+    // FIN BOTONES OCULTAR COMANDAS   
 
 
     // INICIO ANIMACIÓN BOTONES AGREGAR/QUITAR PRODUCTOS

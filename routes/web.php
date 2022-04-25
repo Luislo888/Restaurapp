@@ -43,7 +43,7 @@ Route::get('/register', [App\Http\Controllers\AdminController::class, 'index'])-
 Route::resource('/admin', AdminController::class);
 Route::resource('/camarero', CamareroController::class);
 Route::resource('/cocinero', CocineroController::class);
-Route::resource('/comanda', ComandaController::class);
+// Route::resource('/comanda', ComandaController::class);
 
 // Route::get('/camarero', [App\Http\Controllers\CamareroController::class, 'index'])->name('camarero');
 // Route::post('/camarero/{id}', [App\Http\Controllers\ComandaController::class, 'store'])->name('comanda-edit');
