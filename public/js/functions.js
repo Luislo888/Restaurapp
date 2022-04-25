@@ -103,12 +103,26 @@ $(function () {
 
     $('.botonMenos').on('click', function () {
 
-        let borrado = $(this).closest('.row').next('.nuevoProducto').children().val();
+        $('option').each(function () {
+
+            if ($(this).is(':selected')) {
+
+                cambiar(this.value);
+
+                let valor = $(this).val();
+
+                $('option').each(function () {
+
+                    if ($(this).val() == valor) {
+
+                        $(this).removeAttr('disabled');
+                    }
+                });
+            }
+        });
 
         $(this).closest('.row').next('.nuevoProducto').remove();
         $(this).closest('.row').next('.nuevaCantidad').remove();
-        alert(borrado);
-        cambiar(borrado);
     });
 
 
@@ -121,13 +135,27 @@ $(function () {
         $(this).closest('.row').after(cantidad);
         $(this).closest('.row').after(nuevoProducto);
         cambiar();
+
+        $('option').each(function () {
+
+            if ($(this).is(':selected')) {
+
+                cambiar(this.value);
+
+                let valor = $(this).val();
+
+                $('option').each(function () {
+
+                    if ($(this).val() == valor) {
+
+                        $(this).attr('disabled', 'disabled');
+                    }
+                });
+            }
+        });
+
+
     });
-
-    function recuperar() {
-
-
-    }
-
 
     function cambiar(borrado = null) {
 
@@ -163,7 +191,7 @@ $(function () {
     });
 
 
-    // FIN BOTONES QUITAR PRODUCTOS
+    // FIN BOTONES AGREGAR/QUITAR PRODUCTOS
 
 
     // INICIO ANIMACIÓN BOTONES AGREGAR/QUITAR PRODUCTOS

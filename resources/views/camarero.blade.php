@@ -57,9 +57,9 @@
                             </div>
 
                             {{-- ENTRANTES --}}
-                            <div class="row mb-3">
+                            <div class="row mb-3" id="rowEntrantes">
 
-                                <label for="entrantes"
+                                <label for="entrantes" id="labelEntrantes"
                                     class="col-md-3 col-form-label text-md-start"><strong>{{ __('Entrantes ') }}</strong></label>
 
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
@@ -69,12 +69,12 @@
                                     <i class="fa-solid fa-circle-minus botonRedondo" id="botonQuitarEntrante"></i>
                                 </button>
 
-                                <div class="col-md-5 inputProductos" id="col">
+                                <div class="col-md-5 inputProductos" id="colEntrantes">
 
-                                    <select id="entrantes" name="productos[]"
-                                        class="form-control @error('entrantes') is-invalid @enderror "
-                                        value="{{ old('entrantes') }}" required autocomplete="entrantes">
-                                        <option selected disabled>Elige un entrante</option>
+                                    <select id="selectEntrantes" name="productos[]"
+                                        class="form-control @error('entrantes') is-invalid @enderror " required
+                                        autocomplete="entrantes">
+                                        <option value="0" selected disabled>Elige un entrante</option>
                                         @foreach ($entrantes as $entrante)
                                             <option value="{{ $entrante->id }}">{{ $entrante->nombre }}</option>
                                         @endforeach
