@@ -1,36 +1,32 @@
+
+
 $(function () {
 
-    $('.notificacionCrearComanda').hide();
-    $('.fa-spin').hide();
+
 
     $("#formCrearComanda").on('submit', function (e) {
 
+        // INICIO AJAX
 
         $('.fa-spin').show();
 
         e.preventDefault();
 
         $('input').each(function () {
-
             if ($(this).val() == '') {
-
                 $(this).val(false);
             }
         });
 
 
         $('option').each(function () {
-
             if ($(this).val() != 0) {
-
                 $(this).removeAttr('disabled');
             }
         });
 
         $('select').each(function () {
-
             if ($(this).val() == 0) {
-
                 $(this).val(null);
             }
         });
@@ -51,9 +47,58 @@ $(function () {
                 $('.fa-spin').hide();
                 let obj = JSON.parse(resultado);
 
-                for (let i in obj.data) { //recorremos el objeto
-                    let mesa = obj.data[i]['mesa'];
+                // for (let i in obj.data) { //recorremos el objeto
+                //     let mesa = obj.data[i]['mesa'];
+                // }
+                // parser = new DOMParser();
+                let fecha = new Date(obj.comanda.created_at);
+                // let fecha = obj.comanda.created_at;
+                // fecha.toTimeString();
+                // fecha = datepicker.formatDate('yy-mm-dd', fecha);
+                let anio = fecha.getFullYear();
+                let mes = fecha.getMonth() + 1;
+                if (mes < 10) {
+                    mes = '0' + mes;
                 }
+                let dia = fecha.getDate();
+                let hora = fecha.getHours();
+                let minutos = fecha.getMinutes();
+                let segundos = fecha.getSeconds();
+
+                // $entrantes = obj.comanda.entrantes;
+
+
+                let formulario = "<form method='GET' action='http://127.0.0.1:8000/comanda/" + obj.comanda.id + "' class=''>"
+                    + "<div class='card mb-3'>"
+
+                    + "<div class='card-header'>" + anio + '-' + mes + '-' + dia + ' ' + hora + ':' + minutos + ':' + segundos + "<br><strong>Mesa:</strong>" + obj.comanda.mesa + "<span class='textoDerecha'><strong>Nº Comanda:</strong>" + obj.comanda.id + "</span></div>"
+
+
+                    + "<div class='card-body bodyComandas bodyComandasAbiertas'>"
+
+
+                    + "<strong>Entrantes:</strong>"
+
+
+
+                    + "<p></p>"
+                    + "<button type='submit' class='btn btn-primary' name='editarComanda'>Editar</button>"
+                    + "</div>"
+                    + "</div>"
+                    + "</form > ";
+
+
+
+                // html = $.parseHTML(formulario),
+                //     nodeNames = [];
+
+
+                $('#comandasAbiertas').prepend(formulario);
+                // $('#comandasAbiertas').prepend(obj.mesa);
+
+
+
+
             },
             error: function (xhr, status) {
                 $('#notificacionError').show().text('Se debe rellenar correctamente la comanda');
@@ -79,6 +124,9 @@ $(function () {
         });
 
     });
+
+    // FIN AJAX
+
 
     // INICIO BOTONES AGREGAR/QUITAR PRODUCTOS
 
@@ -312,13 +360,6 @@ $(function () {
     // FIN ANIMACIÓN BOTONES AGREGAR/QUITAR PRODUCTOS
 
 
-    // INICIO ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
-
-    $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
-
-    // FIN ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
-
-
     // INICIO ANCHORS COMANDAS
 
     $('#botonCrear').on('click', function () {
@@ -338,4 +379,19 @@ $(function () {
     });
 
     // FIN ANCHORS COMANDAS
+
+
+    // INICIO OCULTAR ELEMENTOS
+
+    $('.notificacionCrearComanda').hide();
+    $('.fa-spin').hide();
+
+    // FIN OUCLTAR ELEMENTOS
+
+
+    // INICIO ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
+
+    $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
+
+    // FIN ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
 });

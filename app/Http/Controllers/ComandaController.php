@@ -69,7 +69,17 @@ class ComandaController extends Controller
         $comanda_producto = new ComandasProductosController();
         $comanda_producto->store($comanda->id, $productos, $cantidadNueva);
 
-        echo json_encode($comanda);
+        $comandaCompleta = array();
+        $comandaCompleta['comanda'] = $comanda;
+        $comandaCompleta['productos'] = $productos;
+        $comandaCompleta['comanda_producto'] = $comanda_producto;
+        $comandaCompleta['cantidad'] = $cantidadNueva;
+
+
+
+        echo json_encode($comandaCompleta);
+        // echo json_encode($comanda_producto);
+
 
         // return redirect('/camarero')->with('error', 'mal');
     }
