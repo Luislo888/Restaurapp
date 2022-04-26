@@ -1,6 +1,6 @@
 $(function () {
 
-    $('.notificacionSucces').hide();
+    $('.notificacionCrearComanda').hide();
     $('.fa-spin').hide();
 
     $("#formCrearComanda").on('submit', function (e) {
@@ -8,20 +8,35 @@ $(function () {
 
         $('.fa-spin').show();
 
-
         e.preventDefault();
 
-        var form = $(this);
-        var url = form.attr('action');
+        $('input').each(function () {
+
+            if ($(this).val() == '') {
+
+                $(this).val(false);
+            }
+        });
+
 
         $('option').each(function () {
-
 
             if ($(this).val() != 0) {
 
                 $(this).removeAttr('disabled');
             }
         });
+
+        $('select').each(function () {
+
+            if ($(this).val() == 0) {
+
+                $(this).val(null);
+            }
+        });
+
+        var form = $(this);
+        var url = form.attr('action');
 
         $.ajax({
             type: "POST",
@@ -30,18 +45,36 @@ $(function () {
             beforeSend: function () {
 
             },
-
             success: function (resultado) {
-                // alert(resultado);
-                $('.notificacionSucces').show().text('Comanda creada correctamente');
-                $('.notificacionSucces').delay(3000).fadeOut(3000);
+                $('#notificacionSuccess').show().text('Comanda creada correctamente');
+                $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
                 $('.fa-spin').hide();
                 let obj = JSON.parse(resultado);
 
                 for (let i in obj.data) { //recorremos el objeto
                     let mesa = obj.data[i]['mesa'];
                 }
+            },
+            error: function (xhr, status) {
+                $('#notificacionError').show().text('Se debe rellenar correctamente la comanda');
+                $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
+                $('.fa-spin').hide();
+            },
+        });
 
+        $('option').each(function () {
+
+            if ($(this).is(':selected') && $(this).val() != 0) {
+
+                let valor = $(this).val();
+
+                $('option').each(function () {
+
+                    if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
+
+                        $(this).attr('disabled', 'disabled');
+                    }
+                });
             }
         });
 
@@ -54,8 +87,6 @@ $(function () {
         $('option').each(function () {
 
             if ($(this).is(':selected') && $(this).val() != 0) {
-
-                // cambiar(this.value);
 
                 let valor = $(this).val();
 
@@ -74,28 +105,6 @@ $(function () {
     });
 
 
-    // $("select").on('change', function () {
-
-    //     let valor = $(this).val();
-
-    //     // $('option').each(function () {
-    //     //     if ($(this).val() == valor) {
-    //     //         // $(this).attr('disabled', 'disabled');
-    //     //         return false;
-    //     //         $(this).attr('selected', 'selected');
-    //     //     }
-
-    //     // });
-
-    //     for (let index = 0; index < $('option').length; index++) {
-    //         const element = array[index];
-    //         alert($(this).val());
-
-    //     }
-
-    // });
-
-
     $('.botonMas').on('click', function () {
 
         let cantidad = "<div class='col-md-2 nuevaCantidad'> <input id='' min='1' type='number' class='form-control @error('cantidad') s-invalid @enderror' name='cantidad[]' value='{{ old('cantidad') }}' autocomplete='cantidad' autofocus> </div > ";
@@ -104,24 +113,12 @@ $(function () {
 
         $(this).closest('.row').after(cantidad);
         $(this).closest('.row').after(nuevoProducto);
-        // cambiar();
 
         $('option').each(function () {
 
             if ($(this).is(':selected') && $(this).val() != 0) {
 
-                // cambiar(this.value);
-
                 let valor = $(this).val();
-                // $(this).attr('disabled', 'disabled');
-
-                // if ($(this).val() == valor) {
-
-                //     $(this).attr('disabled', 'disabled');
-                // }
-
-
-                // $(this).attr('selected', 'selected');
 
                 $('option').each(function () {
 
@@ -155,11 +152,11 @@ $(function () {
                 if ($(this).val() == valorAnterior) {
                     $(this).removeAttr('disabled');
                 }
-                if (borrado != null) {
-                    if ($(this).val() == borrado) {
-                        $(this).removeAttr('disabled');
-                    }
-                }
+                // if (borrado != null) {
+                //     if ($(this).val() == borrado) {
+                //         $(this).removeAttr('disabled');
+                //     }
+                // }
 
             });
             valorAnterior = this.value;
@@ -317,7 +314,7 @@ $(function () {
 
     // INICIO ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
 
-    $('.notificacionSucces').delay(3000).fadeOut(3000);
+    $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
 
     // FIN ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
 

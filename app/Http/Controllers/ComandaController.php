@@ -57,12 +57,21 @@ class ComandaController extends Controller
         $productos = $request->input('productos');
         $cantidad = $request->input('cantidad');
 
+        $cantidadNueva = array();
+
+        for ($i = 0; $i < count($cantidad); $i++) {
+            if ($cantidad[$i] != null) {
+                $cantidadNueva[] = $cantidad[$i];
+                // array_push($cantidadNueva, $productos[$i]);
+            }
+        }
+
         $comanda_producto = new ComandasProductosController();
-        $comanda_producto->store($comanda->id, $productos, $cantidad);
+        $comanda_producto->store($comanda->id, $productos, $cantidadNueva);
 
         echo json_encode($comanda);
 
-        // return redirect('/camarero')->with('success', 'Comanda creada');
+        // return redirect('/camarero')->with('error', 'mal');
     }
 
     /**
