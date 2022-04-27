@@ -1,7 +1,17 @@
 
+body{
+    /* font-size: 15px; */
+    color: #3b3b3b;
+}
+
+.col-form-label, .form-control{
+    font-size: 15px;
+}
 strong{
     font-weight: 600;
-    color: rgb(45, 45, 45);
+    /* color: rgb(45, 45, 45); */
+    color: rgb(78 77 77);
+
 }
 
 h6{
@@ -71,8 +81,9 @@ button{
     color: red;
 }
 
-
-
+.fa-spinner{
+    font-size: 30px;
+}
 
 /* CUSTOM IDS AND CLASSES ----------------------------------------------------------------------------- */
 
@@ -114,6 +125,10 @@ button{
 
 .botonMasMenos{
     margin-top: 5px!important;
+}
+
+.btnEditarComandaAjax{
+    margin-right: 5px;
 }
 
 .marginTopBody{
@@ -263,6 +278,10 @@ button{
     right: -21px;
 }
 
+.textoDerecha{
+    position: absolute;
+    right: 12px!important;
+}
 
 /* RESPONSIVE */
 

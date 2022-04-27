@@ -33,9 +33,11 @@
                         <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6> --}}
                         <h6 class="alert alert-success notificacionCrearComanda" id="notificacionSuccess">
                             {{ session('success') }}</h6>
-                        <h6 class="alert alert-danger notificacionCrearComanda" id="notificacionError">
+                        <h6 class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionError">
                             {{ session('success') }}</h6>
-                        <i class="fas fa-spinner fa-spin"></i>
+                        <div class="row justify-content-center ">
+                            <i class="fas fa-spinner fa-spin text-center"></i>
+                        </div>
                         <form method="POST" action="{{ route('comanda') }}" class="" id="formCrearComanda">
                             @csrf
 
@@ -62,7 +64,8 @@
                             <div class="row mb-3" id="rowEntrantes">
 
                                 <label for="entrantes" id="labelEntrantes"
-                                    class="col-md-3 col-form-label text-md-start"><strong>{{ __('Entrantes ') }}</strong></label>
+                                    class="col-md-3 col-form-label text-md-start"><strong><i
+                                            class="fa-solid fa-bowl-food"></i> {{ __('Entrantes ') }}</strong></label>
 
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
                                     <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarEntrante"></i>
@@ -99,8 +102,8 @@
                             {{-- PRIMEROS --}}
 
                             <div class="row mb-3">
-                                <label for="primeros"
-                                    class="col-md-3 col-form-label text-md-start"><strong>{{ __('Primeros ') }}</strong>
+                                <label for="primeros" class="col-md-3 col-form-label text-md-start"><strong><i
+                                            class="fa-solid fa-seedling"></i> {{ __('Primeros ') }}</strong>
                                 </label>
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
                                     id="botonAgregarPrimero">
@@ -143,8 +146,8 @@
 
                             {{-- SEGUNDOS --}}
                             <div class="row mb-3">
-                                <label for="segundos"
-                                    class="col-md-3 col-form-label text-md-start"><strong>{{ __('Segundos ') }}</strong></label>
+                                <label for="segundos" class="col-md-3 col-form-label text-md-start"><strong>
+                                        <i class="fa-solid fa-burger"></i> {{ __('Segundos ') }}</strong></label>
 
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
                                     id="botonAgregarSegundo">
@@ -188,8 +191,9 @@
                             {{-- POSTRES --}}
 
                             <div class="row mb-3">
-                                <label for="postres"
-                                    class="col-md-3 col-form-label text-md-start"><strong>{{ __('Postres ') }}</strong></label>
+                                <label for="postres" class="col-md-3 col-form-label text-md-start"><strong>
+                                        <i class="fa-solid fa-ice-cream"></i> {{ __('Postres ') }}
+                                    </strong></label>
 
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
                                     id="botonAgregarSegundo">
@@ -231,8 +235,8 @@
                             {{-- BEBIDAS --}}
 
                             <div class="row mb-3">
-                                <label for="bebidas"
-                                    class="col-md-3 col-form-label text-md-start"><strong>{{ __('Bebidas ') }}</strong></label>
+                                <label for="bebidas" class="col-md-3 col-form-label text-md-start"><strong><i
+                                            class="fa-solid fa-wine-glass"></i> {{ __('Bebidas ') }}</strong></label>
 
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
                                     id="botonAgregarSegundo">
@@ -275,7 +279,8 @@
 
                             <div class="row mb-3">
                                 <label for="comentarios" class="col-md-3 col-form-label text-md-start"
-                                    id="comentarioLabel"><strong>{{ __('Comentarios') }}</strong></label>
+                                    id="comentarioLabel"><strong><i class="fa-solid fa-comment"></i>
+                                        {{ __('Comentarios') }}</strong></label>
 
                                 <div class="col-md-8">
                                     <textarea id="comentarioInput" min="1" max="6" type="number"
@@ -292,7 +297,7 @@
 
 
                             <div class="row mb-0 justify-content-center">
-                                <div class="col-md-12 offset-md-3">
+                                <div class="col-md-12 offset-md-6">
                                     <button type="submit" class="btn btn-primary" id="botonCrearComanda">
                                         {{ __('Crear Comanda') }}
                                     </button>
@@ -328,50 +333,53 @@
                             class="">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    {{ $comanda->created_at }}
-                                    <br>
                                     <strong>Mesa:</strong> {{ $comanda->mesa }}
                                     <span class="textoDerecha"><strong>Nº Comanda:</strong>
                                         {{ $comanda->id }}</span>
+                                    <br>
+                                    <span class="fechaFormateada">{{ $comanda->created_at }}</span>
                                 </div>
 
                                 <div class="card-body bodyComandas bodyComandasAbiertas">
-                                    <strong>Entrantes:</strong>
+                                    <strong><i class="fa-solid fa-bowl-food"></i> Entrantes:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
                                             <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong>Primeros:</strong>
+                                    <strong><i class="fa-solid fa-seedling"></i> Primeros:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
                                             <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong>Segundos:</strong>
+                                    <strong><i class="fa-solid fa-burger"></i> Segundos:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
                                             <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong>Postres:</strong>
+                                    <strong>
+                                        <i class="fa-solid fa-ice-cream"></i> Postres:
+                                    </strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'postres')
                                             <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong>Bebidas:</strong>
+                                    <strong><i class="fa-solid fa-wine-glass"></i> Bebidas:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'bebidas')
                                             <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong>Comentarios:</strong> {{ $comanda->comentarios }}
+                                    <strong><i class="fa-solid fa-comment"></i> Comentarios:</strong>
+                                    {{ $comanda->comentarios }}
                                     <br>
 
                                     <div class="row mb-1 mt-1 botonesComandas">
@@ -410,54 +418,55 @@
                     @if ($comanda->id != null && $comanda->estado == 'en curso')
                         <div class="card mb-3">
                             <div class="card-header">
-                                {{ $comanda->created_at }}
-                                <br>
                                 <strong>Mesa:</strong> {{ $comanda->mesa }}
                                 <span class="textoDerecha"><strong>Nº Comanda:</strong>
                                     {{ $comanda->id }}</span>
+                                <br>
+                                <span class="fechaFormateada">{{ $comanda->created_at }}</span>
                             </div>
 
                             <div class="card-body bodyComandas bodyComandasEnCurso">
-                                <strong>Entrantes:</strong>
+                                <strong><i class="fa-solid fa-bowl-food"></i> Entrantes:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong>Primeros:</strong>
+                                <strong><i class="fa-solid fa-seedling"></i> Primeros:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong>Segundos:</strong>
+                                <strong><i class="fa-solid fa-burger"></i> Segundos:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong>Postres:</strong>
+                                <strong><i class="fa-solid fa-ice-cream"></i> Postres:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'postres')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong>Bebidas:</strong>
+                                <strong><i class="fa-solid fa-wine-glass"></i> Bebidas:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'bebidas')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong>Comentarios:</strong> {{ $comanda->comentarios }}
+                                <strong><i class="fa-solid fa-comment"></i> Comentarios:</strong>
+                                {{ $comanda->comentarios }}
                                 <br>
 
-                                <div class="row mb-1 mt-1 botonesComandas">
-                                    <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
+                                <div class="row mb-1 mt-1 botonesComandas justify-content-center">
+                                    <div class="col-md-12 mb-1 mt-1 ">
                                         <button type="submit" class="btn btn-primary">
                                             {{ __('Editar ') }}
                                         </button>
@@ -490,50 +499,51 @@
                     @if ($comanda->id != null && $comanda->estado == 'cerrada')
                         <div class="card mb-3">
                             <div class="card-header">
-                                {{ $comanda->created_at }}
-                                <br>
                                 <strong>Mesa:</strong> {{ $comanda->mesa }}
                                 <span class="textoDerecha"><strong>Nº Comanda:</strong>
                                     {{ $comanda->id }}</span>
+                                <br>
+                                <span class="fechaFormateada">{{ $comanda->created_at }}</span>
                             </div>
 
                             <div class="card-body bodyComandas bodyComandasCerradas">
-                                <strong>Entrantes:</strong>
+                                <strong><i class="fa-solid fa-bowl-food"></i> Entrantes:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong>Primeros:</strong>
+                                <strong><i class="fa-solid fa-seedling"></i> Primeros:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong>Segundos:</strong>
+                                <strong><i class="fa-solid fa-burger"></i> Segundos:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong>Postres:</strong>
+                                <strong><i class="fa-solid fa-ice-cream"></i> Postres:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'postres')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong>Bebidas:</strong>
+                                <strong><i class="fa-solid fa-wine-glass"></i> Bebidas:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'bebidas')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong>Comentarios:</strong> {{ $comanda->comentarios }}
+                                <strong><i class="fa-solid fa-comment"></i> Comentarios:</strong>
+                                {{ $comanda->comentarios }}
                                 <br>
 
                             </div>
