@@ -7,6 +7,7 @@ use App\Models\Producto;
 use App\Models\UsersComandas;
 use App\Models\ComandasProductos;
 use App\Http\Controllers\UsersComandasController;
+use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CamareroController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -69,13 +70,16 @@ class ComandaController extends Controller
         $comanda_producto = new ComandasProductosController();
         $comanda_producto->store($comanda->id, $productos, $cantidadNueva);
 
+
+        // $productosCompleto = new ProductoController;
+        // $productosCompleto->index()::whereIn('id', $productos)->get();
+
+
         $comandaCompleta = array();
         $comandaCompleta['comanda'] = $comanda;
         $comandaCompleta['productos'] = $productos;
         $comandaCompleta['comanda_producto'] = $comanda_producto;
         $comandaCompleta['cantidad'] = $cantidadNueva;
-
-
 
         echo json_encode($comandaCompleta);
         // echo json_encode($comanda_producto);
