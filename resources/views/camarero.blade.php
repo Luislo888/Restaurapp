@@ -308,7 +308,7 @@
                                         {{ __('Crear Comanda') }}
                                     </button>
 
-                                    <button type="reset" class="btn btn-danger">
+                                    <button type="reset" class="btn btn-danger btnResetComanda">
                                         {{ __('Limpiar') }}
                                     </button>
                                 </div>
@@ -348,28 +348,45 @@
                                 </div>
 
                                 <div class="card-body bodyComandas bodyComandasAbiertas">
-                                    <strong><i class="fa-solid fa-bowl-food"></i> Entrantes:</strong>
+                                    <strong class="asdf"><i class="fa-solid fa-bowl-food"></i>
+                                        Entrantes:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
                                             <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong><i class="fa-solid fa-seedling"></i> Primeros:</strong>
+                                    <strong class="asdf"><i class="fa-solid fa-seedling"></i> Primeros:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
                                             <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong><i class="fa-solid fa-burger"></i> Segundos:</strong>
+
+                                    {{-- @php
+                                        $segundos = 0;
+                                    @endphp
+                                    @foreach ($productos as $producto)
+                                        @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
+                                            @php
+                                                $segundos++;
+                                            @endphp
+                                            @if ($segundos == 1)
+                                                <strong><i class="fa-solid fa-burger"></i> Segundos:</strong>
+                                            @endif
+                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div><br>
+                                        @endif
+                                    @endforeach --}}
+
+                                    <strong class="asdf"><i class="fa-solid fa-burger"></i> Segundos:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
                                             <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong>
+                                    <strong class="asdf">
                                         <i class="fa-solid fa-ice-cream"></i> Postres:
                                     </strong>
                                     @foreach ($productos as $producto)
@@ -378,7 +395,8 @@
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong><i class="fa-solid fa-wine-glass"></i> Bebidas:</strong>
+                                    <strong class="asdf"><i class="fa-solid fa-wine-glass"></i>
+                                        Bebidas:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'bebidas')
                                             <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>

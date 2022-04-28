@@ -78,6 +78,22 @@ $(function () {
 
 
                 for (let i = 0; i < obj.productosCompleto.length; i++) {
+
+                    // if (i == 0) {
+                    //     switch (obj.productosCompleto[i].categoria) {
+                    //         case 'entrantes': entrantes += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
+                    //             break;
+                    //         case 'primeros': primeros += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
+                    //             break;
+                    //         case 'segundos': segundos += '<strong>Segundos:</strong><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
+                    //             break;
+                    //         case 'bebidas': bebidas += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
+                    //             break;
+                    //         case 'postres': postres += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
+                    //             break;
+                    //     }
+                    // } else {
+
                     switch (obj.productosCompleto[i].categoria) {
                         case 'entrantes': entrantes += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
                             break;
@@ -90,6 +106,7 @@ $(function () {
                         case 'postres': postres += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
                             break;
                     }
+                    // }
                 }
 
 
@@ -156,6 +173,18 @@ $(function () {
     });
 
     // FIN AJAX
+
+
+
+    // INICIO BOTON RESET COMANDA
+
+    $('.btnResetComanda').on('click', function (e) {
+        $('option').each(function () {
+            $(this).attr('disabled', false);
+        });
+    });
+
+    // FIN BOTON RESET COMANDA
 
 
 
@@ -447,4 +476,23 @@ $(function () {
     $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
 
     // FIN ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
+
+
+    $('.asdf').each(function () {
+
+        // $(this).next().next().css('color', 'red');
+
+        // alert($(this).next().prop('nodeName'));
+
+        if ($(this).next().is('BR')) {
+            $(this).remove();
+            $(this).next().remove();
+        }
+
+        // $('br').each(function () {
+        //     $(this).remove();
+        // });
+
+
+    });
 });
