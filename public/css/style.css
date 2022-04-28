@@ -7,11 +7,16 @@ body{
 .col-form-label, .form-control{
     font-size: 15px;
 }
+
+img{    
+    width: 18px;
+    opacity: 0.75;
+}
+
 strong{
     font-weight: 600;
     /* color: rgb(45, 45, 45); */
     color: rgb(78 77 77);
-
 }
 
 h6{
@@ -85,6 +90,14 @@ button{
     font-size: 30px;
 }
 
+.iconEnCurso{
+    font-size: 15px;
+}
+
+.fa-user-pen, .fa-right-to-bracket, .fa-user-gear{
+    margin-left: 10px;
+}
+
 /* CUSTOM IDS AND CLASSES ----------------------------------------------------------------------------- */
 
 .miDiv {
@@ -129,6 +142,10 @@ button{
 
 .btnEditarComandaAjax{
     margin-right: 5px;
+}
+
+#botonCurso{
+    min-width: 89px;
 }
 
 .marginTopBody{
@@ -283,6 +300,14 @@ button{
     right: 12px!important;
 }
 
+#iconChef{
+    width: 32px;
+    opacity: 1.75;
+    padding-bottom: 13px;
+    margin-left: 5px;
+}
+
+
 /* RESPONSIVE */
 
 @media (min-width: 1400px) { 
@@ -310,7 +335,7 @@ button{
     .marginTopBody {
         margin-top: 139px;
     }
-
+    
     .col-md-auto{
         margin-top: 20px;
     }
@@ -318,7 +343,7 @@ button{
     .titulosComandas{
         margin-bottom: -1px!important;
     }
-
+    
     .miDiv{
         margin-left: initial;
         margin-right: initial;
@@ -329,15 +354,20 @@ button{
         margin-left: 100px;
         margin-right: 50px;
     }
-
+    
     .comandasNavTabs{
         margin-top: -4px;
         position: absolute;
         margin-left: 132px;
     }
-
+    
     .comandasBody{
         margin-top: 135px;
+    }
+    
+    #crearComanda{
+        margin-top: 9px;
+
     }
 
     .nuevoProducto{

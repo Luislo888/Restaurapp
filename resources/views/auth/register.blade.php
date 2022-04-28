@@ -2,7 +2,7 @@
 
 @section('cabecera')
     <div id="tituloAdministrador">
-        <h1 id="">Administrador</h1>
+        <h1 id="">Administrador <i class="fa-solid fa-user-gear"></i></h1>
         <a href="{{ url('/camarero') }}" class="btn btn-primary botonesAdmin" role="button" aria-disabled="true">Camareros
         </a>
         <a href="{{ url('/cocinero') }}" class="btn btn-primary botonesAdmin" role="button" aria-disabled="true">Cocineros

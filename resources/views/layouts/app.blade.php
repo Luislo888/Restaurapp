@@ -70,9 +70,9 @@
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Acceder') }}</a>
-                                </li>
+                                {{-- <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('') }}</a>
+                                </li> --}}
                             @endif
 
                             @if (Route::has('register'))
@@ -106,8 +106,8 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                 document.getElementById('logout-form').submit();">
-                                        {{ __('Cerrar Sesión') }}
+                                                                                                                                                                                                                                                                             document.getElementById('logout-form').submit();">
+                                        <i class="fa-solid fa-right-from-bracket"></i> {{ __('Cerrar Sesión') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"

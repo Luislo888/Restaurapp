@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('cabecera')
-    <h6 class="tituloRol">Camarero</h6>
+    <h6 class="tituloRol">Camarero <i class="fa-solid fa-user-pen"></i></h6>
     <div class="collapse navbar-collapse text-center justify-content-center comandasNavTabs" id="navbarSupportedContent">
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
             <button id="botonCrear" type="button" class="btn alert alert-primary">Crear</button>
             <button id="botonAbiertas" type="button" class="btn alert alert-warning">Abiertas</button>
-            <button id="botonCurso" type="button" class="btn alert alert-danger">EnCurso</button>
+            <button id="botonCurso" type="button" class="btn alert alert-danger">En Curso</button>
             <button id="botonCerradas" type="button" class="btn alert alert-success">Cerradas</button>
 
         </div>
@@ -23,7 +23,8 @@
             <div class="col-md-auto" id="crearComanda">
                 <div class="card cardCrear" id="cardCrear">
                     <div class="card-header">
-                        <h6 class="" id="tituloCrearComanda">{{ __('Crear Comanda') }}</h6>
+                        <h6 class="" id="tituloCrearComanda"><i class="fa-solid fa-pen-to-square"></i>
+                            {{ __('Crear Comanda') }}</h6>
                     </div>
 
                     <div class="card-body" id="bodyCrearComanda">
@@ -44,8 +45,13 @@
                             {{-- Nº MESA --}}
 
                             <div class="row mb-4">
-                                <label for="mesa"
-                                    class="col-md-9 col-form-label text-md-start"><strong>{{ __('Nº Mesa') }}</strong></label>
+                                <label for="mesa" class="col-md-9 col-form-label text-md-start"><strong>
+                                        <img src="{{ asset('images/table.png') }}" alt="">
+                                        <img src="{{ asset('images/table (1).png') }}" alt="">
+                                        <img src="{{ asset('images/desk.png') }}" alt="">
+                                        <img src="{{ asset('images/dinner-table.png') }}" alt="">
+                                        <img src="{{ asset('images/student-in-class.png') }}" alt="">
+                                        {{ __('Nº Mesa') }}</strong></label>
 
                                 <div class="col-md-2 cantidad numeroMesa">
                                     <input id="mesa" min="1" max="6" type="number"
@@ -324,7 +330,8 @@
             <div class="col-md-auto" id="comandasAbiertas">
                 <div class="card">
                     <div class="card-header text-warning titulosComandas">
-                        <h6 id="tituloComandaAbierta">Comandas Abiertas</h6>
+                        <h6 id="tituloComandaAbierta"><i class="fa-solid fa-spinner iconEnCurso"></i> Comandas Abiertas
+                        </h6>
                     </div>
                 </div>
                 @foreach ($comandas as $comanda)
@@ -411,7 +418,7 @@
             <div class="col-md-auto" id="comandasEnCurso">
                 <div class="card">
                     <div class="card-header text-warning titulosComandas">
-                        <h6 id="tituloComandaEnCurso">Comandas en Curso</h6>
+                        <h6 id="tituloComandaEnCurso"><i class="fa-solid fa-list-check"></i> Comandas en Curso</h6>
                     </div>
                 </div>
                 @foreach ($comandas as $comanda)
@@ -492,7 +499,7 @@
             <div class="col-md-auto" id="comandasCerradas">
                 <div class="card">
                     <div class="card-header text-warning titulosComandas">
-                        <h6 id="tituloComandaCerrada">Comandas Cerradas</h6>
+                        <h6 id="tituloComandaCerrada"><i class="fa-solid fa-check-double"></i> Comandas Cerradas</h6>
                     </div>
                 </div>
                 @foreach ($comandas as $comanda)

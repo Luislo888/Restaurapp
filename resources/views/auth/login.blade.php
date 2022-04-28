@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('cabecera')
-    <h6 class="" id="tituloLogin">Login</h6>
+    <h6 class="" id="tituloLogin">Login <i class="fa-solid fa-right-to-bracket"></i></h6>
 @endsection
 
 @section('content')
@@ -16,8 +16,8 @@
                             @csrf
 
                             <div class="row mb-3">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-start">{{ __('Email Address') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-start"><i
+                                        class="fa-solid fa-at"></i> {{ __('E-mail') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -32,8 +32,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-start">{{ __('Password') }}</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-start"><i
+                                        class="fa-solid fa-key"></i> {{ __('Contraseña') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
