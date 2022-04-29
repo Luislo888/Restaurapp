@@ -478,21 +478,21 @@ $(function () {
     // FIN ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
 
 
-    $('.asdf').each(function () {
+    // $('.asdf').each(function () {
 
-        // $(this).next().next().css('color', 'red');
+    //     // $(this).next().next().css('color', 'red');
 
-        // alert($(this).next().prop('nodeName'));
+    //     // alert($(this).next().prop('nodeName'));
 
-        if ($(this).next().is('BR')) {
-            $(this).remove();
-            $(this).next().remove();
-        }
+    //     if ($(this).next().is('BR')) {
+    //         $(this).remove();
+    //         $(this).next().remove();
+    //     }
 
-        // $('br').each(function () {
-        //     $(this).remove();
-        // });
+    //     // $('br').each(function () {
+    //     //     $(this).remove();
+    //     // });
 
 
-    });
+    // });
 });

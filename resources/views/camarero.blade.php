@@ -46,11 +46,7 @@
 
                             <div class="row mb-4">
                                 <label for="mesa" class="col-md-9 col-form-label text-md-start"><strong>
-                                        <img src="{{ asset('images/table.png') }}" alt="">
-                                        <img src="{{ asset('images/table (1).png') }}" alt="">
-                                        <img src="{{ asset('images/desk.png') }}" alt="">
-                                        <img src="{{ asset('images/dinner-table.png') }}" alt="">
-                                        <img src="{{ asset('images/student-in-class.png') }}" alt="">
+                                        <img src="{{ asset('images/mesa.png') }}" alt="">
                                         {{ __('Nº Mesa') }}</strong></label>
 
                                 <div class="col-md-2 cantidad numeroMesa">
@@ -70,8 +66,11 @@
                             <div class="row mb-3" id="rowEntrantes">
 
                                 <label for="entrantes" id="labelEntrantes"
-                                    class="col-md-3 col-form-label text-md-start"><strong><i
-                                            class="fa-solid fa-bowl-food"></i> {{ __('Entrantes ') }}</strong></label>
+                                    class="col-md-3 col-form-label text-md-start"><strong>
+                                        {{-- <i class="fa-solid fa-bowl-food"></i> --}}
+                                        <img class="iconIzquierda" src="{{ asset('images/entrante.png') }}" alt="">
+
+                                        {{ __('Entrantes ') }}</strong></label>
 
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
                                     <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarEntrante"></i>
@@ -108,8 +107,10 @@
                             {{-- PRIMEROS --}}
 
                             <div class="row mb-3">
-                                <label for="primeros" class="col-md-3 col-form-label text-md-start"><strong><i
-                                            class="fa-solid fa-seedling"></i> {{ __('Primeros ') }}</strong>
+                                <label for="primeros" class="col-md-3 col-form-label text-md-start"><strong>
+                                        {{-- <i                                            class="fa-solid fa-seedling"></i> --}}
+                                        <img class="iconIzquierda" src="{{ asset('images/primeros.png') }}" alt="">
+                                        {{ __('Primeros ') }}</strong>
                                 </label>
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
                                     id="botonAgregarPrimero">
@@ -153,7 +154,9 @@
                             {{-- SEGUNDOS --}}
                             <div class="row mb-3">
                                 <label for="segundos" class="col-md-3 col-form-label text-md-start"><strong>
-                                        <i class="fa-solid fa-burger"></i> {{ __('Segundos ') }}</strong></label>
+                                        {{-- <i class="fa-solid fa-burger"></i> --}}
+                                        <img class="iconIzquierda" src="{{ asset('images/segundos.png') }}" alt="">
+                                        {{ __('Segundos ') }}</strong></label>
 
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
                                     id="botonAgregarSegundo">
@@ -340,15 +343,20 @@
                             class="">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <strong>Mesa:</strong> {{ $comanda->mesa }}
-                                    <span class="textoDerecha"><strong>Nº Comanda:</strong>
+                                    <strong><img src="{{ asset('images/mesa.png') }}" alt=""> Mesa:</strong>
+                                    {{ $comanda->mesa }}
+                                    <span class="textoDerecha"><strong>
+                                            <img class="orderList" src="{{ asset('images/comanda.png') }}">
+                                            Nº Comanda:</strong>
                                         {{ $comanda->id }}</span>
-                                    <br>
+                                    <br><strong><i class="fa-solid fa-clock iconClock"></i></strong>
                                     <span class="fechaFormateada">{{ $comanda->created_at }}</span>
                                 </div>
 
                                 <div class="card-body bodyComandas bodyComandasAbiertas">
-                                    <strong class="asdf"><i class="fa-solid fa-bowl-food"></i>
+                                    <strong class="asdf">
+                                        <img class="iconIzquierda" src="{{ asset('images/entrante.png') }}" alt="">
+
                                         Entrantes:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
@@ -356,7 +364,9 @@
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong class="asdf"><i class="fa-solid fa-seedling"></i> Primeros:</strong>
+                                    <strong class="asdf"> <img class="iconIzquierda"
+                                            src="{{ asset('images/primeros.png') }}" alt="">
+                                        Primeros:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
                                             <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
@@ -379,7 +389,9 @@
                                         @endif
                                     @endforeach --}}
 
-                                    <strong class="asdf"><i class="fa-solid fa-burger"></i> Segundos:</strong>
+                                    <strong class="asdf"> <img class="iconIzquierda"
+                                            src="{{ asset('images/segundos.png') }}" alt="">
+                                        Segundos:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
                                             <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
@@ -443,29 +455,35 @@
                     @if ($comanda->id != null && $comanda->estado == 'en curso')
                         <div class="card mb-3">
                             <div class="card-header">
+                                <img class="iconIzquierda" src="{{ asset('images/mesa.png') }}" alt="">
                                 <strong>Mesa:</strong> {{ $comanda->mesa }}
-                                <span class="textoDerecha"><strong>Nº Comanda:</strong>
+                                <span class="textoDerecha"><img class="orderList"
+                                        src="{{ asset('images/comanda.png') }}" alt=""> <strong>Nº Comanda:</strong>
                                     {{ $comanda->id }}</span>
                                 <br>
+                                <i class="fa-solid fa-clock iconClock"></i>
                                 <span class="fechaFormateada">{{ $comanda->created_at }}</span>
                             </div>
 
                             <div class="card-body bodyComandas bodyComandasEnCurso">
-                                <strong><i class="fa-solid fa-bowl-food"></i> Entrantes:</strong>
+                                <strong> <img class="iconIzquierda" src="{{ asset('images/entrante.png') }}" alt="">
+                                    Entrantes:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong><i class="fa-solid fa-seedling"></i> Primeros:</strong>
+                                <strong> <img class="iconIzquierda" src="{{ asset('images/primeros.png') }}" alt="">
+                                    Primeros:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong><i class="fa-solid fa-burger"></i> Segundos:</strong>
+                                <strong> <img class="iconIzquierda" src="{{ asset('images/segundos.png') }}" alt="">
+                                    Segundos:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
@@ -524,29 +542,35 @@
                     @if ($comanda->id != null && $comanda->estado == 'cerrada')
                         <div class="card mb-3">
                             <div class="card-header">
+                                <img class="iconIzquierda" src="{{ asset('images/mesa.png') }}" alt="">
                                 <strong>Mesa:</strong> {{ $comanda->mesa }}
-                                <span class="textoDerecha"><strong>Nº Comanda:</strong>
+                                <span class="textoDerecha"><img class="orderList"
+                                        src="{{ asset('images/comanda.png') }}" alt=""> <strong>Nº Comanda:</strong>
                                     {{ $comanda->id }}</span>
                                 <br>
+                                <i class="fa-solid fa-clock iconClock"></i>
                                 <span class="fechaFormateada">{{ $comanda->created_at }}</span>
                             </div>
 
                             <div class="card-body bodyComandas bodyComandasCerradas">
-                                <strong><i class="fa-solid fa-bowl-food"></i> Entrantes:</strong>
+                                <img class="iconIzquierda" src="{{ asset('images/entrante.png') }}" alt="">
+                                Entrantes:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong><i class="fa-solid fa-seedling"></i> Primeros:</strong>
+                                <strong> <img class="iconIzquierda" src="{{ asset('images/primeros.png') }}" alt="">
+                                    Primeros:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong><i class="fa-solid fa-burger"></i> Segundos:</strong>
+                                <strong> <img class="iconIzquierda" src="{{ asset('images/segundos.png') }}" alt="">
+                                    Segundos:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
