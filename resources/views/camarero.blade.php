@@ -254,7 +254,7 @@
                                 <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos"
                                     id="botonQuitarSegundo">
                                     <i class="fa-solid fa-circle-minus botonRedondo"></i>
-                                </button>asdfloijñadsf
+                                </button>
                                 <div class="col-md-5 inputProductos">
 
                                     <select id="bebidas" name="productos[]"
