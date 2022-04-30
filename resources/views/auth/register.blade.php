@@ -79,12 +79,13 @@
 
                                 <div class="col-md-7">
 
-                                    <select id="rol" name="rol" class="form-control @error('rol') is-invalid @enderror"
-                                        value="{{ old('rol') }}" required autocomplete="rol">
-                                        <option selected disabled>Elige un rol</option>
-                                        <option value="1">Administrador</option>
-                                        <option value="2">Camarero</option>
-                                        <option value="3">Cocinero</option>
+                                    <select id="registrarRol" name="rol"
+                                        class="form-control @error('rol') is-invalid @enderror" value="{{ old('rol') }}"
+                                        required autocomplete="rol">
+                                        <option class="registrar" value="0" selected disabled>Elige un rol</option>
+                                        <option class="registrar" value="1">Administrador</option>
+                                        <option class="registrar" value="2">Camarero</option>
+                                        <option class="registrar" value="3">Cocinero</option>
                                     </select>
 
                                     @error('rol')

@@ -68,7 +68,7 @@
                                 <label for="entrantes" id="labelEntrantes"
                                     class="col-md-3 col-form-label text-md-start"><strong>
                                         {{-- <i class="fa-solid fa-bowl-food"></i> --}}
-                                        <img class="iconIzquierda" src="{{ asset('images/entrante.png') }}" alt="">
+                                        <img class="iconIzquierda" src="{{ asset('images/entrantes.png') }}" alt="">
 
                                         {{ __('Entrantes ') }}</strong></label>
 
@@ -355,7 +355,7 @@
 
                                 <div class="card-body bodyComandas bodyComandasAbiertas">
                                     <strong class="asdf">
-                                        <img class="iconIzquierda" src="{{ asset('images/entrante.png') }}" alt="">
+                                        <img class="iconIzquierda" src="{{ asset('images/entrantes.png') }}" alt="">
 
                                         Entrantes:</strong>
                                     @foreach ($productos as $producto)
@@ -466,7 +466,7 @@
                             </div>
 
                             <div class="card-body bodyComandas bodyComandasEnCurso">
-                                <strong> <img class="iconIzquierda" src="{{ asset('images/entrante.png') }}" alt="">
+                                <strong> <img class="iconIzquierda" src="{{ asset('images/entrantes.png') }}" alt="">
                                     Entrantes:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
@@ -553,7 +553,7 @@
                             </div>
 
                             <div class="card-body bodyComandas bodyComandasCerradas">
-                                <img class="iconIzquierda" src="{{ asset('images/entrante.png') }}" alt="">
+                                <img class="iconIzquierda" src="{{ asset('images/entrantes.png') }}" alt="">
                                 Entrantes:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
