@@ -354,7 +354,7 @@
                                 </div>
 
                                 <div class="card-body bodyComandas bodyComandasAbiertas">
-                                    <strong class="asdf">
+                                    <strong class="categoriaProducto">
                                         <img class="iconIzquierda" src="{{ asset('images/entrantes.png') }}" alt="">
 
                                         Entrantes:</strong>
@@ -364,7 +364,7 @@
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong class="asdf"> <img class="iconIzquierda"
+                                    <strong class="categoriaProducto"> <img class="iconIzquierda"
                                             src="{{ asset('images/primeros.png') }}" alt="">
                                         Primeros:</strong>
                                     @foreach ($productos as $producto)
@@ -389,7 +389,7 @@
                                         @endif
                                     @endforeach --}}
 
-                                    <strong class="asdf"> <img class="iconIzquierda"
+                                    <strong class="categoriaProducto"> <img class="iconIzquierda"
                                             src="{{ asset('images/segundos.png') }}" alt="">
                                         Segundos:</strong>
                                     @foreach ($productos as $producto)
@@ -398,7 +398,7 @@
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong class="asdf">
+                                    <strong class="categoriaProducto">
                                         <i class="fa-solid fa-ice-cream"></i> Postres:
                                     </strong>
                                     @foreach ($productos as $producto)
@@ -407,7 +407,7 @@
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong class="asdf"><i class="fa-solid fa-wine-glass"></i>
+                                    <strong class="categoriaProducto"><i class="fa-solid fa-wine-glass"></i>
                                         Bebidas:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'bebidas')
@@ -415,8 +415,15 @@
                                         @endif
                                     @endforeach
                                     <br>
-                                    <strong><i class="fa-solid fa-comment"></i> Comentarios:</strong>
-                                    {{ $comanda->comentarios }}
+                                    {{-- <strong class="categoriaProducto"><i class="fa-solid fa-comment"></i>
+                                        Comentarios:</strong>
+                                    <div><br>{{ $comanda->comentarios }}</div>
+                                    <br> --}}
+                                    @if ($comanda->comentarios != null)
+                                        <strong class="comentarioProducto"><i class="fa-solid fa-comment"></i>
+                                            Comentarios:</strong>
+                                        {{ $comanda->comentarios }}
+                                    @endif
                                     <br>
 
                                     <div class="row mb-1 mt-1 botonesComandas">
@@ -466,7 +473,8 @@
                             </div>
 
                             <div class="card-body bodyComandas bodyComandasEnCurso">
-                                <strong> <img class="iconIzquierda" src="{{ asset('images/entrantes.png') }}" alt="">
+                                <strong class="categoriaProducto"> <img class="iconIzquierda"
+                                        src="{{ asset('images/entrantes.png') }}" alt="">
                                     Entrantes:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
@@ -474,7 +482,8 @@
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong> <img class="iconIzquierda" src="{{ asset('images/primeros.png') }}" alt="">
+                                <strong class="categoriaProducto"> <img class="iconIzquierda"
+                                        src="{{ asset('images/primeros.png') }}" alt="">
                                     Primeros:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
@@ -482,7 +491,8 @@
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong> <img class="iconIzquierda" src="{{ asset('images/segundos.png') }}" alt="">
+                                <strong class="categoriaProducto"> <img class="iconIzquierda"
+                                        src="{{ asset('images/segundos.png') }}" alt="">
                                     Segundos:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
@@ -490,22 +500,25 @@
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong><i class="fa-solid fa-ice-cream"></i> Postres:</strong>
+                                <strong class="categoriaProducto"><i class="fa-solid fa-ice-cream"></i> Postres:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'postres')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong><i class="fa-solid fa-wine-glass"></i> Bebidas:</strong>
+                                <strong class="categoriaProducto"><i class="fa-solid fa-wine-glass"></i> Bebidas:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'bebidas')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong><i class="fa-solid fa-comment"></i> Comentarios:</strong>
-                                {{ $comanda->comentarios }}
+                                @if ($comanda->comentarios != null)
+                                    <strong class="comentarioProducto"><i class="fa-solid fa-comment"></i>
+                                        Comentarios:</strong>
+                                    {{ $comanda->comentarios }}
+                                @endif
                                 <br>
 
                                 <div class="row mb-1 mt-1 botonesComandas justify-content-center">
@@ -553,15 +566,17 @@
                             </div>
 
                             <div class="card-body bodyComandas bodyComandasCerradas">
-                                <img class="iconIzquierda" src="{{ asset('images/entrantes.png') }}" alt="">
-                                Entrantes:</strong>
+                                <strong class="categoriaProducto"><img class="iconIzquierda"
+                                        src="{{ asset('images/entrantes.png') }}" alt="">
+                                    Entrantes:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong> <img class="iconIzquierda" src="{{ asset('images/primeros.png') }}" alt="">
+                                <strong class="categoriaProducto"> <img class="iconIzquierda"
+                                        src="{{ asset('images/primeros.png') }}" alt="">
                                     Primeros:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
@@ -569,7 +584,8 @@
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong> <img class="iconIzquierda" src="{{ asset('images/segundos.png') }}" alt="">
+                                <strong class="categoriaProducto"> <img class="iconIzquierda"
+                                        src="{{ asset('images/segundos.png') }}" alt="">
                                     Segundos:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
@@ -577,22 +593,25 @@
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong><i class="fa-solid fa-ice-cream"></i> Postres:</strong>
+                                <strong class="categoriaProducto"><i class="fa-solid fa-ice-cream"></i> Postres:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'postres')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong><i class="fa-solid fa-wine-glass"></i> Bebidas:</strong>
+                                <strong class="categoriaProducto"><i class="fa-solid fa-wine-glass"></i> Bebidas:</strong>
                                 @foreach ($productos as $producto)
                                     @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'bebidas')
                                         <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
                                     @endif
                                 @endforeach
                                 <br>
-                                <strong><i class="fa-solid fa-comment"></i> Comentarios:</strong>
-                                {{ $comanda->comentarios }}
+                                @if ($comanda->comentarios != null)
+                                    <strong class="comentarioProducto"><i class="fa-solid fa-comment"></i>
+                                        Comentarios:</strong>
+                                    {{ $comanda->comentarios }}
+                                @endif
                                 <br>
 
                             </div>

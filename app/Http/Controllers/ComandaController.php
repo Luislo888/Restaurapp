@@ -90,8 +90,10 @@ class ComandaController extends Controller
      * @param  \App\Models\Comanda  $comanda
      * @return \Illuminate\Http\Response
      */
-    public function show(Comanda $comanda)
+    public function show($id)
     {
+
+        // dd($comanda);
         $entrantes = Producto::all()->where('categoria', 'entrantes');
         $primeros = Producto::all()->where('categoria', 'primeros');
         $segundos = Producto::all()->where('categoria', 'segundos');
@@ -99,7 +101,7 @@ class ComandaController extends Controller
         $bebidas = Producto::all()->where('categoria', 'bebidas');
         // dd($productos);
 
-        $comanda = Comanda::find($comanda->id);
+        $comanda = Comanda::find($id);
         // dd($comanda);
 
         $comandasProductos = ComandasProductos::where('comanda_id', $comanda->id)->get();

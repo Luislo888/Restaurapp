@@ -47,14 +47,7 @@ $(function () {
                 $('.fa-spin').hide();
                 let obj = JSON.parse(resultado);
 
-                // for (let i in obj.data) { //recorremos el objeto
-                //     let mesa = obj.data[i]['mesa'];
-                // }
-                // parser = new DOMParser();
                 let fecha = new Date(obj.comanda.created_at);
-                // let fecha = obj.comanda.created_at;
-                // fecha.toTimeString();
-                // fecha = datepicker.formatDate('yy-mm-dd', fecha);
                 let anio = fecha.getFullYear();
                 let mes = fecha.getMonth() + 1;
                 if (mes < 10) {
@@ -70,10 +63,13 @@ $(function () {
                 let segundos = "";
                 let postres = "";
                 let bebidas = "";
+                let comentarios = "";
 
                 if (obj.comanda.comentarios == null) {
 
-                    obj.comanda.comentarios = "";
+                    comentarios = "";
+                } else {
+                    comentarios = `<strong><i class='fa-solid fa-comment'></i> Comentarios: </strong> ${obj.comanda.comentarios} <br>`;
                 }
 
 
@@ -123,21 +119,21 @@ $(function () {
                             <span class="fechaFormateada">${hora}:${minutos}:${segundosFecha} - ${dia}/${mes}/${anio}</span>
                         </div>
                         <div class="card-body bodyComandas bodyComandasAbiertas">
-                            <strong class="asdf">
+                            <strong class="categoriaProducto">
                                 <img class="iconIzquierda" src="http://127.0.0.1:8000/images/entrantes.png" alt="">
                                 Entrantes:</strong>${entrantes}<br>
-                            <strong class="asdf"> <img class="iconIzquierda"
+                            <strong class="categoriaProducto"> <img class="iconIzquierda"
                                     src="http://127.0.0.1:8000/images/primeros.png" alt="">
                                 Primeros:</strong>${primeros}<br>
-                            <strong class="asdf"> <img class="iconIzquierda"
+                            <strong class="categoriaProducto"> <img class="iconIzquierda"
                                     src="http://127.0.0.1:8000/images/segundos.png" alt="">
                                 Segundos:</strong>${segundos}<br>
-                            <strong class="asdf">
+                            <strong class="categoriaProducto">
                                 <i class="fa-solid fa-ice-cream"></i> Postres:
                             </strong>${postres}<br>
-                            <strong class="asdf"><i class="fa-solid fa-wine-glass"></i>
+                            <strong class="categoriaProducto"><i class="fa-solid fa-wine-glass"></i>
                                 Bebidas:</strong>${bebidas}<br>
-                            <strong><i class="fa-solid fa-comment"></i> Comentarios: </strong>${obj.comanda.comentarios}<br>
+                                ${comentarios}
                             <div class="row mb-1 mt-1 botonesComandas">
                                 <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
                                     <button type="submit" class="btn btn-primary" name="editarComanda">
@@ -152,8 +148,9 @@ $(function () {
                     </div>
                 </form>`;
 
+                $('#comandasAbiertas').append(formulario);
 
-                $('#comandasAbiertas').prepend(formulario);
+                quitarCategoriasProductosVacios();
             },
             error: function (xhr, status) {
                 $('#notificacionError').show().text('Se debe rellenar correctamente la comanda');
@@ -494,22 +491,29 @@ $(function () {
 
     // FIN ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
 
+    // INICIO QUITAR CATEGORIAS PRODUCTOS VACÍOS
 
-    // $('.asdf').each(function () {
+    function quitarCategoriasProductosVacios() {
 
-    //     // $(this).next().next().css('color', 'red');
+        $('.categoriaProducto').each(function () {
+            // alert($(this).next().prop('nodeName'));
 
-    //     // alert($(this).next().prop('nodeName'));
+            if ($(this).next().is('BR')) {
+                $(this).remove();
+                $(this).next().remove();
+            }
 
-    //     if ($(this).next().is('BR')) {
-    //         $(this).remove();
-    //         $(this).next().remove();
-    //     }
+            $('br').each(function () {
+                if ($(this).next().is('BR')) {
+                    $(this).remove();
+                }
+            });
+        });
 
-    //     // $('br').each(function () {
-    //     //     $(this).remove();
-    //     // });
+    }
+
+    quitarCategoriasProductosVacios();
 
 
-    // });
+    // FIN QUITAR CATEGORIAS PRODUCTOS VACÍOS
 });
