@@ -93,18 +93,21 @@ class ComandaController extends Controller
     public function show($id)
     {
 
-        // dd($comanda);
         $entrantes = Producto::all()->where('categoria', 'entrantes');
+        // dd($entrantes);
         $primeros = Producto::all()->where('categoria', 'primeros');
         $segundos = Producto::all()->where('categoria', 'segundos');
         $postres = Producto::all()->where('categoria', 'postres');
         $bebidas = Producto::all()->where('categoria', 'bebidas');
-        // dd($productos);
+
 
         $comanda = Comanda::find($id);
         // dd($comanda);
+        // La comanda buscada por ID
 
         $comandasProductos = ComandasProductos::where('comanda_id', $comanda->id)->get();
+        // dd($comandasProductos);
+        // Los productos de la comanda en cuestión
 
         $camarero = Auth::user()->name;
 
@@ -124,6 +127,8 @@ class ComandaController extends Controller
             ])->get();
         }
 
+        // dd($comandas);
+        // Todas las comandas del usuario, usado para la vista camarero
 
         $productos = ComandasProductos::addSelect([
             'id' => Producto::select('id')
@@ -131,6 +136,8 @@ class ComandaController extends Controller
         ])->join('productos', 'comandas_productos.producto_id', '=', 'productos.id')
             ->select('productos.*', 'comandas_productos.*')->get();
 
+        // dd($productos);
+        // Todos las comandasProductos(comanda_id, producto_id, cantidad) uniéndole los productos(nombre, categoria)
 
         return view('comanda', ['comanda' => $comanda, 'comandas' => $comandas, 'todosProductos' => $productos, 'productos' => $productos, 'comandasProductos' => $comandasProductos, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'postres' => $postres, 'bebidas' => $bebidas]);
     }
