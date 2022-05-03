@@ -514,6 +514,14 @@ $(function () {
 
     quitarCategoriasProductosVacios();
 
+    $('#botonCrearComanda').on('click', function () {
+        $('option').each(function () {
+            if ($(this).val() != 0) {
+                $(this).removeAttr('disabled');
+            }
+        });
+    });
+
 
     // FIN QUITAR CATEGORIAS PRODUCTOS VACÍOS
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comanda;
 use App\Models\ComandasProductos;
 use Illuminate\Http\Request;
 
@@ -75,8 +76,12 @@ class ComandasProductosController extends Controller
      */
     public function update($comanda_id, $producto_id, $cantidad)
     {
+        // $comandas_productos = ComandasProductos->delete();
+        $comandas_productos = ComandasProductos::where('comanda_id', $comanda_id)->delete();
         for ($i = 0; $i < count($producto_id); $i++) {
-            $comandas_productos = ComandasProductos::where('comanda_id', $comanda_id)->where('producto_id', $producto_id[$i])->first();
+            $comandas_productos = new ComandasProductos();
+            $comandas_productos->comanda_id = $comanda_id;
+            $comandas_productos->producto_id = $producto_id[$i];
             $comandas_productos->cantidad = $cantidad[$i];
             $comandas_productos->save();
         }

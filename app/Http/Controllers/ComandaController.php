@@ -162,14 +162,14 @@ class ComandaController extends Controller
      * @param  \App\Models\Comanda  $comanda
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comanda $comanda)
+    public function update(Request $request, $id)
     {
-        $comanda = Comanda::find($comanda->id);
+        $comanda = Comanda::find($id);
 
         $comanda->mesa = $request->input('mesa');
         $comanda->comentarios = $request->input('comentarios');
 
-        $comanda->save();
+        $comanda->update();
 
         $productos = $request->input('productos');
         $cantidad = $request->input('cantidad');
@@ -177,7 +177,7 @@ class ComandaController extends Controller
         $comanda_producto = new ComandasProductosController();
         $comanda_producto->update($comanda->id, $productos, $cantidad);
 
-        return redirect('/camarero')->with('asdf', 'Comanda actualizada');
+        return redirect('/camarero')->with('success', 'Comanda actualizada');
     }
 
     /**
