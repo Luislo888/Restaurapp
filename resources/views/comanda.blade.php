@@ -70,28 +70,87 @@
                             </div>
                         </div>
 
+                        @php
+                            $iteracion = 0;
+                        @endphp
+
                         @foreach ($productos as $producto)
                             @if ($producto->categoria == 'entrantes' && $producto->comanda_id == $comanda->id)
-                                @foreach ($entrantes as $entrante)
-                                    @if ($entrante->id == $producto->producto_id)
-                                        <strong>{{ $entrante->nombre }}</strong>
-                                    @else
-                                        {{ $entrante->nombre }}
+                                <div class="row mb-3" id="rowEntrantes">
+                                    @php
+                                        $iteracion++;
+                                    @endphp
+
+                                    @if ($iteracion == 1)
+                                        <label for="entrantes" id="labelEntrantes"
+                                            class="col-md-3 col-form-label text-md-start"><strong>
+                                                <img class="iconIzquierda" src="{{ asset('images/entrantes.png') }}"
+                                                    alt="">
+
+                                                {{ __('Entrantes ') }}</strong></label>
+
+                                        <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
+                                            <i class="fa-solid fa-circle-plus botonRedondo"
+                                                id="botonAgregarEntrante"></i>
+                                        </button>
+                                        <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
+                                            <i class="fa-solid fa-circle-minus botonRedondo"
+                                                id="botonQuitarEntrante"></i>
+                                        </button>
                                     @endif
-                                @endforeach
-                                {{ $producto->cantidad }}
-                                <br>
+
+                                    @if ($iteracion > 1)
+                                        <label for="entrantes" id="labelEntrantes"
+                                            class="col-md-5 col-form-label text-md-start"> </label>
+                                    @endif
+
+                                    <div class="col-md-5 inputProductos" id="colEntrantes">
+                                        <select id="selectEntrantes" name="productos[]"
+                                            class="form-control @error('entrantes') is-invalid @enderror "
+                                            autocomplete="entrantes">
+                                            <option value="0" selected>Elige un entrante</option>
+
+                                            @foreach ($entrantes as $entrante)
+                                                @if ($entrante->id == $producto->producto_id)
+                                                    {{-- {{ $entrante->nombre }} --}}
+                                                    <option selected value="{{ $entrante->id }}">
+                                                        {{ $entrante->nombre }}
+                                                    </option>
+                                                @else
+                                                    {{-- {{ $entrante->nombre }} --}}
+                                                    <option value="{{ $entrante->id }}">{{ $entrante->nombre }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+
+
+                                        {{-- {{ $producto->cantidad }} --}}
+                                    </div>
+                                    <div class="col-md-2 cantidad">
+                                        <input id="" min="1" type="number"
+                                            class="form-control @error('cantidad') is-invalid @enderror"
+                                            name="cantidad[]" value="{{ $producto->cantidad }}"
+                                            autocomplete="cantidad" autofocus>
+
+                                        @error('cantidad')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
                             @endif
                         @endforeach
 
+
                         {{-- ENTRANTES --}}
-                        @foreach ($comanda->producto as $producto)
+                        {{-- @foreach ($comanda->producto as $producto)
                             @if ($producto->categoria == 'entrantes')
                                 <div class="row mb-3" id="rowEntrantes">
 
                                     <label for="entrantes" id="labelEntrantes"
                                         class="col-md-3 col-form-label text-md-start"><strong>
-                                            {{-- <i class="fa-solid fa-bowl-food"></i> --}}
                                             <img class="iconIzquierda" src="{{ asset('images/entrantes.png') }}"
                                                 alt="">
 
@@ -110,9 +169,9 @@
                                             class="form-control @error('entrantes') is-invalid @enderror "
                                             autocomplete="entrantes">
                                             <option value="0" selected>Elige un entrante</option>
-                                            {{-- @foreach ($entrantes as $entrante)
+                                            @foreach ($entrantes as $entrante)
                                         <option value="{{ $entrante->id }}">{{ $entrante->nombre }}</option>
-                                    @endforeach --}}
+                                    @endforeach
                                             @foreach ($todosProductos as $todosProducto)
                                                 @if ($todosProducto->id == $producto->id)
                                                     <option value="{{ $todosProducto->id }}" selected>
@@ -138,7 +197,7 @@
                                     </div>
                                 </div>
                             @endif
-                        @endforeach
+                        @endforeach --}}
 
                         {{-- PRIMEROS --}}
 

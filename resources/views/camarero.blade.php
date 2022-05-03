@@ -92,7 +92,7 @@
                                 </div>
 
                                 <div class="col-md-2 cantidad">
-                                    <input id="" min="1" type="number"
+                                    <input id="" min="0" type="number"
                                         class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
                                         autocomplete="cantidad" autofocus>
 
