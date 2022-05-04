@@ -1,7 +1,7 @@
-@extends('layouts.app')
-{{-- @extends('camarero') --}}
+{{-- @extends('layouts.app') --}}
+@extends('camarero')
 
-@section('cabecera')
+{{-- @section('cabecera')
     <h6 class="tituloRol">Editar Comanda</h6>
     <div class="collapse navbar-collapse text-center justify-content-center comandasNavTabs" id="navbarSupportedContent">
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
@@ -12,7 +12,7 @@
 
         </div>
     </div>
-@endsection
+@endsection --}}
 
 {{-- @section('asdf') --}}
 {{-- @if (isset($_GET['editarComanda'])) --}}
@@ -31,22 +31,22 @@
                         <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6>
                     @endif
                     <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6> --}}
-                    <h6 class="alert alert-success notificacionCrearComanda" id="notificacionSuccess">
+                    <h6 class="alert alert-success notificacionCrearComanda" id="notificacionEditarSuccess">
                         {{ session('success') }}</h6>
-                    <h6 class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionError">
+                    <h6 class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionEditarError">
                         {{ session('success') }}</h6>
                     <div class="row justify-content-center ">
-                        <i class="fas fa-spinner fa-spin text-center"></i>
+                        <i class="fas fa-spinner fa-spin text-center" id="spinEditarComanda"></i>
                     </div>
 
 
                     <form method="POST" {{ route('comanda-update', ['id' => $comanda->id]) }} class=""
-                        id="">
-                        {{-- id="formCrearComanda"> --}}
+                        id="formEditarComanda">
                         @method('PATCH')
                         @csrf
 
-                        {{-- Nº MESA --}}
+                        {{-- INICIO COMANDA CABECERA --}}
+
                         <strong><i class="fa-solid fa-clock iconClock"></i></strong>
                         <span class="fechaFormateada">{{ $comanda->created_at }}</span>
 
@@ -56,7 +56,6 @@
                             {{ $comanda->id }}</span>
                         <p></p>
 
-                        {{-- INICIO ENTRANTES --}}
 
                         <div class="row mb-4">
 
@@ -77,6 +76,11 @@
                             </div>
                         </div>
 
+                        {{-- FIN COMANDA CABECERA --}}
+
+
+
+                        {{-- INICIO ENTRANTES --}}
 
                         <div class="row mb-3" id="rowEntrantes">
                             <label for="entrantes" id="labelEntrantes"
@@ -102,7 +106,6 @@
                                         </option>
                                     @endforeach
                                 </select>
-
                             </div>
 
                             <div class="col-md-2 cantidad">
@@ -143,7 +146,6 @@
                                                 @endif
                                             @endforeach
                                         </select>
-
                                     </div>
                                     <div class="col-md-2 cantidad">
                                         <input id="" min="1" type="number"
@@ -166,8 +168,8 @@
 
                         {{-- INICIO PRIMEROS --}}
 
-                        {{-- <div class="row mb-3" id="rowPrimeros">
-                            <label for="primeros" id="labelPrimeros"
+                        <div class="row mb-3" id="">
+                            <label for="primeros" id="labelEntrantes"
                                 class="col-md-3 col-form-label text-md-start"><strong>
                                     <img class="iconIzquierda" src="{{ asset('images/primeros.png') }}" alt="">
 
@@ -179,10 +181,8 @@
                             <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
                                 <i class="fa-solid fa-circle-minus botonRedondo" id="botonQuitarPrimero"></i>
                             </button>
-                            <div class="col-md-5 inputProductos" id="colPrimeros">
-                                <select id="selectPrimeros" name="productos[]"
-                                    class="form-control @error('primeros') is-invalid @enderror "
-                                    autocomplete="primeros">
+                            <div class="col-md-5 inputProductos" id="col">
+                                <select id="primeros" name="productos[]" class="form-control">
                                     <option value="0" selected>Elige un primero</option>
 
                                     @foreach ($primeros as $primero)
@@ -190,32 +190,21 @@
                                         </option>
                                     @endforeach
                                 </select>
-
                             </div>
-                            <div class="col-md-2 cantidad">
-                                <input id="" min="1" type="number"
-                                    class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
-                                    autocomplete="cantidad" autofocus>
 
-                                @error('cantidad')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            <div class="col-md-2 cantidad">
+                                <input id="" min="1" type="number" class="form-control" name="cantidad[]">
                             </div>
                         </div>
 
 
                         @foreach ($productos as $producto)
                             @if ($producto->categoria == 'primeros' && $producto->comanda_id == $comanda->id)
-                                <div class="row mb-3" id="rowPrimeros">
-                                    <label for="primeros" id="labelPrimeros"
-                                        class="col-md-5 col-form-label text-md-start"> </label>
+                                <div class="row mb-3" id="row">
+                                    <label for="primeros" id="" class="col-md-5 col-form-label text-md-start"> </label>
 
-                                    <div class="col-md-5 inputProductos" id="colPrimeros">
-                                        <select id="selectPrimeros" name="productos[]"
-                                            class="form-control @error('primeros') is-invalid @enderror "
-                                            autocomplete="primeros">
+                                    <div class="col-md-5 inputProductos" id="col">
+                                        <select id="primeros" name="productos[]" class="form-control">
                                             <option value="0" selected>Elige un primero</option>
 
                                             @foreach ($primeros as $primero)
@@ -230,163 +219,221 @@
                                                 @endif
                                             @endforeach
                                         </select>
-
                                     </div>
                                     <div class="col-md-2 cantidad">
-                                        <input id="" min="1" type="number"
-                                            class="form-control @error('cantidad') is-invalid @enderror"
-                                            name="cantidad[]" value="{{ $producto->cantidad }}"
-                                            autocomplete="cantidad" autofocus>
-
-                                        @error('cantidad')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <input id="" min="1" type="number" class="form-control" name="cantidad[]"
+                                            value="{{ $producto->cantidad }}">
                                     </div>
                                 </div>
                             @endif
-                        @endforeach --}}
+                        @endforeach
 
                         {{-- FIN PRIMEROS --}}
 
 
 
-                        {{-- SEGUNDOS --}}
+                        {{-- INICIO SEGUNDOS --}}
 
-
-                        {{-- <div class="row mb-3">
-                            <label for="segundos" class="col-md-3 col-form-label text-md-start"><strong>
+                        <div class="row mb-3" id="">
+                            <label for="segundos" id="labelSegundos"
+                                class="col-md-3 col-form-label text-md-start"><strong>
                                     <img class="iconIzquierda" src="{{ asset('images/segundos.png') }}" alt="">
+
                                     {{ __('Segundos ') }}</strong></label>
 
-                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
-                                id="botonAgregarSegundo">
-                                <i class="fa-solid fa-circle-plus botonRedondo"></i>
+                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
+                                <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarSegundo"></i>
                             </button>
-
-                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos"
-                                id="botonQuitarSegundo">
-                                <i class="fa-solid fa-circle-minus botonRedondo"></i>
+                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
+                                <i class="fa-solid fa-circle-minus botonRedondo" id="botonQuitarSegundo"></i>
                             </button>
-                            <div class="col-md-5 inputProductos">
-
-                                <select id="segundos" name="productos[]"
-                                    class="form-control @error('segundos') is-invalid @enderror"
-                                    autocomplete="segundos">
+                            <div class="col-md-5 inputProductos" id="col">
+                                <select id="segundos" name="productos[]" class="form-control">
                                     <option value="0" selected>Elige un segundo</option>
+
                                     @foreach ($segundos as $segundo)
-                                        <option value="{{ $segundo->id }}">{{ $segundo->nombre }}</option>
+                                        <option value="{{ $segundo->id }}">{{ $segundo->nombre }}
+                                        </option>
                                     @endforeach
                                 </select>
-
-                                @error('segundos')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
+
                             <div class="col-md-2 cantidad">
-                                <input id="" min="1" type="number"
-                                    class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
-                                    autocomplete="cantidad" autofocus>
-
-                                @error('cantidad')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input id="" min="1" type="number" class="form-control" name="cantidad[]">
                             </div>
-                        </div> --}}
+                        </div>
 
-                        {{-- POSTRES --}}
 
-                        {{-- <div class="row mb-3">
-                            <label for="postres" class="col-md-3 col-form-label text-md-start"><strong>
-                                    <i class="fa-solid fa-ice-cream"></i> {{ __('Postres ') }}
-                                </strong></label>
+                        @foreach ($productos as $producto)
+                            @if ($producto->categoria == 'segundos' && $producto->comanda_id == $comanda->id)
+                                <div class="row mb-3" id="row">
+                                    <label for="segundos" id="" class="col-md-5 col-form-label text-md-start"> </label>
 
-                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
-                                id="botonAgregarSegundo">
-                                <i class="fa-solid fa-circle-plus botonRedondo"></i>
+                                    <div class="col-md-5 inputProductos" id="col">
+                                        <select id="segundos" name="productos[]" class="form-control">
+                                            <option value="0" selected>Elige un segundo</option>
+
+                                            @foreach ($segundos as $segundo)
+                                                @if ($segundo->id == $producto->producto_id)
+                                                    <option selected value="{{ $segundo->id }}">
+                                                        {{ $segundo->nombre }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $segundo->id }}">
+                                                        {{ $segundo->nombre }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+
+                                    </div>
+                                    <div class="col-md-2 cantidad">
+                                        <input id="" min="1" type="number" class="form-control" name="cantidad[]"
+                                            value="{{ $producto->cantidad }}">
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+
+                        {{-- FIN SEGUNDOS --}}
+
+
+
+                        {{-- INICIO POSTRES --}}
+
+                        <div class="row mb-3" id="">
+                            <label for="postres" id="labelPostres"
+                                class="col-md-3 col-form-label text-md-start"><strong>
+                                    <i class="fa-solid fa-ice-cream"></i>
+
+                                    {{ __('Postres ') }}</strong></label>
+
+                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
+                                <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarPostre"></i>
                             </button>
-                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos"
-                                id="botonQuitarSegundo">
-                                <i class="fa-solid fa-circle-minus botonRedondo"></i>
+                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
+                                <i class="fa-solid fa-circle-minus botonRedondo" id="botonQuitarPostre"></i>
                             </button>
-                            <div class="col-md-5 inputProductos">
-
-                                <select id="postres" name="productos[]"
-                                    class="form-control @error('postres') is-invalid @enderror" autocomplete="postres">
+                            <div class="col-md-5 inputProductos" id="col">
+                                <select id="postres" name="productos[]" class="form-control">
                                     <option value="0" selected>Elige un postre</option>
+
                                     @foreach ($postres as $postre)
-                                        <option value="{{ $postre->id }}">{{ $postre->nombre }}</option>
+                                        <option value="{{ $postre->id }}">{{ $postre->nombre }}
+                                        </option>
                                     @endforeach
                                 </select>
-
-                                @error('postres')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
+
                             <div class="col-md-2 cantidad">
-                                <input id="" min="1" type="number"
-                                    class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
-                                    autocomplete="cantidad" autofocus>
-
-                                @error('cantidad')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input id="" min="1" type="number" class="form-control" name="cantidad[]">
                             </div>
-                        </div> --}}
+                        </div>
 
-                        {{-- BEBIDAS --}}
 
-                        {{-- <div class="row mb-3">
-                            <label for="bebidas" class="col-md-3 col-form-label text-md-start"><strong><i
-                                        class="fa-solid fa-wine-glass"></i> {{ __('Bebidas ') }}</strong></label>
+                        @foreach ($productos as $producto)
+                            @if ($producto->categoria == 'postres' && $producto->comanda_id == $comanda->id)
+                                <div class="row mb-3" id="row">
+                                    <label for="postres" id="" class="col-md-5 col-form-label text-md-start"> </label>
 
-                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas"
-                                id="botonAgregarSegundo">
-                                <i class="fa-solid fa-circle-plus botonRedondo"></i>
+                                    <div class="col-md-5 inputProductos" id="col">
+                                        <select id="postres" name="productos[]" class="form-control">
+                                            <option value="0" selected>Elige un postre</option>
+
+                                            @foreach ($postres as $postre)
+                                                @if ($postre->id == $producto->producto_id)
+                                                    <option selected value="{{ $postre->id }}">
+                                                        {{ $postre->nombre }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $postre->id }}">
+                                                        {{ $postre->nombre }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+
+                                    </div>
+                                    <div class="col-md-2 cantidad">
+                                        <input id="" min="1" type="number" class="form-control" name="cantidad[]"
+                                            value="{{ $producto->cantidad }}">
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+
+                        {{-- FIN POSTRES --}}
+
+
+
+                        {{-- INICIO BEBIDAS --}}
+
+                        <div class="row mb-3" id="">
+                            <label for="bebidas" id="labelBebidas"
+                                class="col-md-3 col-form-label text-md-start"><strong>
+                                    <i class="fa-solid fa-wine-glass"></i>
+
+                                    {{ __('Bebidas ') }}</strong></label>
+
+                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
+                                <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarBebida"></i>
                             </button>
-                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos"
-                                id="botonQuitarSegundo">
-                                <i class="fa-solid fa-circle-minus botonRedondo"></i>
+                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
+                                <i class="fa-solid fa-circle-minus botonRedondo" id="botonQuitarBebida"></i>
                             </button>
-                            <div class="col-md-5 inputProductos">
-
-                                <select id="bebidas" name="productos[]"
-                                    class="form-control @error('bebidas') is-invalid @enderror" autocomplete="bebidas">
+                            <div class="col-md-5 inputProductos" id="col">
+                                <select id="bebidas" name="productos[]" class="form-control">
                                     <option value="0" selected>Elige una bebida</option>
+
                                     @foreach ($bebidas as $bebida)
-                                        <option value="{{ $bebida->id }}">{{ $bebida->nombre }}</option>
+                                        <option value="{{ $bebida->id }}">{{ $bebida->nombre }}
+                                        </option>
                                     @endforeach
                                 </select>
-
-                                @error('bebidas')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
+
                             <div class="col-md-2 cantidad">
-                                <input id="" min="1" type="number"
-                                    class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
-                                    autocomplete="cantidad" autofocus>
-
-                                @error('cantidad')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input id="" min="1" type="number" class="form-control" name="cantidad[]">
                             </div>
-                        </div> --}}
+                        </div>
 
-                        {{-- COMENTARIOS --}}
+
+                        @foreach ($productos as $producto)
+                            @if ($producto->categoria == 'bebidas' && $producto->comanda_id == $comanda->id)
+                                <div class="row mb-3" id="row">
+                                    <label for="bebidas" id="" class="col-md-5 col-form-label text-md-start"> </label>
+
+                                    <div class="col-md-5 inputProductos" id="col">
+                                        <select id="bebidas" name="productos[]" class="form-control">
+                                            <option value="0" selected>Elige una bebida</option>
+
+                                            @foreach ($bebidas as $bebida)
+                                                @if ($bebida->id == $producto->producto_id)
+                                                    <option selected value="{{ $bebida->id }}">
+                                                        {{ $bebida->nombre }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $bebida->id }}">
+                                                        {{ $bebida->nombre }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+
+                                    </div>
+                                    <div class="col-md-2 cantidad">
+                                        <input id="" min="1" type="number" class="form-control" name="cantidad[]"
+                                            value="{{ $producto->cantidad }}">
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+
+                        {{-- FIN BEBIDAS --}}
+
+
+
+                        {{-- INCIO COMENTARIOS --}}
 
                         <div class="row mb-3">
                             <label for="comentarios" class="col-md-3 col-form-label text-md-start"
@@ -418,6 +465,8 @@
                                 </button>
                             </div>
                         </div>
+
+                        {{-- FIN COMENTARIOS --}}
                     </form>
 
                 </div>

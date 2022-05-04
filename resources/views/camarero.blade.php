@@ -32,12 +32,12 @@
                             <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6>
                         @endif
                         <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6> --}}
-                        <h6 class="alert alert-success notificacionCrearComanda" id="notificacionSuccess">
-                            {{ session('success') }}</h6>
-                        <h6 class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionError">
+                        <h6 class="alert alert-success notificacionCrearComanda" id="notificacionCrearSuccess">
+                            {{ session('success') }}asdf</h6>
+                        <h6 class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionCrearError">
                             {{ session('success') }}</h6>
                         <div class="row justify-content-center ">
-                            <i class="fas fa-spinner fa-spin text-center"></i>
+                            <i class="fas fa-spinner fa-spin text-center" id="spinCrearComanda"></i>
                         </div>
                         <form method="POST" action="{{ route('comanda') }}" class="" id="formCrearComanda">
                             @csrf

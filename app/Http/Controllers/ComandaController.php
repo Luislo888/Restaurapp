@@ -15,6 +15,20 @@ use Illuminate\Support\Facades\Auth;
 
 class ComandaController extends Controller
 {
+
+    public function cantidadNueva($cantidad)
+    {
+
+        $cantidadNueva = array();
+
+        for ($i = 0; $i < count($cantidad); $i++) {
+            if ($cantidad[$i] != null) {
+                $cantidadNueva[] = $cantidad[$i];
+            }
+        }
+
+        return $cantidadNueva;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -56,28 +70,18 @@ class ComandaController extends Controller
         $user_comanda->store($comanda->id);
 
         $productos = $request->input('productos');
-        $cantidad = $request->input('cantidad');
-
-        $cantidadNueva = array();
-
-        for ($i = 0; $i < count($cantidad); $i++) {
-            if ($cantidad[$i] != null) {
-                $cantidadNueva[] = $cantidad[$i];
-                // array_push($cantidadNueva, $productos[$i]);
-            }
-        }
+        $cantidad = $this->cantidadNueva($request->input('cantidad'));
 
         $comanda_producto = new ComandasProductosController();
-        $comanda_producto->store($comanda->id, $productos, $cantidadNueva);
+        $comanda_producto->store($comanda->id, $productos, $cantidad);
 
         $productosCompleto = Producto::whereIn('id', $productos)->get();
-
 
         $comandaCompleta = array();
         $comandaCompleta['comanda'] = $comanda;
         $comandaCompleta['productosCompleto'] = $productosCompleto;
         // $comandaCompleta['comanda_producto'] = $comanda_producto;
-        $comandaCompleta['cantidad'] = $cantidadNueva;
+        $comandaCompleta['cantidad'] = $cantidad;
 
         echo json_encode($comandaCompleta);
 
@@ -141,6 +145,8 @@ class ComandaController extends Controller
 
         // return view('comanda', ['comanda' => $comanda, 'comandas' => $comandas, 'todosProductos' => $productos, 'productos' => $productos, 'comandasProductos' => $comandasProductos, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'postres' => $postres, 'bebidas' => $bebidas]);
 
+        $comandaCompleta = array();
+
         return view('comanda', ['comanda' => $comanda, 'comandas' => $comandas, 'productos' => $productos, 'comandasProductos' => $comandasProductos, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'postres' => $postres, 'bebidas' => $bebidas]);
     }
 
@@ -172,12 +178,22 @@ class ComandaController extends Controller
         $comanda->update();
 
         $productos = $request->input('productos');
-        $cantidad = $request->input('cantidad');
+
+        $cantidad = $this->cantidadNueva($request->input('cantidad'));
 
         $comanda_producto = new ComandasProductosController();
         $comanda_producto->update($comanda->id, $productos, $cantidad);
 
-        return redirect('/camarero')->with('success', 'Comanda actualizada');
+
+        $comandaCompleta = array();
+        $productosCompleto = Producto::whereIn('id', $productos)->get();
+        $comandaCompleta['comanda'] = $comanda;
+        $comandaCompleta['productosCompleto'] = $productosCompleto;
+        $comandaCompleta['cantidad'] = $cantidad;
+
+        echo json_encode($comandaCompleta);
+
+        // return redirect('/camarero')->with('success', 'Comanda actualizada');
     }
 
     /**
