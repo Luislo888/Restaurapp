@@ -147,7 +147,23 @@ class ComandaController extends Controller
 
         $comandaCompleta = array();
 
-        return view('comanda', ['comanda' => $comanda, 'comandas' => $comandas, 'productos' => $productos, 'comandasProductos' => $comandasProductos, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'postres' => $postres, 'bebidas' => $bebidas]);
+        // $productosCompleto = Producto::whereIn('id', $comandasProductos)->get();
+        // $comandaCompleta['productosCompleto'] = $productosCompleto;
+
+        $comandaCompleta['comanda'] = $comanda;
+        $comandaCompleta['comandas'] = $comandas;
+        $comandaCompleta['productos'] = $productos;
+        $comandaCompleta['comandasProductos'] = $comandasProductos;
+        $comandaCompleta['entrantes'] = $entrantes;
+        $comandaCompleta['primeros'] = $primeros;
+        $comandaCompleta['segundos'] = $segundos;
+        $comandaCompleta['postres'] = $postres;
+        $comandaCompleta['bebidas'] = $bebidas;
+
+        echo json_encode($comandaCompleta);
+
+
+        // return view('comanda', ['comanda' => $comanda, 'comandas' => $comandas, 'productos' => $productos, 'comandasProductos' => $comandasProductos, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'postres' => $postres, 'bebidas' => $bebidas]);
     }
 
     /**
