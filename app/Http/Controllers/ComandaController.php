@@ -145,6 +145,15 @@ class ComandaController extends Controller
 
         // return view('comanda', ['comanda' => $comanda, 'comandas' => $comandas, 'todosProductos' => $productos, 'productos' => $productos, 'comandasProductos' => $comandasProductos, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'postres' => $postres, 'bebidas' => $bebidas]);
 
+        $productosComanda = array();
+
+        foreach ($productos as $producto) {
+
+            if ($producto->comanda_id == $comanda->id) {
+                $productosComanda[] = $producto;
+            }
+        }
+
         $comandaCompleta = array();
 
         // $productosCompleto = Producto::whereIn('id', $comandasProductos)->get();
@@ -159,6 +168,8 @@ class ComandaController extends Controller
         $comandaCompleta['segundos'] = $segundos;
         $comandaCompleta['postres'] = $postres;
         $comandaCompleta['bebidas'] = $bebidas;
+        $comandaCompleta['productosComanda'] = $productosComanda;
+        $comandaCompleta['productosCompleto'] = $productos;
 
         echo json_encode($comandaCompleta);
 

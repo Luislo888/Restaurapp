@@ -323,6 +323,11 @@ br{
     margin-top: 50px!important;
 }
 
+.modalShow{    
+    margin: 0px!important;
+    min-width: 497px!important;    
+}
+
 /* RESPONSIVE */
 
 @media (min-width: 1400px) { 
