@@ -45,21 +45,13 @@ $(function () {
                 },
                 success: function (resultado) {
 
-
-
                     // $('#notificacionEditarSuccess').show().text('Comanda editada correctamente');
                     // $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
                     // $('#spinEditarComanda').hide();
 
                     let obj = JSON.parse(resultado);
 
-
-
                     $('#showComandaContent').empty();
-
-
-
-
 
                     let fecha = new Date(obj.comanda.created_at);
                     let anio = fecha.getFullYear();
@@ -99,23 +91,13 @@ $(function () {
                         comentarios = `<strong><i class='fa-solid fa-comment'></i> Comentarios: </strong> ${obj.comanda.comentarios} <br>`;
                     }
 
+                    for (let i = 0; i < obj.entrantes.length; i++) {
+                        entrantes += `<option value="${obj.entrantes[i].id}">${obj.entrantes[i].nombre}</option>`;
+                    }
 
-                    // for (let i = 0; i < obj.productosCompleto.length; i++) {
 
-                    //     // if (i == 0) {
-                    //     //     switch (obj.productosCompleto[i].categoria) {
-                    //     //         case 'entrantes': entrantes += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                    //     //             break;
-                    //     //         case 'primeros': primeros += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                    //     //             break;
-                    //     //         case 'segundos': segundos += '<strong>Segundos:</strong><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                    //     //             break;
-                    //     //         case 'bebidas': bebidas += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                    //     //             break;
-                    //     //         case 'postres': postres += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                    //     //             break;
-                    //     //     }
-                    //     // } else {
+                    // for (let i = 0; i < obj.productosComanda.length; i++) {
+
 
                     //     switch (obj.productosCompleto[i].categoria) {
                     //         case 'entrantes': entrantes += '<div><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i] + '</div>';
@@ -132,6 +114,39 @@ $(function () {
                     //     // }
                     // }
 
+                    let entrantesComanda = "";
+
+                    for (let i = 0; i < obj.productosComanda.length; i++) {
+
+                        if (obj.productosComanda[i].categoria == 'entrantes') {
+
+                            entrantesComanda +=
+                                `<div class="col-md-5 inputProductos nuevoProducto nuevoProductoEditar" id="colEntrantes">
+                                <select id="selectEntrantes" name="productos[]"
+                                    class="form-control">
+                                    <option value="0" >Elige un entrante</option>`;
+
+                            for (let j = 0; j < obj.entrantes.length; j++) {
+
+                                entrantesComanda += `<option value="${obj.entrantes[j].id}" `;
+                                if (obj.entrantes[j].nombre == obj.productosComanda[i].nombre) {
+                                    entrantesComanda += ` selected `;
+                                }
+                                entrantesComanda += `>${obj.entrantes[j].nombre}</option>`;
+                            }
+
+                            entrantesComanda += `</select>
+                            </div>
+                                <div class="col-md-2 nuevaCantidad">
+                                    <input id="" min="1" type="number"
+                                        class="form-control"
+                                        name="cantidad[]" value="${obj.productosComanda[i].cantidad}" autofocus>                                
+                            </div>`;
+
+                        }
+
+                    }
+
 
                     // if (obj.comanda.estado == 'en curso') {
                     //     estado = 'bodyComandasEnCurso'
@@ -142,7 +157,7 @@ $(function () {
 
                     let formulario = `
                     <div class="col-md-auto" id="crearComanda">
-                <div class="card cardCrear" id="cardCrear">
+                <div class="card cardCrear " id="cardCrear">
                     <div class="card-header">
                         <h6 class="" id="tituloCrearComanda"><i class="fa-solid fa-pen-to-square"></i>
                             Editar Comanda</h6>
@@ -165,13 +180,7 @@ $(function () {
                         <form method="POST" action="http://127.0.0.1:8000/comanda/${obj.comanda.id}" class=""
                             id="formEditarComanda">
                             
-                            @method('PATCH')
-                            @csrf
-                            
-
-                            
-
-                            <strong><i class="fa-solid fa-clock iconClock"></i></strong>
+                          <strong><i class="fa-solid fa-clock iconClock"></i></strong>
                             <span class="fechaFormateada">${obj.comanda.created_at}</span>
 
                             <span class="textoDerecha"><img class="orderList" src="http://127.0.0.1:8000/images/comanda.png">
@@ -193,23 +202,37 @@ $(function () {
                                         autocomplete="mesa" autofocus value="${obj.comanda.mesa}">                                    
                                 </div>
                             </div>    
-                            
-                            <div class="col-md-5 inputProductos" id="colEntrantes">
-                                <select id="selectEntrantes" name="productos[]"
-                                    class="form-control"
-                                    >
-                                    <option value="0" selected>Elige un entrante</option>
-                                    <option value="1" selected>Cebiche</option>                                    
-                                </select>
+
+                            <div class="row mb-3" id="rowEntrantes">
+                                <label for="entrantes" id="labelEntrantes"
+                                    class="col-md-3 col-form-label text-md-start"><strong>
+                                        <img class="iconIzquierda" src="http://127.0.0.1:8000/images/entrantes.png" alt="">
+
+                                        Entrantes</strong></label>
+
+                                <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
+                                    <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarEntrante"></i>
+                                </button>
+                                <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
+                                    <i class="fa-solid fa-circle-minus botonRedondo" id="botonQuitarEntrante"></i>
+                                </button>
+
+                                <div class="col-md-5 inputProductos" id="colEntrantes">
+                                    <select id="selectEntrantes" name="productos[]"
+                                        class="form-control">
+                                        <option value="0" selected>Elige un entrante</option>
+                                        ${entrantes}
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2 cantidad">
+                                    <input id="" min="1" type="number"
+                                        class="form-control" name="cantidad[]"
+                                        autofocus>                                    
+                                </div>
                             </div>
 
-                            <div class="col-md-2 cantidad">
-                                <input id="" min="1" type="number"
-                                    class="form-control" name="cantidad[]"
-                                     autofocus>
-
-                                
-                            </div>
+                            ${entrantesComanda}
 
                             <div class="row mb-0 justify-content-center">
                                 <div class="col-md-12 offset-md-6">
@@ -241,6 +264,8 @@ $(function () {
                     //     }
                     // });
                     $('#showComandaContent').append(formulario);
+                    agregarQuitarProductos();
+                    formatearFechaHora();
                     editarComanda();
 
                 },
@@ -686,38 +711,38 @@ $(function () {
 
     // INICIO FORMATEAR FECHA Y HORA
 
-    // function formatearFechaHora() {
+    function formatearFechaHora() {
 
-    $('.fechaFormateada').each(function () {
-        let fecha = new Date($(this).text());
+        $('.fechaFormateada').each(function () {
+            let fecha = new Date($(this).text());
 
-        let anio = fecha.getFullYear();
-        let mes = fecha.getMonth() + 1;
-        if (mes < 10) {
-            mes = '0' + mes;
-        }
-        let dia = fecha.getDate();
-        if (dia < 10) {
-            dia = '0' + dia;
-        }
-        let hora = fecha.getHours();
-        if (hora < 10) {
-            hora = '0' + hora;
-        }
-        let minutos = fecha.getMinutes();
-        if (minutos < 10) {
-            minutos = '0' + minutos;
-        }
-        let segundosFecha = fecha.getSeconds();
-        if (segundosFecha < 10) {
-            segundosFecha = '0' + segundosFecha;
-        }
+            let anio = fecha.getFullYear();
+            let mes = fecha.getMonth() + 1;
+            if (mes < 10) {
+                mes = '0' + mes;
+            }
+            let dia = fecha.getDate();
+            if (dia < 10) {
+                dia = '0' + dia;
+            }
+            let hora = fecha.getHours();
+            if (hora < 10) {
+                hora = '0' + hora;
+            }
+            let minutos = fecha.getMinutes();
+            if (minutos < 10) {
+                minutos = '0' + minutos;
+            }
+            let segundosFecha = fecha.getSeconds();
+            if (segundosFecha < 10) {
+                segundosFecha = '0' + segundosFecha;
+            }
 
-        $(this).text(hora + ':' + minutos + ':' + segundosFecha + ' - ' + dia + '/' + mes + '/' + anio);
-    });
-    // }
+            $(this).text(hora + ':' + minutos + ':' + segundosFecha + ' - ' + dia + '/' + mes + '/' + anio);
+        });
+    }
 
-    // formatearFechaHora();
+    formatearFechaHora();
 
     // FIN FORMATEAR FECHA Y HORA
 
@@ -725,57 +750,60 @@ $(function () {
 
     // INICIO BOTONES AGREGAR/QUITAR PRODUCTOS
 
-    $('.botonMenos').on('click', function () {
+    function agregarQuitarProductos() {
 
-        $('option').each(function () {
+        $('.botonMenos').on('click', function () {
 
-            if ($(this).is(':selected') && $(this).val() != 0) {
+            $('option').each(function () {
 
-                let valor = $(this).val();
+                if ($(this).is(':selected') && $(this).val() != 0) {
 
-                $('option').each(function () {
+                    let valor = $(this).val();
 
-                    if ($(this).val() == valor) {
+                    $('option').each(function () {
 
-                        $(this).removeAttr('disabled');
-                    }
-                });
-            }
-        });
+                        if ($(this).val() == valor) {
 
-        $(this).closest('.row').next('.nuevoProducto').remove();
-        $(this).closest('.row').next('.nuevaCantidad').remove();
-    });
+                            $(this).removeAttr('disabled');
+                        }
+                    });
+                }
+            });
 
-
-    $('.botonMas').on('click', function () {
-
-        let cantidad = "<div class='col-md-2 nuevaCantidad'> <input id='' min='1' type='number' class='form-control @error('cantidad') s-invalid @enderror' name='cantidad[]' value='{{ old('cantidad') }}' autocomplete='cantidad' autofocus> </div > ";
-
-        let nuevoProducto = $(this).closest('.row').children('.inputProductos').clone().addClass('nuevoProducto');
-
-        $(this).closest('.row').after(cantidad);
-        $(this).closest('.row').after(nuevoProducto);
-
-        $('option').each(function () {
-
-            if ($(this).is(':selected') && $(this).val() != 0) {
-
-                let valor = $(this).val();
-
-                $('option').each(function () {
-
-                    if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
-
-                        $(this).attr('disabled', 'disabled');
-                        // $(this).attr('selected', 'selected');
-                    }
-                });
-            }
+            $(this).closest('.row').next('.nuevoProducto').remove();
+            $(this).closest('.row').next('.nuevaCantidad').remove();
         });
 
 
-    });
+        $('.botonMas').on('click', function () {
+
+            let cantidad = "<div class='col-md-2 nuevaCantidad'> <input id='' min='1' type='number' class='form-control' name='cantidad[]' autofocus> </div > ";
+
+            let nuevoProducto = $(this).closest('.row').children('.inputProductos').clone().addClass('nuevoProducto');
+
+            $(this).closest('.row').after(cantidad);
+            $(this).closest('.row').after(nuevoProducto);
+
+            $('option').each(function () {
+
+                if ($(this).is(':selected') && $(this).val() != 0) {
+
+                    let valor = $(this).val();
+
+                    $('option').each(function () {
+
+                        if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
+
+                            $(this).attr('disabled', 'disabled');
+                            // $(this).attr('selected', 'selected');
+                        }
+                    });
+                }
+            });
+        });
+    }
+
+    agregarQuitarProductos();
 
     function cambiar(borrado = null) {
 

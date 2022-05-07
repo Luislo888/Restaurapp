@@ -205,22 +205,30 @@ button{
 }
 
 #cardCrear{    
-    min-width: 472px;
+    min-width: 499px;
 }
 
 .nuevoProducto{
-    margin-left: 192px;;
-    width: 168.5px;
+    margin-left: 204px;
+    width: 177.5px;
     margin-bottom: 16px;
 }
 
 .nuevaCantidad{
     margin-left: 367px;
     width: 70.5px;
-    margin-top: -54px;
+    margin-top: -52px;
     margin-bottom: 14px;
 }
 
+.nuevoProductoEditar{
+    margin-left: 204px;
+    width: 177.5px;
+}
+
+.nuevaCantidad{
+    margin-left: 389px;
+}
 
 .cantidad{
     width: 94px!important;
