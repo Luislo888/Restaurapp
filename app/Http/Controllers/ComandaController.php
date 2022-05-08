@@ -97,9 +97,9 @@ class ComandaController extends Controller
     public function show($id)
     {
 
-        $entrantes = Producto::all()->where('categoria', 'entrantes');
         // dd($entrantes);
         $primeros = Producto::all()->where('categoria', 'primeros');
+        $entrantes = Producto::all()->where('categoria', 'entrantes');
         $segundos = Producto::all()->where('categoria', 'segundos');
         $postres = Producto::all()->where('categoria', 'postres');
         $bebidas = Producto::all()->where('categoria', 'bebidas');
@@ -163,13 +163,15 @@ class ComandaController extends Controller
         $comandaCompleta['comandas'] = $comandas;
         $comandaCompleta['productos'] = $productos;
         $comandaCompleta['comandasProductos'] = $comandasProductos;
-        $comandaCompleta['entrantes'] = $entrantes;
         $comandaCompleta['primeros'] = $primeros;
+        $comandaCompleta['entrantes'] = $entrantes;
         $comandaCompleta['segundos'] = $segundos;
         $comandaCompleta['postres'] = $postres;
         $comandaCompleta['bebidas'] = $bebidas;
         $comandaCompleta['productosComanda'] = $productosComanda;
         $comandaCompleta['productosCompleto'] = $productos;
+
+        // dd($comandaCompleta);
 
         echo json_encode($comandaCompleta);
 

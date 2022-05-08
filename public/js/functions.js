@@ -88,23 +88,40 @@ $(function () {
 
                         comentarios = "";
                     } else {
-                        comentarios = `<strong><i class='fa-solid fa-comment'></i> Comentarios: </strong> ${obj.comanda.comentarios} <br>`;
+                        comentarios = obj.comanda.comentarios;
                     }
+
+                    let arrayPrimeros = $.map(obj.primeros, function (value, index) {
+                        return [value];
+                    });
+
+                    let arraySegundos = $.map(obj.segundos, function (value, index) {
+                        return [value];
+                    });
+
+                    let arrayPostres = $.map(obj.postres, function (value, index) {
+                        return [value];
+                    });
+
+                    let arrayBebidas = $.map(obj.bebidas, function (value, index) {
+                        return [value];
+                    });
+
 
                     for (let i = 0; i < obj.entrantes.length; i++) {
                         entrantes += `<option value="${obj.entrantes[i].id}">${obj.entrantes[i].nombre}</option>`;
                     }
-                    for (let i = 0; i < obj.primeros.length; i++) {
-                        primeros += `<option value="${obj.primeros[i].id}">${obj.primeros[i].nombre}</option>`;
+                    for (let i = 0; i < arrayPrimeros.length; i++) {
+                        primeros += `<option value="${arrayPrimeros[i].id}">${arrayPrimeros[i].nombre}</option>`;
                     }
-                    for (let i = 0; i < obj.segundos.length; i++) {
-                        segundos += `<option value="${obj.segundos[i].id}">${obj.segundos[i].nombre}</option>`;
+                    for (let i = 0; i < arraySegundos.length; i++) {
+                        segundos += `<option value="${arraySegundos[i].id}">${arraySegundos[i].nombre}</option>`;
                     }
-                    for (let i = 0; i < obj.postres.length; i++) {
-                        postres += `<option value="${obj.postres[i].id}">${obj.postres[i].nombre}</option>`;
+                    for (let i = 0; i < arrayPostres.length; i++) {
+                        postres += `<option value="${arrayPostres[i].id}">${arrayPostres[i].nombre}</option>`;
                     }
-                    for (let i = 0; i < obj.bebidas.length; i++) {
-                        bebidas += `<option value="${obj.bebidas[i].id}">${obj.bebidas[i].nombre}</option>`;
+                    for (let i = 0; i < arrayBebidas.length; i++) {
+                        bebidas += `<option value="${arrayBebidas[i].id}">${arrayBebidas[i].nombre}</option>`;
                     }
 
                     let entrantesComanda = "";
@@ -119,8 +136,7 @@ $(function () {
 
                             entrantesComanda +=
                                 `<div class="col-md-5 inputProductos nuevoProducto nuevoProductoEditar" id="colEntrantes">
-                                    <select id="selectEntrantes" name="productos[]"
-                                        class="form-control">
+                                    <select id="selectEntrantes" name="productos[]" class="form-control">
                                         <option value="0" >Elige un entrante</option>`;
 
                             for (let j = 0; j < obj.entrantes.length; j++) {
@@ -132,7 +148,8 @@ $(function () {
                                 entrantesComanda += `>${obj.entrantes[j].nombre}</option>`;
                             }
 
-                            entrantesComanda += `</select>
+                            entrantesComanda +=
+                                `</select>
                                 </div>
                                 <div class="col-md-2 nuevaCantidad">
                                     <input id="" min="1" type="number"
@@ -147,21 +164,21 @@ $(function () {
                         if (obj.productosComanda[i].categoria == 'primeros') {
 
                             primerosComanda +=
-                                `<div class="col-md-5 inputProductos nuevoProducto nuevoProductoEditar" id="colprimeros">
-                                    <select id="selectprimeros" name="productos[]"
-                                        class="form-control">
-                                        <option value="0" >Elige un entrante</option>`;
+                                `<div class="col-md-5 inputProductos nuevoProducto nuevoProductoEditar" id="colPrimeros">
+                                    <select id="selectPrimeros" name="productos[]" class="form-control">
+                                        <option value="0" >Elige un primero</option>`;
 
-                            for (let j = 0; j < obj.primeros.length; j++) {
+                            for (let j = 0; j < arrayPrimeros.length; j++) {
 
-                                primerosComanda += `<option value="${obj.primeros[j].id}" `;
-                                if (obj.primeros[j].nombre == obj.productosComanda[i].nombre) {
+                                primerosComanda += `<option value="${arrayPrimeros[j].id}" `;
+                                if (arrayPrimeros[j].nombre == obj.productosComanda[i].nombre) {
                                     primerosComanda += ` selected `;
                                 }
-                                primerosComanda += `>${obj.primeros[j].nombre}</option>`;
+                                primerosComanda += `>${arrayPrimeros[j].nombre}</option>`;
                             }
 
-                            primerosComanda += `</select>
+                            primerosComanda +=
+                                `</select>
                                 </div>
                                 <div class="col-md-2 nuevaCantidad">
                                     <input id="" min="1" type="number"
@@ -176,21 +193,79 @@ $(function () {
                         if (obj.productosComanda[i].categoria == 'segundos') {
 
                             segundosComanda +=
-                                `<div class="col-md-5 inputProductos nuevoProducto nuevoProductoEditar" id="colsegundos">
-                                    <select id="selectsegundos" name="productos[]"
-                                        class="form-control">
-                                        <option value="0" >Elige un entrante</option>`;
+                                `<div class="col-md-5 inputProductos nuevoProducto nuevoProductoEditar" id="colSegundos">
+                                    <select id="selectSegundos" name="productos[]" class="form-control">
+                                        <option value="0" >Elige un segundo</option>`;
 
-                            for (let j = 0; j < obj.segundos.length; j++) {
+                            for (let j = 0; j < arraySegundos.length; j++) {
 
-                                segundosComanda += `<option value="${obj.segundos[j].id}" `;
-                                if (obj.segundos[j].nombre == obj.productosComanda[i].nombre) {
+                                segundosComanda += `<option value="${arraySegundos[j].id}" `;
+                                if (arraySegundos[j].nombre == obj.productosComanda[i].nombre) {
                                     segundosComanda += ` selected `;
                                 }
-                                segundosComanda += `>${obj.segundos[j].nombre}</option>`;
+                                segundosComanda += `>${arraySegundos[j].nombre}</option>`;
                             }
 
-                            segundosComanda += `</select>
+                            segundosComanda +=
+                                `</select>
+                                </div>
+                                <div class="col-md-2 nuevaCantidad">
+                                    <input id="" min="1" type="number"
+                                        class="form-control"
+                                        name="cantidad[]" value="${obj.productosComanda[i].cantidad}" autofocus>                                
+                                </div>`;
+                        }
+                    }
+
+                    for (let i = 0; i < obj.productosComanda.length; i++) {
+
+                        if (obj.productosComanda[i].categoria == 'postres') {
+
+                            postresComanda +=
+                                `<div class="col-md-5 inputProductos nuevoProducto nuevoProductoEditar" id="colPostres">
+                                    <select id="selectPostres" name="productos[]" class="form-control">
+                                        <option value="0" >Elige un postre</option>`;
+
+                            for (let j = 0; j < arrayPostres.length; j++) {
+
+                                postresComanda += `<option value="${arrayPostres[j].id}" `;
+                                if (arrayPostres[j].nombre == obj.productosComanda[i].nombre) {
+                                    postresComanda += ` selected `;
+                                }
+                                postresComanda += `>${arrayPostres[j].nombre}</option>`;
+                            }
+
+                            postresComanda +=
+                                `</select>
+                                </div>
+                                <div class="col-md-2 nuevaCantidad">
+                                    <input id="" min="1" type="number"
+                                        class="form-control"
+                                        name="cantidad[]" value="${obj.productosComanda[i].cantidad}" autofocus>                                
+                                </div>`;
+                        }
+                    }
+
+                    for (let i = 0; i < obj.productosComanda.length; i++) {
+
+                        if (obj.productosComanda[i].categoria == 'bebidas') {
+
+                            bebidasComanda +=
+                                `<div class="col-md-5 inputProductos nuevoProducto nuevoProductoEditar" id="colBebidas">
+                                    <select id="selectBebidas" name="productos[]" class="form-control">
+                                        <option value="0" >Elige un postre</option>`;
+
+                            for (let j = 0; j < arrayBebidas.length; j++) {
+
+                                bebidasComanda += `<option value="${arrayBebidas[j].id}" `;
+                                if (arrayBebidas[j].nombre == obj.productosComanda[i].nombre) {
+                                    bebidasComanda += ` selected `;
+                                }
+                                bebidasComanda += `>${arrayBebidas[j].nombre}</option>`;
+                            }
+
+                            bebidasComanda +=
+                                `</select>
                                 </div>
                                 <div class="col-md-2 nuevaCantidad">
                                     <input id="" min="1" type="number"
@@ -212,39 +287,25 @@ $(function () {
                         <div class="col-md-auto" id="crearComanda">
                             <div class="card cardCrear " id="cardCrear">
                                 <div class="card-header">
-                                    <h6 class="" id="tituloCrearComanda"><i class="fa-solid fa-pen-to-square"></i>
-                                        Editar Comanda</h6>
+                                    <h6 class="" id="tituloCrearComanda"><i class="fa-solid fa-pen-to-square"></i> Editar Comanda</h6>
                                 </div>
-
-                                <div class="card-body" id="bodyCrearComanda">
-                                    
+                                <div class="card-body" id="bodyCrearComanda">                                    
                                     <h6 style="display:none" class="alert alert-success notificacionSucces"></h6>
-                                
-                                    <h6 style="display:none" class="alert alert-success notificacionSucces"></h6>
-                                    <h6 style="display:none" class="alert alert-success notificacionCrearComanda" id="notificacionEditarSuccess">
-                                        </h6>
-                                    <h6 style="display:none" class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionEditarError">
-                                        </h6>
+                                    <h6 style="display:none" class="alert alert-success notificacionCrearComanda" id="notificacionEditarSuccess"></h6>
+                                    <h6 style="display:none" class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionEditarError"></h6>
                                     <div style="display:none" class="row justify-content-center ">
                                         <i class="fas fa-spinner fa-spin text-center" id="spinEditarComanda"></i>
                                     </div>
 
-
-                                    <form method="POST" action="http://127.0.0.1:8000/comanda/${obj.comanda.id}" class=""
-                                        id="formEditarComanda">
+                                    <form method="POST" action="http://127.0.0.1:8000/comanda/${obj.comanda.id}" class="" id="formEditarComanda">
                                         
-                                    <strong><i class="fa-solid fa-clock iconClock"></i></strong>
+                                        <strong><i class="fa-solid fa-clock iconClock"></i></strong>
                                         <span class="fechaFormateada">${hora}:${minutos}:${segundosFecha} - ${dia}/${mes}/${anio}</span>
-
                                         <span class="textoDerecha"><img class="orderList" src="http://127.0.0.1:8000/images/comanda.png">
-                                        <strong>Nº Comanda: </strong>                            
-                                            ${obj.comanda.id}
-                                        </span>
+                                        <strong>Nº Comanda: </strong>${obj.comanda.id}</span>
                                         <p></p>
 
-
                                         <div class="row mb-4">
-
                                             <label for="mesa" class="col-md-9 col-form-label text-md-start"><strong>
                                                     <img src="http://127.0.0.1:8000/images/mesa.png" alt="">
                                                     Nº Mesa </strong></label>
@@ -257,11 +318,7 @@ $(function () {
                                         </div>    
 
                                         <div class="row mb-3" id="rowEntrantes">
-                                            <label for="entrantes" id="labelEntrantes"
-                                                class="col-md-3 col-form-label text-md-start"><strong>
-                                                    <img class="iconIzquierda" src="http://127.0.0.1:8000/images/entrantes.png" alt="">
-
-                                                    Entrantes</strong></label>
+                                            <label for="entrantes" id="labelEntrantes" class="col-md-3 col-form-label text-md-start"><strong><img class="iconIzquierda" src="http://127.0.0.1:8000/images/entrantes.png" alt=""> Entrantes</strong></label>
 
                                             <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
                                                 <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarEntrante"></i>
@@ -271,29 +328,21 @@ $(function () {
                                             </button>
 
                                             <div class="col-md-5 inputProductos" id="colEntrantes">
-                                                <select id="selectEntrantes" name="productos[]"
-                                                    class="form-control">
+                                                <select id="selectEntrantes" name="productos[]" class="form-control">
                                                     <option value="0" selected>Elige un entrante</option>
                                                     ${entrantes}
                                                 </select>
                                             </div>
 
                                             <div class="col-md-2 cantidad">
-                                                <input id="" min="1" type="number"
-                                                    class="form-control" name="cantidad[]"
-                                                    autofocus>                                    
+                                                <input id="" min="1" type="number" class="form-control" name="cantidad[]" autofocus>                                    
                                             </div>
                                         </div>
 
                                         ${entrantesComanda}
 
-
                                         <div class="row mb-3" id="rowPrimeros">
-                                            <label for="primeros" id="labelPrimeros"
-                                                class="col-md-3 col-form-label text-md-start"><strong>
-                                                    <img class="iconIzquierda" src="http://127.0.0.1:8000/images/primeros.png" alt="">
-
-                                                    primeros</strong></label>
+                                            <label for="primeros" id="labelPrimeros" class="col-md-3 col-form-label text-md-start"><strong><img class="iconIzquierda" src="http://127.0.0.1:8000/images/primeros.png" alt=""> Primeros</strong></label>
 
                                             <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
                                                 <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarEntrante"></i>
@@ -305,50 +354,99 @@ $(function () {
                                             <div class="col-md-5 inputProductos" id="colPrimeros">
                                                 <select id="selectPrimeros" name="productos[]"
                                                     class="form-control">
-                                                    <option value="0" selected>Elige un entrante</option>
+                                                    <option value="0" selected>Elige un primero</option>
                                                     ${primeros}
                                                 </select>
                                             </div>
 
                                             <div class="col-md-2 cantidad">
-                                                <input id="" min="1" type="number"
-                                                    class="form-control" name="cantidad[]"
-                                                    autofocus>                                    
+                                                <input id="" min="1" type="number" class="form-control" name="cantidad[]" autofocus>                                    
                                             </div>
                                         </div>
 
                                         ${primerosComanda}
 
                                         <div class="row mb-3" id="rowSegundos">
-                                            <label for="segundos" id="labelSegundos"
-                                                class="col-md-3 col-form-label text-md-start"><strong>
-                                                    <img class="iconIzquierda" src="http://127.0.0.1:8000/images/segundos.png" alt="">
-
-                                                    segundos</strong></label>
+                                            <label for="segundos" id="labelSegundos" class="col-md-3 col-form-label text-md-start"><strong><img class="iconIzquierda" src="http://127.0.0.1:8000/images/segundos.png" alt=""> Segundos</strong></label>
 
                                             <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
-                                                <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarEntrante"></i>
+                                                <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarSegundo"></i>
                                             </button>
                                             <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
-                                                <i class="fa-solid fa-circle-minus botonRedondo" id="botonQuitarEntrante"></i>
+                                                <i class="fa-solid fa-circle-minus botonRedondo" id="botonQuitarSegundo"></i>
                                             </button>
 
                                             <div class="col-md-5 inputProductos" id="colSegundos">
-                                                <select id="selectsegundos" name="productos[]"
-                                                    class="form-control">
-                                                    <option value="0" selected>Elige un entrante</option>
+                                                <select id="selectsegundos" name="productos[]" class="form-control">
+                                                    <option value="0" selected>Elige un segundo</option>
                                                     ${segundos}
                                                 </select>
                                             </div>
 
                                             <div class="col-md-2 cantidad">
-                                                <input id="" min="1" type="number"
-                                                    class="form-control" name="cantidad[]"
-                                                    autofocus>                                    
+                                                <input id="" min="1" type="number" class="form-control" name="cantidad[]" autofocus>                                    
                                             </div>
                                         </div>
 
                                         ${segundosComanda}
+
+                                        <div class="row mb-3" id="rowPostres">
+                                            <label for="postres" id="labelPostres" class="col-md-3 col-form-label text-md-start"><strong><i class="fa-solid fa-ice-cream"></i> Postres</strong></label>
+
+                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
+                                                <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarPostre"></i>
+                                            </button>
+                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
+                                                <i class="fa-solid fa-circle-minus botonRedondo" id="botonQuitarPostre"></i>
+                                            </button>
+
+                                            <div class="col-md-5 inputProductos" id="colPostres">
+                                                <select id="selectPostres" name="productos[]" class="form-control">
+                                                    <option value="0" selected>Elige un postre</option>
+                                                    ${postres}
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-2 cantidad">
+                                                <input id="" min="1" type="number" class="form-control" name="cantidad[]" autofocus>                                    
+                                            </div>
+                                        </div>
+
+                                        ${postresComanda}
+
+                                        <div class="row mb-3" id="rowBebidas">
+                                            <label for="bebidas" id="labelBebidas" class="col-md-3 col-form-label text-md-start"><strong><i class="fa-solid fa-ice-cream"></i> Bebidas</strong></label>
+
+                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
+                                                <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarPostre"></i>
+                                            </button>
+                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
+                                                <i class="fa-solid fa-circle-minus botonRedondo" id="botonQuitarPostre"></i>
+                                            </button>
+
+                                            <div class="col-md-5 inputProductos" id="colBebidas">
+                                                <select id="selectBebidas" name="productos[]" class="form-control">
+                                                    <option value="0" selected>Elige un postre</option>
+                                                    ${bebidas}
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-2 cantidad">
+                                                <input id="" min="1" type="number" class="form-control" name="cantidad[]" autofocus>                                    
+                                            </div>
+                                        </div>
+
+                                        ${bebidasComanda}
+
+
+                                        <div class="row mb-3">
+                                            <label for="comentarios" class="col-md-3 col-form-label text-md-start" id="comentarioLabel"><strong><i class="fa-solid fa-comment"></i> Comentarios</strong></label>
+
+                                            <div class="col-md-8">
+                                                <textarea id="comentarioInput" min="1" max="6" class="form-control" name="comentarios" autocomplete="comentarios"
+                                                    autofocus>${comentarios}</textarea>
+                                            </div>
+                                        </div>
 
                                         <div class="row mb-0 justify-content-center">
                                             <div class="col-md-12 offset-md-6">
