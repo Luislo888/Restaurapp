@@ -8,6 +8,7 @@ $(function () {
 
         $(".formShowComanda").on('submit', function (e) {
 
+
             e.preventDefault();
 
             $('#spinEditarComanda').show();
@@ -37,6 +38,7 @@ $(function () {
 
 
             $.ajax({
+
                 type: "GET",
                 url: url,
                 data: form.serialize(),
@@ -45,6 +47,7 @@ $(function () {
                 },
                 success: function (resultado) {
 
+                    // alert("entro");
                     // $('#notificacionEditarSuccess').show().text('Comanda editada correctamente');
                     // $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
                     // $('#spinEditarComanda').hide();
@@ -285,7 +288,7 @@ $(function () {
 
                     let formulario = `
                         <div class="col-md-auto" id="crearComanda">
-                            <div class="card cardCrear " id="cardCrear">
+                            <div class="card cardCrear cardEditar" id="cardCrear">
                                 <div class="card-header">
                                     <h6 class="" id="tituloCrearComanda"><i class="fa-solid fa-pen-to-square"></i> Editar Comanda</h6>
                                 </div>
@@ -320,7 +323,7 @@ $(function () {
                                         <div class="row mb-3" id="rowEntrantes">
                                             <label for="entrantes" id="labelEntrantes" class="col-md-3 col-form-label text-md-start"><strong><img class="iconIzquierda" src="http://127.0.0.1:8000/images/entrantes.png" alt=""> Entrantes</strong></label>
 
-                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
+                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas botonMasEditar">
                                                 <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarEntrante"></i>
                                             </button>
                                             <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
@@ -344,7 +347,7 @@ $(function () {
                                         <div class="row mb-3" id="rowPrimeros">
                                             <label for="primeros" id="labelPrimeros" class="col-md-3 col-form-label text-md-start"><strong><img class="iconIzquierda" src="http://127.0.0.1:8000/images/primeros.png" alt=""> Primeros</strong></label>
 
-                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
+                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas botonMasEditar">
                                                 <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarEntrante"></i>
                                             </button>
                                             <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
@@ -369,7 +372,7 @@ $(function () {
                                         <div class="row mb-3" id="rowSegundos">
                                             <label for="segundos" id="labelSegundos" class="col-md-3 col-form-label text-md-start"><strong><img class="iconIzquierda" src="http://127.0.0.1:8000/images/segundos.png" alt=""> Segundos</strong></label>
 
-                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
+                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas botonMasEditar">
                                                 <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarSegundo"></i>
                                             </button>
                                             <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
@@ -393,7 +396,7 @@ $(function () {
                                         <div class="row mb-3" id="rowPostres">
                                             <label for="postres" id="labelPostres" class="col-md-3 col-form-label text-md-start"><strong><i class="fa-solid fa-ice-cream"></i> Postres</strong></label>
 
-                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
+                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas botonMasEditar">
                                                 <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarPostre"></i>
                                             </button>
                                             <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
@@ -417,7 +420,7 @@ $(function () {
                                         <div class="row mb-3" id="rowBebidas">
                                             <label for="bebidas" id="labelBebidas" class="col-md-3 col-form-label text-md-start"><strong><i class="fa-solid fa-ice-cream"></i> Bebidas</strong></label>
 
-                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas">
+                                            <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas botonMasEditar">
                                                 <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarPostre"></i>
                                             </button>
                                             <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMenos">
@@ -457,6 +460,7 @@ $(function () {
                                                 <button type="reset" class="btn btn-danger btnResetComanda">
                                                     Limpiar
                                                 </button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div>
                                     </form>
@@ -478,6 +482,8 @@ $(function () {
                     $('#showComandaContent').append(formulario);
                     agregarQuitarProductos();
                     // formatearFechaHora();
+                    animacionBotonMasMenos();
+
                     editarComanda();
 
                 },
@@ -516,6 +522,7 @@ $(function () {
 
 
         $("#formEditarComanda").on('submit', function (e) {
+
             alert('2');
 
             $('#spinEditarComanda').show();
@@ -645,7 +652,7 @@ $(function () {
 
 
                     let formulario = `
-                    <form method="PATCH" action="http://127.0.0.1:8000/comanda/${obj.comanda.id}" class="">
+                    <form method="GET" action="http://127.0.0.1:8000/comanda/${obj.comanda.id}" class="formShowComanda" >
                         <div class="card mb-3">
                             <div class="card-header">
                                 <strong><img src="http://127.0.0.1:8000/images/mesa.png" alt=""> Mesa:</strong>
@@ -675,9 +682,9 @@ $(function () {
                                     ${comentarios}
                                 <div class="row mb-1 mt-1 botonesComandas">
                                     <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
-                                        <button type="submit" class="btn btn-primary" name="editarComanda">
-                                            Editar
-                                        </button>
+                                    <button type="submit" class="btn btn-primary botonShowComanda" name="showComanda" data-bs-toggle="modal" data-bs-target="#showComanda">
+                                    Editar 
+                                </button>
                                         <button type="submit" class="btn btn-danger">
                                             Cancelar
                                         </button>
@@ -686,6 +693,9 @@ $(function () {
                             </div>
                         </div>
                     </form>`;
+
+
+                    formShowComanda();
 
                     $('form').each(function () {
 
@@ -698,6 +708,8 @@ $(function () {
                             });
                         }
                     });
+                    // formShowComanda();
+                    formShowComanda();
                 },
                 error: function (xhr, status) {
                     $('#notificacionEditarError').show().text('Se debe rellenar correctamente la comanda');
@@ -722,8 +734,12 @@ $(function () {
                 }
             });
 
+            formShowComanda();
+
         });
+        formShowComanda();
     }
+    $('#showComandaContent').empty();
 
     editarComanda();
 
@@ -1149,48 +1165,54 @@ $(function () {
         }
     });
 
-    // FIN BOTONES OCULTAR COMANDAS   
+    // FIN BOTONES OCULTAR COMANDAS
 
 
     // INICIO ANIMACIÓN BOTONES AGREGAR/QUITAR PRODUCTOS
 
-    $('.fa-circle-plus').on('click', function () {
+    function animacionBotonMasMenos() {
 
-        $(this).removeClass('fa-circle-plus');
-        $(this).css('margin-top', '-1px');
-        $(this).css('margin-left', '-12px');
-        $(this).addClass('fa-circle-plus30');
+        $('.fa-circle-plus').on('click', function () {
 
-        $boton = $(this);
+            $(this).removeClass('fa-circle-plus');
+            $(this).css('margin-top', '-1px');
+            $(this).css('margin-left', '-12px');
+            $(this).addClass('fa-circle-plus30');
 
-        const myInterval = setInterval(myTimer, 200);
+            $boton = $(this);
 
-        function myTimer() {
-            $boton.css('margin-top', '-1px');
-            $boton.css('margin-left', '-10px');
-            $boton.removeClass('fa-circle-plus30').addClass('fa-circle-plus');
-            clearInterval(myInterval);
-        }
-    });
+            const myInterval = setInterval(myTimer, 200);
 
-    $('.fa-circle-minus').on('click', function () {
+            function myTimer() {
+                $boton.css('margin-top', '-1px');
+                $boton.css('margin-left', '-10px');
+                $boton.removeClass('fa-circle-plus30').addClass('fa-circle-plus');
+                clearInterval(myInterval);
+            }
+        });
 
-        $(this).removeClass('fa-circle-minus');
-        $(this).css('margin-top', '-1px');
-        $(this).css('margin-left', '-12px');
-        $(this).addClass('fa-circle-minus30');
+        $('.fa-circle-minus').on('click', function () {
 
-        $boton = $(this);
+            $(this).removeClass('fa-circle-minus');
+            $(this).css('margin-top', '-1px');
+            $(this).css('margin-left', '-12px');
+            $(this).addClass('fa-circle-minus30');
 
-        const myInterval = setInterval(myTimer, 200);
+            $boton = $(this);
 
-        function myTimer() {
-            $boton.css('margin-top', '-1px');
-            $boton.css('margin-left', '-10px');
-            $boton.removeClass('fa-circle-minus30').addClass('fa-circle-minus');
-            clearInterval(myInterval);
-        }
-    });
+            const myInterval = setInterval(myTimer, 200);
+
+            function myTimer() {
+                $boton.css('margin-top', '-1px');
+                $boton.css('margin-left', '-10px');
+                $boton.removeClass('fa-circle-minus30').addClass('fa-circle-minus');
+                clearInterval(myInterval);
+            }
+        });
+
+    }
+
+    animacionBotonMasMenos();
 
     // FIN ANIMACIÓN BOTONES AGREGAR/QUITAR PRODUCTOS
 

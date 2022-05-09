@@ -336,6 +336,21 @@ br{
     min-width: 497px!important;    
 }
 
+.offset-md-6 {
+    margin-left: 56%;
+}
+
+.botonesComandas{
+    margin-left: initial!important;
+}
+
+/* @media (max-width: 767px)
+cardEditar .botonMas {
+    margin-left: 208px;
+    width: 10px;
+    margin-top: 4px!important; */
+
+
 /* RESPONSIVE */
 
 @media (min-width: 1400px) { 
@@ -381,6 +396,13 @@ br{
         max-width: initial;
         margin-left: 100px;
         margin-right: 50px;
+    }
+
+    .cardEditar{
+        max-width: initial;
+        margin-left: 0px;
+        margin-right: 50px;
+        margin-top: -9px;
     }
     
     .comandasNavTabs{
@@ -436,6 +458,26 @@ br{
     select{
         margin-bottom: 10px;
     }
+
+    .botonesComandas{
+        margin-left: 26%!important;
+    }
+
+    .botonMasEditar {
+        margin-left: 208px;
+        width: 10px;
+        margin-top: 4px!important; 
+    }
+
+    .fade{
+        height: 100%!important;
+        width: 100%!important;
+    }
+
+    .modal.show .modal-dialog {
+        margin-bottom: 35px!important;
+    }
+
 }
  
 

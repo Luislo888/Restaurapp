@@ -412,7 +412,7 @@
                                     <br>
 
                                     <div class="row mb-1 mt-1 botonesComandas">
-                                        <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
+                                        <div class="col-md-12 offset-md-1 mb-1 mt-1 justify-content-center">
                                             <button type="submit" class="btn btn-primary botonShowComanda"
                                                 name="showComanda" data-bs-toggle="modal" data-bs-target="#showComanda">
                                                 {{ __('Editar ') }}
@@ -447,7 +447,7 @@
                 @foreach ($comandas as $comanda)
                     @if ($comanda->id != null && $comanda->estado == 'en curso')
                         <form method="GET" action="{{ route('comanda-edit', ['id' => $comanda->id]) }}"
-                            class="">
+                            class="formShowComanda">
                             <div class="card mb-3">
                                 <div class="card-header">
                                     <img class="iconIzquierda" src="{{ asset('images/mesa.png') }}" alt="">
@@ -509,11 +509,13 @@
                                         {{ $comanda->comentarios }}
                                     @endif
                                     <br>
-                                    <div class="row mb-1 mt-1 botonesComandas justify-content-center">
-                                        <div class="col-md-12 mb-1 mt-1 ">
-                                            <button type="submit" class="btn btn-primary">
+                                    <div class="row mb-1 mt-1 botonesComandas">
+                                        <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
+                                            <button type="submit" class="btn btn-primary botonShowComanda"
+                                                name="showComanda" data-bs-toggle="modal" data-bs-target="#showComanda">
                                                 {{ __('Editar ') }}
                                             </button>
+
                                             <button type="submit" class="btn btn-danger">
                                                 {{ __('Cancelar ') }}
                                             </button>
