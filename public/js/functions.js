@@ -7,7 +7,9 @@ $(function () {
     function formShowComanda() {
 
         $(".formShowComanda").on('submit', function (e) {
+            // $(".botonShowComanda").on('submit', function (e) {
 
+            // alert("entro");
 
             e.preventDefault();
 
@@ -49,7 +51,7 @@ $(function () {
 
                     // alert("entro");
                     // $('#notificacionEditarSuccess').show().text('Comanda editada correctamente');
-                    // $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
+                    // $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                     // $('#spinEditarComanda').hide();
 
                     let obj = JSON.parse(resultado);
@@ -300,7 +302,7 @@ $(function () {
                                         <i style="display:none" class="fas fa-spinner fa-spin text-center" id="spinEditarComanda"></i>
                                     </div>
 
-                                    <form method="POST" action="http://127.0.0.1:8000/comanda/${obj.comanda.id}" class="" id="formEditarComanda">
+                                    <form  method="POST" action="http://127.0.0.1:8000/comanda/${obj.comanda.id}" class="" id="formEditarComanda">
                                         
                                         <strong><i class="fa-solid fa-clock iconClock"></i></strong>
                                         <span class="fechaFormateada">${hora}:${minutos}:${segundosFecha} - ${dia}/${mes}/${anio}</span>
@@ -489,7 +491,7 @@ $(function () {
                 },
                 error: function (xhr, status) {
                     $('#notificacionEditarError').show().text('Se debe rellenar correctamente la comanda');
-                    $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
+                    $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                     $('#spinEditarComanda').hide();
                 },
             });
@@ -512,6 +514,8 @@ $(function () {
 
         });
     };
+
+    formShowComanda();
     // FIN AJAX SHOW COMANDA
 
 
@@ -567,7 +571,7 @@ $(function () {
                 },
                 success: function (resultado) {
                     $('#notificacionEditarSuccess').show().text('Comanda editada correctamente');
-                    $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
+                    $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                     $('#spinEditarComanda').hide();
 
                     let obj = JSON.parse(resultado);
@@ -695,25 +699,34 @@ $(function () {
                     </form>`;
 
 
-                    formShowComanda();
+                    // formShowComanda();
 
                     $('form').each(function () {
 
-                        if ($(this).attr('action') == `http://127.0.0.1:8000/comanda/${obj.comanda.id}`) {
+                        if ($(this).attr('action') == `http://127.0.0.1:8000/comanda/${obj.comanda.id}` && $(this).attr('method') == 'GET') {
 
-                            $(this).fadeOut('slow').promise().done(function () {
-                                $(this).replaceWith(formulario);
-                                // $(logo).fadeIn('slow');
-                                quitarCategoriasProductosVacios();
-                            });
+                            // $(this).fadeOut('slow').promise().done(function () {
+                            //     $(this).replaceWith(formulario);
+                            //     // $(logo).fadeIn('slow');
+                            // });
+
+                            // $(this).remove();
+
+                            $(this).replaceWith(formulario);
+                            quitarCategoriasProductosVacios();
+
+                            // $('#comandasAbiertas').append(formulario);
+                            // formShowComanda();
+
                         }
                     });
-                    // formShowComanda();
+
                     formShowComanda();
+
                 },
                 error: function (xhr, status) {
                     $('#notificacionEditarError').show().text('Se debe rellenar correctamente la comanda');
-                    $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
+                    $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                     $('#spinEditarComanda').hide();
                 },
             });
@@ -734,14 +747,17 @@ $(function () {
                 }
             });
 
-            formShowComanda();
+            // formShowComanda();
 
         });
-        formShowComanda();
+        // formShowComanda();
     }
     $('#showComandaContent').empty();
+    // formShowComanda();
 
     editarComanda();
+
+    // formShowComanda();
 
     // FIN AJAX EDITAR COMANDA
 
@@ -786,7 +802,7 @@ $(function () {
             },
             success: function (resultado) {
                 $('#notificacionCrearSuccess').show().text('Comanda creada correctamente');
-                $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
+                $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                 $('#spinCrearComanda').hide();
                 let obj = JSON.parse(resultado);
 
@@ -892,17 +908,58 @@ $(function () {
                 </form>`;
 
                 $('#comandasAbiertas').append(formulario);
-
-                quitarCategoriasProductosVacios();
                 formShowComanda();
+                // editarComanda();
+                quitarCategoriasProductosVacios();
+                // formShowComanda();
+
+                // $('form').each(function () {
+
+                //     if ($(this).attr('action') == `http://127.0.0.1:8000/comanda/${obj.comanda.id}` && $(this).attr('method') == 'GET') {
+
+                //         // $(this).fadeOut('slow').promise().done(function () {
+                //         //     $(this).replaceWith(formulario);
+                //         //     // $(logo).fadeIn('slow');
+                //         //     quitarCategoriasProductosVacios();
+                //         // });
+
+                //         // $(this).remove();
+
+                //         // $(this).replaceWith(formulario);
+
+                //         // $('#comandasAbiertas').append(formulario);
+                //         formShowComanda();
+
+                //         let asdf = $(this);
+
+                //         asdf.add
+                //         $(this).addE;
+
+                //     }
+                // });
+
+                // let asdf = document.getElementsByTagName('form');
+
+                // for (let i = 0; i < asdf.length; i++) {
+                //     asdf[i].addEventListener('submit', formShowComanda);
+                // }
+
+                // formShowComanda();
             },
             error: function (xhr, status) {
                 $('#notificacionCrearError').show().text('Se debe rellenar correctamente la comanda');
-                $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
+                $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                 $('#spinCrearComanda').hide();
             },
-        });
+            done: function (data) {
+                formShowComanda();
+            },
+            complete: function (data) {
+                formShowComanda();
+            }
 
+        });
+        formShowComanda();
         $('option').each(function () {
 
             if ($(this).is(':selected') && $(this).val() != 0) {
@@ -920,6 +977,8 @@ $(function () {
         });
         formShowComanda();
     });
+    // formShowComanda();
+
 
     // FIN AJAX CREAR COMANDA 
 
@@ -1248,7 +1307,7 @@ $(function () {
 
     // INICIO ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
 
-    $('.notificacionCrearComanda').delay(3000).fadeOut(3000);
+    $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
 
     // FIN ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
 
@@ -1313,4 +1372,6 @@ $(function () {
             }
         });
     });
+
+
 });
