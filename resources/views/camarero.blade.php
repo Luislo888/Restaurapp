@@ -28,14 +28,15 @@
                     </div>
 
                     <div class="card-body" id="bodyCrearComanda">
-                        {{-- @if (session('success'))
-                            <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6>
+                        @if (session('success'))
+                            <h6 class="alert alert-success notificacionSucces " id="notificacionCrearSuccess">
+                                {{ session('success') }}</h6>
                         @endif
-                        <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6> --}}
-                        <h6 class="alert alert-success notificacionCrearComanda" id="notificacionCrearSuccess">
+                        {{-- <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6> --}}
+                        {{-- <h6 class="alert alert-success notificacionCrearComanda" id="notificacionCrearSuccess">
                             {{ session('success') }}asdf</h6>
                         <h6 class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionCrearError">
-                            {{ session('success') }}</h6>
+                            {{ session('success') }}</h6> --}}
                         <div class="row justify-content-center ">
                             <i class="fas fa-spinner fa-spin text-center" id="spinCrearComanda"></i>
                         </div>
@@ -92,7 +93,7 @@
                                 </div>
 
                                 <div class="col-md-2 cantidad">
-                                    <input id="" min="0" type="number"
+                                    <input id="" min="1" type="number"
                                         class="form-control @error('cantidad') is-invalid @enderror" name="cantidad[]"
                                         autocomplete="cantidad" autofocus>
 
@@ -418,7 +419,7 @@
                                                 {{ __('Editar ') }}
                                             </button>
 
-                                            <button type="submit" class="btn btn-danger">
+                                            <button type="submit" class="btn btn-danger botonCancelar">
                                                 {{ __('Cancelar ') }}
                                             </button>
                                         </div>

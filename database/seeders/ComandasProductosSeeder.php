@@ -162,6 +162,11 @@ class ComandasProductosSeeder extends Seeder
         // COMANDA ID 5 -----------------------------------
         $comanda = ComandasProductos::create([
             'comanda_id' => 5,
+            'producto_id' => 1,
+            'cantidad' => 2,
+        ]);
+        $comanda = ComandasProductos::create([
+            'comanda_id' => 5,
             'producto_id' => 5,
             'cantidad' => 2,
         ]);
@@ -173,10 +178,20 @@ class ComandasProductosSeeder extends Seeder
         // COMANDA ID 6 -----------------------------------
         $comanda = ComandasProductos::create([
             'comanda_id' => 6,
+            'producto_id' => 2,
+            'cantidad' => 1,
+        ]);
+        $comanda = ComandasProductos::create([
+            'comanda_id' => 6,
             'producto_id' => 6,
             'cantidad' => 1,
         ]);
         // COMANDA ID 7 -----------------------------------
+        $comanda = ComandasProductos::create([
+            'comanda_id' => 7,
+            'producto_id' => 2,
+            'cantidad' => 1,
+        ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 7,
             'producto_id' => 6,
@@ -200,6 +215,11 @@ class ComandasProductosSeeder extends Seeder
         // COMANDA ID 8 -----------------------------------
         $comanda = ComandasProductos::create([
             'comanda_id' => 8,
+            'producto_id' => 2,
+            'cantidad' => 1,
+        ]);
+        $comanda = ComandasProductos::create([
+            'comanda_id' => 8,
             'producto_id' => 6,
             'cantidad' => 1,
         ]);
@@ -219,6 +239,11 @@ class ComandasProductosSeeder extends Seeder
             'cantidad' => 1,
         ]);
         // COMANDA ID 9 -----------------------------------
+        $comanda = ComandasProductos::create([
+            'comanda_id' => 9,
+            'producto_id' => 2,
+            'cantidad' => 1,
+        ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 9,
             'producto_id' => 6,

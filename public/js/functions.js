@@ -2,6 +2,60 @@
 
 $(function () {
 
+
+    function cancelarComanda() {
+
+        // $('.botonCancelar').on('click', function (e) {
+
+        //     alert(e.closest('form').attr('action'));
+
+
+        // $(this).closest('.row').children('.inputProductos')
+        // });
+        // type: "GET",
+        //         url: url,
+        //         data: form.serialize(),
+        //         beforeSend: function () {
+
+        //         },
+        //         success: function (resultado) {
+
+        $('.botonCancelar').each(function () {
+
+            $(this).on('click', function () {
+                // alert($(this).closest('form').attr('action'));
+
+                // let url = $(this).closest('form').attr('action') + "?cancelar";
+                let url = $(this).closest('form').attr('action');
+
+                alert(url);
+
+                $.ajax({
+
+                    url: url,
+                    type: 'DELETE',
+                    data: {
+                        "_token": $("meta[name='csrf-token']").attr("content")
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    // data: form.serialize(),
+                    success: function (resultado) {
+                        alert(resultado);
+
+
+                    }
+
+
+
+                });
+            });
+
+        });
+    }
+
+    cancelarComanda();
     // INICIO AJAX SHOW COMANDA
 
     function formShowComanda() {
@@ -48,11 +102,6 @@ $(function () {
 
                 },
                 success: function (resultado) {
-
-                    // alert("entro");
-                    // $('#notificacionEditarSuccess').show().text('Comanda editada correctamente');
-                    // $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
-                    // $('#spinEditarComanda').hide();
 
                     let obj = JSON.parse(resultado);
 
@@ -420,7 +469,8 @@ $(function () {
                                         ${postresComanda}
 
                                         <div class="row mb-3" id="rowBebidas">
-                                            <label for="bebidas" id="labelBebidas" class="col-md-3 col-form-label text-md-start"><strong><i class="fa-solid fa-ice-cream"></i> Bebidas</strong></label>
+                                            <label for="bebidas" id="labelBebidas" class="col-md-3 col-form-label text-md-start"><strong><i
+                                            class="fa-solid fa-wine-glass"></i> Bebidas</strong></label>
 
                                             <button type="button" class="btn sinFocus col-md-1 botonMasMenos botonMas botonMasEditar">
                                                 <i class="fa-solid fa-circle-plus botonRedondo" id="botonAgregarPostre"></i>
@@ -448,8 +498,7 @@ $(function () {
                                             <label for="comentarios" class="col-md-3 col-form-label text-md-start" id="comentarioLabel"><strong><i class="fa-solid fa-comment"></i> Comentarios</strong></label>
 
                                             <div class="col-md-8">
-                                                <textarea id="comentarioInput" min="1" max="6" class="form-control" name="comentarios" autocomplete="comentarios"
-                                                    autofocus>${comentarios}</textarea>
+                                                <textarea id="comentarioInput" min="1" max="6" class="form-control" name="comentarios" autocomplete="comentarios" autofocus>${comentarios}</textarea>
                                             </div>
                                         </div>
 
@@ -689,7 +738,7 @@ $(function () {
                                     <button type="submit" class="btn btn-primary botonShowComanda" name="showComanda" data-bs-toggle="modal" data-bs-target="#showComanda">
                                     Editar 
                                 </button>
-                                        <button type="submit" class="btn btn-danger">
+                                        <button type="submit" class="btn btn-danger botonCancelar">
                                             Cancelar
                                         </button>
                                     </div>
@@ -697,7 +746,6 @@ $(function () {
                             </div>
                         </div>
                     </form>`;
-
 
                     // formShowComanda();
 
@@ -722,6 +770,7 @@ $(function () {
                     });
 
                     formShowComanda();
+                    cancelarComanda();
 
                 },
                 error: function (xhr, status) {
@@ -764,7 +813,7 @@ $(function () {
 
     // INICIO AJAX CREAR COMANDA
 
-    $("#formCrearComanda").on('submit', function (e) {
+    $("#-CrearComanda").on('submit', function (e) {
 
 
         $('#spinCrearComanda').show();
@@ -794,6 +843,7 @@ $(function () {
         var url = form.attr('action');
 
         $.ajax({
+            async: false,
             type: "POST",
             url: url,
             data: form.serialize(),
@@ -1373,5 +1423,6 @@ $(function () {
         });
     });
 
+    $('#notificacionCrearSuccess').delay(2000).fadeOut(2000);
 
 });

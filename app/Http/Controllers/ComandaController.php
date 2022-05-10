@@ -83,9 +83,9 @@ class ComandaController extends Controller
         // $comandaCompleta['comanda_producto'] = $comanda_producto;
         $comandaCompleta['cantidad'] = $cantidad;
 
-        echo json_encode($comandaCompleta);
+        // echo json_encode($comandaCompleta);
 
-        // return redirect('/camarero')->with('error', 'mal');
+        return redirect('/camarero')->with('success', 'Comanda creada correctamente');
     }
 
     /**
@@ -234,5 +234,13 @@ class ComandaController extends Controller
     public function destroy(Comanda $comanda)
     {
         //
+    }
+
+    public function cancelar($id)
+    {
+        $comanda = Comanda::find($id);
+        $comanda->estado = 'cancelada';
+        $comanda->update();
+        echo json_encode($id);
     }
 }
