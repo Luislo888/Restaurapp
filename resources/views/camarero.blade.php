@@ -419,7 +419,8 @@
                                                 {{ __('Editar ') }}
                                             </button>
 
-                                            <button type="submit" class="btn btn-danger botonCancelar">
+                                            <button type="submit" class="btn btn-danger botonCancelar"
+                                                data-bs-toggle="modal" data-bs-target="#cancelComanda">
                                                 {{ __('Cancelar ') }}
                                             </button>
                                         </div>
@@ -632,16 +633,29 @@
     {{-- <div id="showComanda"></div> --}}
 
 
-    <!-- Modal -->
+    <!-- INICIO MODAL EDITAR COMANDA -->
+
     <div class="modal fade" id="showComanda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" id="showComandaContent">
-
-
             </div>
         </div>
-
     </div>
+
+    <!-- FIN MODAL EDITAR COMANDA -->
+
+
+    <!-- INICIO MODAL CANCELAR COMANDA -->
+
+    <div class="modal fade" id="cancelComanda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="cancelComandaContent">
+                asdf
+            </div>
+        </div>
+    </div>
+
+    <!-- FIN MODAL CANCELAR COMANDA -->
 @endsection
 
 {{-- @yield('asdf') --}}

@@ -36,7 +36,9 @@ h6{
 }
 
 .card{
-    max-width: 357px;
+    /* max-width: 357px; */
+    min-width: 256px;
+
 }
 
 .btn-primary{
@@ -343,6 +345,12 @@ br{
 .botonesComandas{
     margin-left: initial!important;
 }
+
+#tituloCancelarComanda{
+    color: #df4957;
+}
+
+
 
 /* @media (max-width: 767px)
 cardEditar .botonMas {

@@ -238,9 +238,9 @@ class ComandaController extends Controller
 
     public function cancelar($id)
     {
-        $comanda = Comanda::find($id);
-        $comanda->estado = 'cancelada';
-        $comanda->update();
+        // $comanda = Comanda::find($id);
+        // $comanda->estado = 'cancelada';
+        // $comanda->update();
         echo json_encode($id);
     }
 }

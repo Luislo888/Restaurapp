@@ -5,30 +5,24 @@ $(function () {
 
     function cancelarComanda() {
 
-        // $('.botonCancelar').on('click', function (e) {
-
-        //     alert(e.closest('form').attr('action'));
-
-
-        // $(this).closest('.row').children('.inputProductos')
-        // });
-        // type: "GET",
-        //         url: url,
-        //         data: form.serialize(),
-        //         beforeSend: function () {
-
-        //         },
-        //         success: function (resultado) {
-
         $('.botonCancelar').each(function () {
 
-            $(this).on('click', function () {
-                // alert($(this).closest('form').attr('action'));
 
-                // let url = $(this).closest('form').attr('action') + "?cancelar";
+            $(this).on('click', function () {
+                $('#cancelComandaContent').empty();
+
                 let url = $(this).closest('form').attr('action');
 
-                alert(url);
+                let id = "";
+
+                for (let i = url.length - 1; i >= 0; i--) {
+
+                    if (url[i] != '/') {
+                        id += url[i];
+                    } else {
+                        break;
+                    }
+                }
 
                 $.ajax({
 
@@ -42,8 +36,34 @@ $(function () {
                     },
                     // data: form.serialize(),
                     success: function (resultado) {
-                        alert(resultado);
+                        // alert(resultado);
 
+                        let formulario = `
+
+                            <div class="col-md-auto" id="crearComanda">
+                                <div class="card cardCrear cardEditar" id="cardCrear">
+                                    <div class="card-header">
+                                        <h6 class="" id="tituloCancelarComanda"><i class="fa-solid fa-ban"></i> Cancelar Comanda</h6>
+                                    </div>
+                                    <div class="card-body" id="bodyCrearComanda">                                    
+                                        <h6 style="display:none" class="alert alert-success notificacionSucces"></h6>
+                                        <h6 style="display:none" class="alert alert-success notificacionCrearComanda" id="notificacionEditarSuccess"></h6>
+                                        <h6 style="display:none" class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionEditarError"></h6>
+                                        <div  class="row justify-content-center ">
+                                            <i style="display:none" class="fas fa-spinner fa-spin text-center" id="spinEditarComanda"></i>
+                                        </div>
+                                        <div>
+                                            ¿Deseas cancelar la comnada Nº ${id}? 
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>`;
+
+
+
+                        $('#cancelComandaContent').append(formulario);
+                        // $('#cancelComandaContent').empty();
 
                     }
 
