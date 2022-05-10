@@ -350,6 +350,15 @@ br{
     color: #df4957;
 }
 
+.botonesCancelarComandas{
+    /* margin-left: 50px; */
+    text-align: center;
+}
+
+#spinCancelarComanda{
+    display: none;
+}
+
 
 
 /* @media (max-width: 767px)

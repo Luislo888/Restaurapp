@@ -32,6 +32,10 @@
                             <h6 class="alert alert-success notificacionSucces " id="notificacionCrearSuccess">
                                 {{ session('success') }}</h6>
                         @endif
+                        @if (session('error'))
+                            <h6 class="alert alert-success notificacionSucces " id="notificacionCrearSuccess">
+                                {{ session('error') }}asdf</h6>
+                        @endif
                         {{-- <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6> --}}
                         {{-- <h6 class="alert alert-success notificacionCrearComanda" id="notificacionCrearSuccess">
                             {{ session('success') }}asdf</h6>
@@ -419,7 +423,7 @@
                                                 {{ __('Editar ') }}
                                             </button>
 
-                                            <button type="submit" class="btn btn-danger botonCancelar"
+                                            <button type="submit" class="btn btn-danger botonShowCancelar"
                                                 data-bs-toggle="modal" data-bs-target="#cancelComanda">
                                                 {{ __('Cancelar ') }}
                                             </button>
@@ -518,7 +522,8 @@
                                                 {{ __('Editar ') }}
                                             </button>
 
-                                            <button type="submit" class="btn btn-danger">
+                                            <button type="submit" class="btn btn-danger botonShowCancelar"
+                                                data-bs-toggle="modal" data-bs-target="#cancelComanda">
                                                 {{ __('Cancelar ') }}
                                             </button>
                                         </div>
@@ -622,17 +627,6 @@
     <button id="ocultarCerradas" type="button" class="btn alert alert-success botonOcultar">Cerradas</button>
 
 
-    {{-- @isset($request->has('storeid'))
-        asdf
-    @endisset --}}
-
-    {{-- @if (isset($_POST['editarComanda']))
-        asdf
-    @endif --}}
-
-    {{-- <div id="showComanda"></div> --}}
-
-
     <!-- INICIO MODAL EDITAR COMANDA -->
 
     <div class="modal fade" id="showComanda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -650,12 +644,9 @@
     <div class="modal fade" id="cancelComanda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" id="cancelComandaContent">
-                asdf
             </div>
         </div>
     </div>
 
     <!-- FIN MODAL CANCELAR COMANDA -->
 @endsection
-
-{{-- @yield('asdf') --}}

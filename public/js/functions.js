@@ -2,16 +2,20 @@
 
 $(function () {
 
+    // INICIO SHOW CANCELAR COMANDA
 
-    function cancelarComanda() {
 
-        $('.botonCancelar').each(function () {
+    function showCancelarComanda() {
+
+        $('.botonShowCancelar').each(function () {
 
 
             $(this).on('click', function () {
+
                 $('#cancelComandaContent').empty();
 
                 let url = $(this).closest('form').attr('action');
+                let cardBorrar = $(this).closest('form');
 
                 let id = "";
 
@@ -24,58 +28,99 @@ $(function () {
                     }
                 }
 
-                $.ajax({
-
-                    url: url,
-                    type: 'DELETE',
-                    data: {
-                        "_token": $("meta[name='csrf-token']").attr("content")
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    // data: form.serialize(),
-                    success: function (resultado) {
-                        // alert(resultado);
-
-                        let formulario = `
+                let formulario = `
 
                             <div class="col-md-auto" id="crearComanda">
                                 <div class="card cardCrear cardEditar" id="cardCrear">
                                     <div class="card-header">
                                         <h6 class="" id="tituloCancelarComanda"><i class="fa-solid fa-ban"></i> Cancelar Comanda</h6>
                                     </div>
-                                    <div class="card-body" id="bodyCrearComanda">                                    
-                                        <h6 style="display:none" class="alert alert-success notificacionSucces"></h6>
-                                        <h6 style="display:none" class="alert alert-success notificacionCrearComanda" id="notificacionEditarSuccess"></h6>
-                                        <h6 style="display:none" class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionEditarError"></h6>
-                                        <div  class="row justify-content-center ">
-                                            <i style="display:none" class="fas fa-spinner fa-spin text-center" id="spinEditarComanda"></i>
-                                        </div>
-                                        <div>
-                                            ¿Deseas cancelar la comnada Nº ${id}? 
-                                        </div>
-                                       
+                                    <div class="card-body" id="bodyCrearComanda">         
+
+                                        <h6 style="display:none" class="alert alert-success notificacionCrearComanda" id="notificacionCancelarSuccess">Comanda cancelada correctamente</h6>
+
+                                        <h6 style="display:none" class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionCancelarError">Ha habido un fallo a la hora de cancelar la comanda</h6>
+
+                                        <div class="row justify-content-center">
+                                            <i class="fas fa-spinner fa-spin text-center" id="spinCancelComanda" style="display:none!important"></i>
+                                        </div>                                        
+                                        
+                                        <div class="row mb-1 mt-1 botonesCancelarComandas">
+                                            <div class="col-md-12 mb-1 mt-1 justify-content-center ">
+                                                <div class="justify-content-center">
+                                                    ¿Deseas cancelar la comnada <img class="orderList" src="http://127.0.0.1:8000/images/comanda.png"> Nº <strong>${id}</strong>? 
+                                                </div>
+                                                <div class="mt-4">
+                                                    <button type="submit" class="btn btn-danger botonCancelar">
+                                                        Cancelar
+                                                    </button>
+                                                    <button type="submit" class="btn btn-secondary botonShowComanda" name="showComanda"  data-bs-dismiss="modal">
+                                                        Cerrar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>                                       
                                     </div>
                                 </div>
                             </div>`;
 
+                $('#cancelComandaContent').append(formulario);
 
-
-                        $('#cancelComandaContent').append(formulario);
-                        // $('#cancelComandaContent').empty();
-
-                    }
-
-
-
-                });
+                cancelarComanda(url, cardBorrar);
             });
 
         });
     }
 
-    cancelarComanda();
+    showCancelarComanda();
+
+    // FIN SHOW CANCELAR COMANDA
+
+
+    // INICIO CANCELAR COMANDA
+
+    function cancelarComanda(url, cardBorrar) {
+
+        $('.botonCancelar').on('click', function () {
+            // alert();
+
+            // $('.fa-spinner').hide();
+            $('#spinCancelComanda').show();
+
+
+            // let url = $(this).closest('form').attr('action');
+
+            // alert(url);
+
+            $.ajax({
+
+                url: url,
+                type: 'DELETE',
+                data: {
+                    "_token": $("meta[name='csrf-token']").attr("content")
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                // data: form.serialize(),
+                success: function (resultado) {
+                    // alert(resultado);
+
+                    $('#spinCancelComanda').hide();
+
+                    $('#notificacionCancelarSuccess').show();
+                    $('#notificacionCancelarSuccess').fadeOut(2000);
+
+                    cardBorrar.fadeOut(2000);
+
+                }
+            });
+        });
+    }
+
+    // FIN CANCELAR COMANDA
+
+
     // INICIO AJAX SHOW COMANDA
 
     function formShowComanda() {
