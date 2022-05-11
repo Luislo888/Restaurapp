@@ -59,33 +59,48 @@ class ComandaController extends Controller
     {
         // dd($request);
 
-        $comanda = new Comanda();
+        try {
+            $comanda = new Comanda();
 
-        $comanda->mesa = $request->input('mesa');
-        $comanda->comentarios = $request->input('comentarios');
+            $comanda->mesa = $request->input('mesa');
+            $comanda->comentarios = $request->input('comentarios');
 
-        $comanda->save();
+            $comanda->save();
 
-        $user_comanda = new UsersComandasController();
-        $user_comanda->store($comanda->id);
+            $user_comanda = new UsersComandasController();
+            $user_comanda->store($comanda->id);
 
-        $productos = $request->input('productos');
-        $cantidad = $this->cantidadNueva($request->input('cantidad'));
+            $productos = $request->input('productos');
+            $cantidad = $this->cantidadNueva($request->input('cantidad'));
 
-        $comanda_producto = new ComandasProductosController();
-        $comanda_producto->store($comanda->id, $productos, $cantidad);
+            $comanda_producto = new ComandasProductosController();
+            $comanda_producto->store($comanda->id, $productos, $cantidad);
 
-        $productosCompleto = Producto::whereIn('id', $productos)->get();
+            $productosCompleto = Producto::whereIn('id', $productos)->get();
 
-        $comandaCompleta = array();
-        $comandaCompleta['comanda'] = $comanda;
-        $comandaCompleta['productosCompleto'] = $productosCompleto;
-        // $comandaCompleta['comanda_producto'] = $comanda_producto;
-        $comandaCompleta['cantidad'] = $cantidad;
+            $comandaCompleta = array();
+            $comandaCompleta['comanda'] = $comanda;
+            $comandaCompleta['productosCompleto'] = $productosCompleto;
+            // $comandaCompleta['comanda_producto'] = $comanda_producto;
+            $comandaCompleta['cantidad'] = $cantidad;
+
+            return redirect('/camarero')->with('success', 'Comanda creada correctamente');
+        } catch (\Throwable $th) {
+            //throw $th;
+            $comanda::rollBack();
+            return redirect('/camarero')->withErrors(['msg' => 'Se debe rellenar correctamente la comanda']);
+        }
+
 
         // echo json_encode($comandaCompleta);
+        // ->withErrors(['msg' => 'The Message'])
+        // return redirect('/camarero')->with('error', 'Mal');
+        // if($error){
 
-        return redirect('/camarero')->with('success', 'Comanda creada correctamente');
+        // }
+        // return redirect('/camarero')->with('success', 'Comanda creada correctamente')->withErrors(['msg' => 'The Message']);
+        // return redirect('/camarero')->withErrors(['msg' => 'The Message']);
+        // return Camarero::back()->withErrors(['msg' => 'The Message']);
     }
 
     /**

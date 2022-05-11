@@ -1,14 +1,51 @@
 
 
+
 $(function () {
 
-    // INICIO SHOW CANCELAR COMANDA
 
+    // INICIO VALIDAR CREAR COMANDA
+
+    $('#formCrearComanda').on('submit', function (e) {
+
+        e.preventDefault();
+
+        var form = $(this);
+
+        let contadorProductos = 0;
+        let contadorCantidades = 0;
+
+        $('#formCrearComanda').children().children().children().children('option').each(function () {
+            if ($(this).is(':selected') && $(this).val() != 0) {
+                contadorProductos++;
+            }
+        });
+
+        let cantidades = $('#formCrearComanda').children().children('.cantidad').children('input');
+
+        for (let i = 1; i < cantidades.length; i++) {
+            if (cantidades[i].value != '') {
+                contadorCantidades++;
+            }
+        }
+
+        if (contadorProductos != contadorCantidades) {
+            $('#notificacionCrearError').show();
+            $('#notificacionCrearError').delay(2000).fadeOut(2000);
+        } else {
+            form.unbind('submit').submit();
+        }
+    });
+
+    // FIN VALIDAR CREAR COMANDA
+
+
+
+    // INICIO SHOW CANCELAR COMANDA
 
     function showCancelarComanda() {
 
         $('.botonShowCancelar').each(function () {
-
 
             $(this).on('click', function () {
 
@@ -20,7 +57,6 @@ $(function () {
                 let id = "";
 
                 for (let i = url.length - 1; i >= 0; i--) {
-
                     if (url[i] != '/') {
                         id += url[i];
                     } else {
@@ -30,39 +66,39 @@ $(function () {
 
                 let formulario = `
 
-                            <div class="col-md-auto" id="crearComanda">
-                                <div class="card cardCrear cardEditar" id="cardCrear">
-                                    <div class="card-header">
-                                        <h6 class="" id="tituloCancelarComanda"><i class="fa-solid fa-ban"></i> Cancelar Comanda</h6>
+                    <div class="col-md-auto" id="crearComanda">
+                        <div class="card cardCrear cardEditar" id="cardCrear">
+                            <div class="card-header">
+                                <h6 class="" id="tituloCancelarComanda"><i class="fa-solid fa-ban"></i> Cancelar Comanda</h6>
+                            </div>
+                            <div class="card-body" id="bodyCrearComanda">         
+
+                                <h6 style="display:none" class="alert alert-success notificacionCrearComanda" id="notificacionCancelarSuccess">Comanda cancelada correctamente</h6>
+
+                                <h6 style="display:none" class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionCancelarError">Ha habido un fallo a la hora de cancelar la comanda</h6>
+
+                                <div class="row justify-content-center">
+                                    <i class="fas fa-spinner fa-spin text-center" id="spinCancelComanda" style="display:none!important"></i>
+                                </div>                                        
+                                
+                                <div class="row mb-1 mt-1 botonesCancelarComandas">
+                                    <div class="col-md-12 mb-1 mt-1 justify-content-center ">
+                                        <div class="justify-content-center">
+                                            ¿Deseas cancelar la comnada <img class="orderList" src="http://127.0.0.1:8000/images/comanda.png"> Nº <strong>${id}</strong>? 
+                                        </div>
+                                        <div class="mt-4">
+                                            <button type="submit" class="btn btn-danger botonCancelar">
+                                                Cancelar
+                                            </button>
+                                            <button type="submit" class="btn btn-secondary botonShowComanda" name="showComanda"  data-bs-dismiss="modal">
+                                                Cerrar
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="card-body" id="bodyCrearComanda">         
-
-                                        <h6 style="display:none" class="alert alert-success notificacionCrearComanda" id="notificacionCancelarSuccess">Comanda cancelada correctamente</h6>
-
-                                        <h6 style="display:none" class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionCancelarError">Ha habido un fallo a la hora de cancelar la comanda</h6>
-
-                                        <div class="row justify-content-center">
-                                            <i class="fas fa-spinner fa-spin text-center" id="spinCancelComanda" style="display:none!important"></i>
-                                        </div>                                        
-                                        
-                                        <div class="row mb-1 mt-1 botonesCancelarComandas">
-                                            <div class="col-md-12 mb-1 mt-1 justify-content-center ">
-                                                <div class="justify-content-center">
-                                                    ¿Deseas cancelar la comnada <img class="orderList" src="http://127.0.0.1:8000/images/comanda.png"> Nº <strong>${id}</strong>? 
-                                                </div>
-                                                <div class="mt-4">
-                                                    <button type="submit" class="btn btn-danger botonCancelar">
-                                                        Cancelar
-                                                    </button>
-                                                    <button type="submit" class="btn btn-secondary botonShowComanda" name="showComanda"  data-bs-dismiss="modal">
-                                                        Cerrar
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>                                       
-                                    </div>
-                                </div>
-                            </div>`;
+                                </div>                                       
+                            </div>
+                        </div>
+                    </div>`;
 
                 $('#cancelComandaContent').append(formulario);
 
@@ -637,11 +673,7 @@ $(function () {
 
     function editarComanda() {
 
-
-
         $("#formEditarComanda").on('submit', function (e) {
-
-            alert('2');
 
             $('#spinEditarComanda').show();
 
@@ -800,10 +832,10 @@ $(function () {
                                     ${comentarios}
                                 <div class="row mb-1 mt-1 botonesComandas">
                                     <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
-                                    <button type="submit" class="btn btn-primary botonShowComanda" name="showComanda" data-bs-toggle="modal" data-bs-target="#showComanda">
-                                    Editar 
-                                </button>
-                                        <button type="submit" class="btn btn-danger botonCancelar">
+                                        <button type="submit" class="btn btn-primary botonShowComanda" name="showComanda" data-bs-toggle="modal" data-bs-target="#showComanda">
+                                        Editar 
+                                    </button>
+                                        <button type="submit" class="btn btn-danger botonCancelar botonShowCancelar">
                                             Cancelar
                                         </button>
                                     </div>
@@ -834,8 +866,9 @@ $(function () {
                         }
                     });
 
+                    showCancelarComanda();
                     formShowComanda();
-                    cancelarComanda();
+                    // cancelarComanda();
 
                 },
                 error: function (xhr, status) {
@@ -855,7 +888,7 @@ $(function () {
 
                         if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
 
-                            $(this).attr('disabled', 'disabled');
+                            // $(this).attr('disabled', 'disabled');
                         }
                     });
                 }
@@ -1085,7 +1118,7 @@ $(function () {
 
                     if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
 
-                        $(this).attr('disabled', 'disabled');
+                        // $(this).attr('disabled', 'disabled');
                     }
                 });
             }
@@ -1103,7 +1136,7 @@ $(function () {
 
     $('.btnResetComanda').on('click', function (e) {
         $('option').each(function () {
-            $(this).attr('disabled', false);
+            // $(this).attr('disabled', false);
         });
     });
 
@@ -1194,11 +1227,11 @@ $(function () {
 
                     $('option').each(function () {
 
-                        if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
+                        // if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
 
-                            $(this).attr('disabled', 'disabled');
-                            // $(this).attr('selected', 'selected');
-                        }
+                        //     // $(this).attr('disabled', 'disabled');
+                        //     // $(this).attr('selected', 'selected');
+                        // }
                     });
                 }
             });
@@ -1218,7 +1251,7 @@ $(function () {
 
             $('option').each(function () {
                 if ($(this).val() == valor) {
-                    $(this).attr('disabled', 'disabled');
+                    // $(this).attr('disabled', 'disabled');
                     // $(this).attr("selected", "selected");
                 }
 
@@ -1489,5 +1522,7 @@ $(function () {
     });
 
     $('#notificacionCrearSuccess').delay(2000).fadeOut(2000);
+
+    $('#notificacionCrearError').hide();
 
 });

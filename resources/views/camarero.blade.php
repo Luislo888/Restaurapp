@@ -32,15 +32,22 @@
                             <h6 class="alert alert-success notificacionSucces " id="notificacionCrearSuccess">
                                 {{ session('success') }}</h6>
                         @endif
-                        @if (session('error'))
+                        {{-- @if (session('error'))
                             <h6 class="alert alert-success notificacionSucces " id="notificacionCrearSuccess">
                                 {{ session('error') }}asdf</h6>
-                        @endif
+                        @endif --}}
+                        @error(session('error'))
+                            <h6 class="alert alert-danger mb-3">{{ $message }}</h6>
+                        @enderror
+                        {{-- @if ($errors->any())
+                            <h4>{{ $errors->first() }}</h4>
+                        @endif --}}
                         {{-- <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6> --}}
                         {{-- <h6 class="alert alert-success notificacionCrearComanda" id="notificacionCrearSuccess">
-                            {{ session('success') }}asdf</h6>
-                        <h6 class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionCrearError">
-                            {{ session('success') }}</h6> --}}
+                            {{ session('success') }}asdf</h6> --}}
+                        <h6 class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionCrearError">Error al
+                            rellenar la comanda
+                        </h6>
                         <div class="row justify-content-center ">
                             <i class="fas fa-spinner fa-spin text-center" id="spinCrearComanda"></i>
                         </div>
