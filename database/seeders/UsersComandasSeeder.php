@@ -20,6 +20,10 @@ class UsersComandasSeeder extends Seeder
             'user_id' => 2,
             'comanda_id' => 1,
         ]);
+        // $comanda = UsersComandas::create([
+        //     'user_id' => 3,
+        //     'comanda_id' => 1,
+        // ]);
         // COMANDA ID 2 -----------------------------------
         $comanda = UsersComandas::create([
             'user_id' => 2,
@@ -64,6 +68,21 @@ class UsersComandasSeeder extends Seeder
         $comanda = UsersComandas::create([
             'user_id' => 4,
             'comanda_id' => 10,
+        ]);
+        // COMANDA ID 11 -----------------------------------
+        $comanda = UsersComandas::create([
+            'user_id' => 2,
+            'comanda_id' => 11,
+        ]);
+        // COMANDA ID 12 -----------------------------------
+        $comanda = UsersComandas::create([
+            'user_id' => 2,
+            'comanda_id' => 12,
+        ]);
+        // COMANDA ID 13 -----------------------------------
+        $comanda = UsersComandas::create([
+            'user_id' => 2,
+            'comanda_id' => 13,
         ]);
     }
 }

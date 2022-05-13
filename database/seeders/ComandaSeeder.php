@@ -72,5 +72,23 @@ class ComandaSeeder extends Seeder
             'comentarios' => 'Con tomate',
             'estado' => 'abierta',
         ]);
+        // COMANDA ID 11 -----------------------------------
+        $comanda = Comanda::create([
+            'mesa' => 3,
+            'comentarios' => 'Con tomate',
+            'estado' => 'cancelada',
+        ]);
+        // COMANDA ID 12 -----------------------------------
+        $comanda = Comanda::create([
+            'mesa' => 3,
+            'comentarios' => 'Con tomate',
+            'estado' => 'cancelada',
+        ]);
+        // COMANDA ID 13 -----------------------------------
+        $comanda = Comanda::create([
+            'mesa' => 3,
+            'comentarios' => 'Con tomate',
+            'estado' => 'cancelada',
+        ]);
     }
 }

@@ -307,6 +307,28 @@ button{
     right: -21px;
 }
 
+
+
+#ocultarAbiertasCocinero{
+    top: 189px;
+    margin-right: -5px;
+}
+
+#ocultarEnCursoCocinero{
+    top: 276px;
+    right: -19px;
+}
+
+#ocultarCerradasCocinero{
+    top: 363px;
+    right: -19px;
+}
+
+#ocultarCanceladasCocinero{
+    top: 441px;
+    margin-right: 1px;
+}
+
 .textoDerecha{
     position: absolute;
     right: 12px!important;

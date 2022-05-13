@@ -1372,6 +1372,100 @@ $(function () {
         }
     });
 
+    // COCINERO
+
+    let estadoBotonAbiertasCocinero = true;
+
+    $('#ocultarAbiertasCocinero').on('click', function () {
+
+
+        if (estadoBotonAbiertasCocinero == true) {
+
+            $('#comandasAbiertas').toggle(500);
+            $('#ocultarAbiertasCocinero').animate({
+                right: '-35px'
+
+            }, 500);
+            estadoBotonAbiertasCocinero = false;
+        } else {
+            $('#comandasAbiertas').toggle(500);
+            $('#ocultarAbiertasCocinero').animate({
+                right: '-12px'
+
+            }, 500);
+            estadoBotonAbiertasCocinero = true;
+        }
+    });
+
+    let estadoBotonEnCursoCocinero = true;
+
+    $('#ocultarEnCursoCocinero').on('click', function () {
+
+
+        if (estadoBotonEnCursoCocinero == true) {
+
+            $('#comandasEnCurso').toggle(500);
+            $('#ocultarEnCursoCocinero').animate({
+                right: '-42px'
+
+            }, 500);
+            estadoBotonEnCursoCocinero = false;
+        } else {
+            $('#comandasEnCurso').toggle(500);
+            $('#ocultarEnCursoCocinero').animate({
+                right: '-19px'
+
+            }, 500);
+            estadoBotonEnCursoCocinero = true;
+        }
+    });
+
+    let estadoBotonCerradasCocinero = true;
+
+    $('#ocultarCerradasCocinero').on('click', function () {
+
+
+        if (estadoBotonCerradasCocinero == true) {
+
+            $('#comandasCerradas').toggle(500);
+            $('#ocultarCerradasCocinero').animate({
+                right: '-42px'
+
+            }, 500);
+            estadoBotonCerradasCocinero = false;
+        } else {
+            $('#comandasCerradas').toggle(500);
+            $('#ocultarCerradasCocinero').animate({
+                right: '-20px'
+
+            }, 500);
+            estadoBotonCerradasCocinero = true;
+        }
+    });
+
+    let estadoBotonCrearCocinero = true;
+
+    $('#ocultarCanceladasCocinero').on('click', function () {
+
+
+        if (estadoBotonCrearCocinero == true) {
+
+            $('#comandasCanceladas').toggle(500);
+            $('#ocultarCanceladasCocinero').animate({
+                right: '-27px'
+
+            }, 500);
+            estadoBotonCrearCocinero = false;
+        } else {
+            $('#comandasCanceladas').toggle(500);
+            $('#ocultarCanceladasCocinero').animate({
+                right: '-10px'
+
+            }, 500);
+            estadoBotonCrearCocinero = true;
+        }
+    });
+
     // FIN BOTONES OCULTAR COMANDAS
 
 
@@ -1440,6 +1534,10 @@ $(function () {
 
     $('#botonCerradas').on('click', function () {
         location.href = '#comandasCerradas';
+    });
+
+    $('#botonCanceladas').on('click', function () {
+        location.href = '#comandasCanceladas';
     });
 
     // FIN ANCHORS COMANDAS
