@@ -3,44 +3,6 @@
 
 $(function () {
 
-
-    // INICIO VALIDAR CREAR COMANDA
-
-    $('#formCrearComanda').on('submit', function (e) {
-
-        e.preventDefault();
-
-        var form = $(this);
-
-        let contadorProductos = 0;
-        let contadorCantidades = 0;
-
-        $('#formCrearComanda').children().children().children().children('option').each(function () {
-            if ($(this).is(':selected') && $(this).val() != 0) {
-                contadorProductos++;
-            }
-        });
-
-        let cantidades = $('#formCrearComanda').children().children('.cantidad').children('input');
-
-        for (let i = 1; i < cantidades.length; i++) {
-            if (cantidades[i].value != '') {
-                contadorCantidades++;
-            }
-        }
-
-        if (contadorProductos != contadorCantidades) {
-            $('#notificacionCrearError').show();
-            $('#notificacionCrearError').delay(2000).fadeOut(2000);
-        } else {
-            form.unbind('submit').submit();
-        }
-    });
-
-    // FIN VALIDAR CREAR COMANDA
-
-
-
     // INICIO SHOW CANCELAR COMANDA
 
     function showCancelarComanda() {
@@ -63,6 +25,8 @@ $(function () {
                         break;
                     }
                 }
+
+                id = id.split('').reverse().join('');
 
                 let formulario = `
 
@@ -834,8 +798,9 @@ $(function () {
                                     <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
                                         <button type="submit" class="btn btn-primary botonShowComanda" name="showComanda" data-bs-toggle="modal" data-bs-target="#showComanda">
                                         Editar 
-                                    </button>
-                                        <button type="submit" class="btn btn-danger botonCancelar botonShowCancelar">
+                                        </button>
+                                        <button type="submit" class="btn btn-danger botonShowCancelar" data-bs-toggle="modal"
+                                            data-bs-target="#cancelComanda">
                                             Cancelar
                                         </button>
                                     </div>
@@ -911,19 +876,18 @@ $(function () {
 
     // INICIO AJAX CREAR COMANDA
 
-    $("#-CrearComanda").on('submit', function (e) {
+    $("#formCrearComanda").on('submit', function (e) {
 
 
         $('#spinCrearComanda').show();
 
         e.preventDefault();
 
-        // $('input').each(function () {
-        //     if ($(this).val() == '') {
-        //         $(this).val(false);
-        //     }
-        // });
-
+        $('input').each(function () {
+            if ($(this).val() == '') {
+                $(this).val(false);
+            }
+        });
 
         $('option').each(function () {
             if ($(this).val() != 0) {
@@ -941,7 +905,6 @@ $(function () {
         var url = form.attr('action');
 
         $.ajax({
-            async: false,
             type: "POST",
             url: url,
             data: form.serialize(),
@@ -1043,10 +1006,12 @@ $(function () {
                                 ${comentarios}
                             <div class="row mb-1 mt-1 botonesComandas">
                                 <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
-                                    <button type="submit" class="btn btn-primary" name="editarComanda">
+                                    <button type="submit" class="btn btn-primary botonShowComanda" name="showComanda"
+                                        data-bs-toggle="modal" data-bs-target="#showComanda">
                                         Editar
                                     </button>
-                                    <button type="submit" class="btn btn-danger">
+                                    <button type="submit" class="btn btn-danger botonShowCancelar" data-bs-toggle="modal"
+                                        data-bs-target="#cancelComanda">
                                         Cancelar
                                     </button>
                                 </div>
@@ -1058,6 +1023,8 @@ $(function () {
                 $('#comandasAbiertas').append(formulario);
                 formShowComanda();
                 // editarComanda();
+                showCancelarComanda();
+                // formShowComanda();
                 quitarCategoriasProductosVacios();
                 // formShowComanda();
 
@@ -1624,3 +1591,39 @@ $(function () {
     $('#notificacionCrearError').hide();
 
 });
+
+
+// INICIO VALIDAR CREAR COMANDA
+
+    // $('#formCrearComanda').on('submit', function (e) {
+
+    //     e.preventDefault();
+
+    //     var form = $(this);
+
+    //     let contadorProductos = 0;
+    //     let contadorCantidades = 0;
+
+    //     $('#formCrearComanda').children().children().children().children('option').each(function () {
+    //         if ($(this).is(':selected') && $(this).val() != 0) {
+    //             contadorProductos++;
+    //         }
+    //     });
+
+    //     let cantidades = $('#formCrearComanda').children().children('.cantidad').children('input');
+
+    //     for (let i = 1; i < cantidades.length; i++) {
+    //         if (cantidades[i].value != '') {
+    //             contadorCantidades++;
+    //         }
+    //     }
+
+    //     if (contadorProductos != contadorCantidades) {
+    //         $('#notificacionCrearError').show();
+    //         $('#notificacionCrearError').delay(2000).fadeOut(2000);
+    //     } else {
+    //         form.unbind('submit').submit();
+    //     }
+    // });
+
+    // FIN VALIDAR CREAR COMANDA

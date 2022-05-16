@@ -88,7 +88,7 @@ class ComandaSeeder extends Seeder
         $comanda = Comanda::create([
             'mesa' => 3,
             'comentarios' => 'Con tomate',
-            'estado' => 'cancelada',
+            'estado' => 'abierta',
         ]);
     }
 }

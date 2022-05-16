@@ -43,8 +43,7 @@
                             <h4>{{ $errors->first() }}</h4>
                         @endif --}}
                         {{-- <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6> --}}
-                        {{-- <h6 class="alert alert-success notificacionCrearComanda" id="notificacionCrearSuccess">
-                            {{ session('success') }}asdf</h6> --}}
+                        <h6 class="alert alert-success notificacionCrearComanda" id="notificacionCrearSuccess"></h6>
                         <h6 class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionCrearError">Error al
                             rellenar la comanda
                         </h6>
@@ -628,10 +627,10 @@
 
         </div>
     </div>
-    <button id="ocultarCrear" type="button" class="btn alert alert-primary botonOcultar">Crear</button>
-    <button id="ocultarAbiertas" type="button" class="btn alert alert-warning botonOcultar">Abiertas</button>
-    <button id="ocultarEnCurso" type="button" class="btn alert alert-danger botonOcultar">En Curso</button>
-    <button id="ocultarCerradas" type="button" class="btn alert alert-success botonOcultar">Cerradas</button>
+    <button id="ocultarCrear" type="button" class="btn alert alert-primary botonOcultar sinFocus">Crear</button>
+    <button id="ocultarAbiertas" type="button" class="btn alert alert-warning botonOcultar sinFocus">Abiertas</button>
+    <button id="ocultarEnCurso" type="button" class="btn alert alert-danger botonOcultar sinFocus">En Curso</button>
+    <button id="ocultarCerradas" type="button" class="btn alert alert-success botonOcultar sinFocus">Cerradas</button>
 
 
     <!-- INICIO MODAL EDITAR COMANDA -->
@@ -657,3 +656,42 @@
 
     <!-- FIN MODAL CANCELAR COMANDA -->
 @endsection
+
+{{-- <form method="GET" action="http://127.0.0.1:8000/comanda/15" class="formShowComanda">
+    <div class="card mb-3">
+        <div class="card-header">
+            <strong><img src="http://127.0.0.1:8000/images/mesa.png" alt=""> Mesa:</strong>
+            1
+            <span class="textoDerecha"><strong>
+                    <img class="orderList" src="http://127.0.0.1:8000/images/comanda.png">
+                    Nº Comanda:</strong>
+                15</span>
+            <br><strong><i class="fa-solid fa-clock iconClock"></i></strong>
+            <span class="fechaFormateada">14:58:42 - 16/05/2022</span>
+        </div>
+
+        <div class="card-body bodyComandas bodyComandasAbiertas">
+            <strong class="categoriaProducto">
+                <img class="iconIzquierda" src="http://127.0.0.1:8000/images/entrantes.png" alt="">
+
+                Entrantes:</strong>
+            <div><br>Cebiche x 1</div>
+
+            <br>
+
+            <div class="row mb-1 mt-1 botonesComandas">
+                <div class="col-md-12 offset-md-1 mb-1 mt-1 justify-content-center">
+                    <button type="submit" class="btn btn-primary botonShowComanda" name="showComanda"
+                        data-bs-toggle="modal" data-bs-target="#showComanda">
+                        Editar
+                    </button>
+
+                    <button type="submit" class="btn btn-danger botonShowCancelar" data-bs-toggle="modal"
+                        data-bs-target="#cancelComanda">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form> --}}
