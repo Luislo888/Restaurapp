@@ -215,6 +215,8 @@ class ComandaController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
         $comanda = Comanda::find($id);
 
         $comanda->mesa = $request->input('mesa');
@@ -252,8 +254,10 @@ class ComandaController extends Controller
         //
     }
 
-    public function cancelar($id)
+    public function cancelar($id, $estado = null)
     {
+
+        $asdf = $estado;
         $comanda = Comanda::find($id);
         $comanda->estado = 'cancelada';
         $comanda->update();

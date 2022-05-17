@@ -40,10 +40,10 @@ class CocineroController extends Controller
             $comandas =  Comanda::addSelect([
                 'id' => UsersComandas::select('id')
                     ->whereColumn('comanda_id', 'comandas.id')
-                    //     , 
-                    // 'rol' => User::select('rol')
-                    //     ->whereColumn('users_comandas.user_id', 'users.id'),
-                    ->where('user_id', Auth::user()->id)
+                //     , 
+                // 'rol' => User::select('rol')
+                //     ->whereColumn('users_comandas.user_id', 'users.id'),
+                // ->where('user_id', Auth::user()->id)
                 // ->where('comandas.estado', 'abierta')
             ])->get();
         } else {

@@ -3,6 +3,114 @@
 
 $(function () {
 
+    function cocinarComanda(url, cardBorrar) {
+
+        $('.botonCocinar').on('click', function () {
+            // alert();
+
+            // $('.fa-spinner').hide();
+            $('#spinCancelComanda').show();
+
+
+            // let url = $(this).closest('form').attr('action');
+
+            // alert(url);
+
+            $.ajax({
+
+                url: url,
+                type: 'PATCH',
+                data: {
+                    "_token": $("meta[name='csrf-token']").attr("content")
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                // data: form.serialize(),
+                success: function (resultado) {
+                    // alert(resultado);
+
+                    $('#spinCancelComanda').hide();
+
+                    $('#notificacionCancelarSuccess').show();
+                    $('#notificacionCancelarSuccess').fadeOut(2000);
+
+                    cardBorrar.fadeOut(2000);
+
+                }
+            });
+        });
+    }
+
+    function showCocinarComanda() {
+
+        $('.botonCocinarComanda').each(function () {
+
+            $(this).on('click', function () {
+
+                $('#cocinarComandaContent').empty();
+
+                let url = $(this).closest('form').attr('action');
+                let cardBorrar = $(this).closest('form');
+
+                let id = "";
+
+                for (let i = url.length - 1; i >= 0; i--) {
+                    if (url[i] != '/') {
+                        id += url[i];
+                    } else {
+                        break;
+                    }
+                }
+
+                id = id.split('').reverse().join('');
+
+                let formulario = `
+
+                    <div class="col-md-auto" id="crearComanda">
+                        <div class="card cardCrear cardEditar" id="cardCrear">
+                            <div class="card-header">
+                                <h6 class="" id="tituloCancelarComanda"><i class="fa-solid fa-fire-burner"></i> Cocinar Comanda</h6>
+                            </div>
+                            <div class="card-body" id="bodyCrearComanda">         
+
+                                <h6 style="display:none" class="alert alert-success notificacionCrearComanda" id="notificacionCancelarSuccess">Comanda asignada en curso correctamente</h6>
+
+                                <h6 style="display:none" class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionCancelarError">Ha habido un fallo a la hora de asignar en curso la comanda</h6>
+
+                                <div class="row justify-content-center">
+                                    <i class="fas fa-spinner fa-spin text-center" id="spinCancelComanda" style="display:none!important"></i>
+                                </div>                                        
+                                
+                                <div class="row mb-1 mt-1 botonesCancelarComandas">
+                                    <div class="col-md-12 mb-1 mt-1 justify-content-center ">
+                                        <div class="justify-content-center">
+                                            ¿Deseas cocinar la comnada <img class="orderList" src="http://127.0.0.1:8000/images/comanda.png"> Nº <strong>${id}</strong>? 
+                                        </div>
+                                        <div class="mt-4">
+                                            <button type="submit" class="btn btn-primary botonCocinar">
+                                                Cocinar
+                                            </button>
+                                            <button type="submit" class="btn btn-secondary botonShowComanda" name="showComanda"  data-bs-dismiss="modal">
+                                                Cerrar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>                                       
+                            </div>
+                        </div>
+                    </div>`;
+
+                $('#cocinarComandaContent').append(formulario);
+
+                cocinarComanda(url, cardBorrar);
+            });
+
+        });
+    }
+
+    showCocinarComanda();
+
     // INICIO SHOW CANCELAR COMANDA
 
     function showCancelarComanda() {
@@ -148,15 +256,14 @@ $(function () {
                 }
             });
 
-            $('select').each(function () {
-                if ($(this).val() == 0) {
-                    $(this).val(null);
-                }
-            });
+            // $('select').each(function () {
+            //     if ($(this).val() == 0) {
+            //         $(this).val(null);
+            //     }
+            // });
 
             var form = $(this);
             var url = form.attr('action');
-
 
             $.ajax({
 
@@ -858,242 +965,204 @@ $(function () {
                     });
                 }
             });
-
-            // formShowComanda();
-
         });
-        // formShowComanda();
     }
+
     $('#showComandaContent').empty();
-    // formShowComanda();
 
     editarComanda();
 
-    // formShowComanda();
-
     // FIN AJAX EDITAR COMANDA
+
 
 
     // INICIO AJAX CREAR COMANDA
 
     $("#formCrearComanda").on('submit', function (e) {
 
-
         $('#spinCrearComanda').show();
 
         e.preventDefault();
 
-        $('input').each(function () {
-            if ($(this).val() == '') {
-                $(this).val(false);
-            }
-        });
+        // $('input').each(function () {
+        //     if ($(this).val() == '') {
+        //         $(this).val(false);
+        //     }
+        // });
 
-        $('option').each(function () {
-            if ($(this).val() != 0) {
-                $(this).removeAttr('disabled');
-            }
-        });
+        // $('option').each(function () {
+        //     if ($(this).val() != 0) {
+        //         $(this).removeAttr('disabled');
+        //     }
+        // });
 
-        $('select').each(function () {
-            if ($(this).val() == 0) {
-                $(this).val(null);
-            }
-        });
+        // $('select').each(function () {
+        //     if ($(this).val() == 0) {
+        //         $(this).val(null);
+        //     }
+        // });
 
         var form = $(this);
         var url = form.attr('action');
 
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: form.serialize(),
-            beforeSend: function () {
+        let contadorProductos = 0;
+        let contadorCantidades = 0;
 
-            },
-            success: function (resultado) {
-                $('#notificacionCrearSuccess').show().text('Comanda creada correctamente');
-                $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
-                $('#spinCrearComanda').hide();
-                let obj = JSON.parse(resultado);
+        $('#formCrearComanda').children().children().children().children('option').each(function () {
+            if ($(this).is(':selected') && $(this).val() != 0) {
+                contadorProductos++;
+            }
+        });
 
-                let fecha = new Date(obj.comanda.created_at);
-                let anio = fecha.getFullYear();
-                let mes = fecha.getMonth() + 1;
-                if (mes < 10) {
-                    mes = '0' + mes;
-                }
-                let dia = fecha.getDate();
-                let hora = fecha.getHours();
-                let minutos = fecha.getMinutes();
-                let segundosFecha = fecha.getSeconds();
+        let cantidades = $('#formCrearComanda').children().children('.cantidad').children('input');
 
-                let entrantes = "";
-                let primeros = "";
-                let segundos = "";
-                let postres = "";
-                let bebidas = "";
-                let comentarios = "";
+        for (let i = 1; i < cantidades.length; i++) {
+            if (cantidades[i].value != '') {
+                contadorCantidades++;
+            }
+        }
 
-                if (obj.comanda.comentarios == null) {
+        if (contadorProductos != contadorCantidades || contadorProductos == 0 || contadorCantidades == 0) {
+            $('#spinCrearComanda').hide();
+            $('#notificacionCrearError').show();
+            $('#notificacionCrearError').delay(2000).fadeOut(2000);
+        } else {
+            // form.unbind('submit').submit();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function (resultado) {
+                    $('#notificacionCrearSuccess').show().text('Comanda creada correctamente');
+                    $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
+                    $('#spinCrearComanda').hide();
+                    let obj = JSON.parse(resultado);
 
-                    comentarios = "";
-                } else {
-                    comentarios = `<strong><i class='fa-solid fa-comment'></i> Comentarios: </strong> ${obj.comanda.comentarios} <br>`;
-                }
-
-
-                for (let i = 0; i < obj.productosCompleto.length; i++) {
-
-                    // if (i == 0) {
-                    //     switch (obj.productosCompleto[i].categoria) {
-                    //         case 'entrantes': entrantes += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                    //             break;
-                    //         case 'primeros': primeros += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                    //             break;
-                    //         case 'segundos': segundos += '<strong>Segundos:</strong><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                    //             break;
-                    //         case 'bebidas': bebidas += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                    //             break;
-                    //         case 'postres': postres += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                    //             break;
-                    //     }
-                    // } else {
-
-                    switch (obj.productosCompleto[i].categoria) {
-                        case 'entrantes': entrantes += '<div><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i] + '</div>';
-                            break;
-                        case 'primeros': primeros += '<div><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i] + '</div>';
-                            break;
-                        case 'segundos': segundos += '<div><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i] + '</div>';
-                            break;
-                        case 'postres': postres += '<div><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i] + '</div>';
-                            break;
-                        case 'bebidas': bebidas += '<div><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i] + '</div>';
-                            break;
+                    let fecha = new Date(obj.comanda.created_at);
+                    let anio = fecha.getFullYear();
+                    let mes = fecha.getMonth() + 1;
+                    if (mes < 10) {
+                        mes = '0' + mes;
                     }
-                    // }
-                }
+                    let dia = fecha.getDate();
+                    let hora = fecha.getHours();
+                    let minutos = fecha.getMinutes();
+                    let segundosFecha = fecha.getSeconds();
 
-                let formulario = `
-                <form method="GET" action="http://127.0.0.1:8000/comanda/${obj.comanda.id}" class="formShowComanda">
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <strong><img src="http://127.0.0.1:8000/images/mesa.png" alt=""> Mesa:</strong>
-                            ${obj.comanda.mesa}
-                            <span class="textoDerecha"><strong>
-                                    <img class="orderList" src="http://127.0.0.1:8000/images/comanda.png">
-                                    Nº Comanda:</strong>
-                                    ${obj.comanda.id}</span>
-                            <br><strong><i class="fa-solid fa-clock iconClock"></i></strong>
-                            <span class="fechaFormateada">${hora}:${minutos}:${segundosFecha} - ${dia}/${mes}/${anio}</span>
-                        </div>
-                        <div class="card-body bodyComandas bodyComandasAbiertas">
-                            <strong class="categoriaProducto">
-                                <img class="iconIzquierda" src="http://127.0.0.1:8000/images/entrantes.png" alt="">
-                                Entrantes:</strong>${entrantes}<br>
-                            <strong class="categoriaProducto"> <img class="iconIzquierda"
-                                    src="http://127.0.0.1:8000/images/primeros.png" alt="">
-                                Primeros:</strong>${primeros}<br>
-                            <strong class="categoriaProducto"> <img class="iconIzquierda"
-                                    src="http://127.0.0.1:8000/images/segundos.png" alt="">
-                                Segundos:</strong>${segundos}<br>
-                            <strong class="categoriaProducto">
-                                <i class="fa-solid fa-ice-cream"></i> Postres:
-                            </strong>${postres}<br>
-                            <strong class="categoriaProducto"><i class="fa-solid fa-wine-glass"></i>
-                                Bebidas:</strong>${bebidas}<br>
-                                ${comentarios}
-                            <div class="row mb-1 mt-1 botonesComandas">
-                                <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
-                                    <button type="submit" class="btn btn-primary botonShowComanda" name="showComanda"
-                                        data-bs-toggle="modal" data-bs-target="#showComanda">
-                                        Editar
-                                    </button>
-                                    <button type="submit" class="btn btn-danger botonShowCancelar" data-bs-toggle="modal"
-                                        data-bs-target="#cancelComanda">
-                                        Cancelar
-                                    </button>
+                    let entrantes = "";
+                    let primeros = "";
+                    let segundos = "";
+                    let postres = "";
+                    let bebidas = "";
+                    let comentarios = "";
+
+                    if (obj.comanda.comentarios == null) {
+                        comentarios = "";
+                    } else {
+                        comentarios = `<strong><i class='fa-solid fa-comment'></i> Comentarios: </strong> ${obj.comanda.comentarios} <br>`;
+                    }
+
+                    for (let i = 0; i < obj.productosCompleto.length; i++) {
+
+                        switch (obj.productosCompleto[i].categoria) {
+                            case 'entrantes': entrantes += '<div><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i] + '</div>';
+                                break;
+                            case 'primeros': primeros += '<div><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i] + '</div>';
+                                break;
+                            case 'segundos': segundos += '<div><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i] + '</div>';
+                                break;
+                            case 'postres': postres += '<div><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i] + '</div>';
+                                break;
+                            case 'bebidas': bebidas += '<div><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i] + '</div>';
+                                break;
+                        }
+                    }
+
+                    let formulario = `
+                    <form method="GET" action="http://127.0.0.1:8000/comanda/${obj.comanda.id}" class="formShowComanda">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <strong><img src="http://127.0.0.1:8000/images/mesa.png" alt=""> Mesa:</strong>
+                                ${obj.comanda.mesa}
+                                <span class="textoDerecha"><strong>
+                                        <img class="orderList" src="http://127.0.0.1:8000/images/comanda.png">
+                                        Nº Comanda:</strong>
+                                        ${obj.comanda.id}</span>
+                                <br><strong><i class="fa-solid fa-clock iconClock"></i></strong>
+                                <span class="fechaFormateada">${hora}:${minutos}:${segundosFecha} - ${dia}/${mes}/${anio}</span>
+                            </div>
+                            <div class="card-body bodyComandas bodyComandasAbiertas">
+                                <strong class="categoriaProducto">
+                                    <img class="iconIzquierda" src="http://127.0.0.1:8000/images/entrantes.png" alt="">
+                                    Entrantes:</strong>${entrantes}<br>
+                                <strong class="categoriaProducto"> <img class="iconIzquierda"
+                                        src="http://127.0.0.1:8000/images/primeros.png" alt="">
+                                    Primeros:</strong>${primeros}<br>
+                                <strong class="categoriaProducto"> <img class="iconIzquierda"
+                                        src="http://127.0.0.1:8000/images/segundos.png" alt="">
+                                    Segundos:</strong>${segundos}<br>
+                                <strong class="categoriaProducto">
+                                    <i class="fa-solid fa-ice-cream"></i> Postres:
+                                </strong>${postres}<br>
+                                <strong class="categoriaProducto"><i class="fa-solid fa-wine-glass"></i>
+                                    Bebidas:</strong>${bebidas}<br>
+                                    ${comentarios}
+                                <div class="row mb-1 mt-1 botonesComandas">
+                                    <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
+                                        <button type="submit" class="btn btn-primary botonShowComanda" name="showComanda"
+                                            data-bs-toggle="modal" data-bs-target="#showComanda">
+                                            Editar
+                                        </button>
+                                        <button type="submit" class="btn btn-danger botonShowCancelar" data-bs-toggle="modal"
+                                            data-bs-target="#cancelComanda">
+                                            Cancelar
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>`;
+                    </form>`;
 
-                $('#comandasAbiertas').append(formulario);
-                formShowComanda();
-                // editarComanda();
-                showCancelarComanda();
-                // formShowComanda();
-                quitarCategoriasProductosVacios();
-                // formShowComanda();
-
-                // $('form').each(function () {
-
-                //     if ($(this).attr('action') == `http://127.0.0.1:8000/comanda/${obj.comanda.id}` && $(this).attr('method') == 'GET') {
-
-                //         // $(this).fadeOut('slow').promise().done(function () {
-                //         //     $(this).replaceWith(formulario);
-                //         //     // $(logo).fadeIn('slow');
-                //         //     quitarCategoriasProductosVacios();
-                //         // });
-
-                //         // $(this).remove();
-
-                //         // $(this).replaceWith(formulario);
-
-                //         // $('#comandasAbiertas').append(formulario);
-                //         formShowComanda();
-
-                //         let asdf = $(this);
-
-                //         asdf.add
-                //         $(this).addE;
-
-                //     }
-                // });
-
-                // let asdf = document.getElementsByTagName('form');
-
-                // for (let i = 0; i < asdf.length; i++) {
-                //     asdf[i].addEventListener('submit', formShowComanda);
+                    $('#comandasAbiertas').append(formulario);
+                    formShowComanda();
+                    showCancelarComanda();
+                    quitarCategoriasProductosVacios();
+                },
+                error: function (xhr, status) {
+                    $('#notificacionCrearError').show().text('Se debe rellenar correctamente la comanda');
+                    $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
+                    $('#spinCrearComanda').hide();
+                }
+                // ,
+                // done: function (data) {
+                //     formShowComanda();
+                // },
+                // complete: function (data) {
+                //     formShowComanda();
                 // }
 
-                // formShowComanda();
-            },
-            error: function (xhr, status) {
-                $('#notificacionCrearError').show().text('Se debe rellenar correctamente la comanda');
-                $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
-                $('#spinCrearComanda').hide();
-            },
-            done: function (data) {
-                formShowComanda();
-            },
-            complete: function (data) {
-                formShowComanda();
-            }
+            });
 
-        });
-        formShowComanda();
-        $('option').each(function () {
+            // formShowComanda();
 
-            if ($(this).is(':selected') && $(this).val() != 0) {
+            // $('option').each(function () {
 
-                let valor = $(this).val();
+            //     if ($(this).is(':selected') && $(this).val() != 0) {
 
-                $('option').each(function () {
+            //         let valor = $(this).val();
 
-                    if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
+            //         $('option').each(function () {
 
-                        // $(this).attr('disabled', 'disabled');
-                    }
-                });
-            }
-        });
-        formShowComanda();
+            //             if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
+
+            //                 // $(this).attr('disabled', 'disabled');
+            //             }
+            //         });
+            //     }
+            // });
+            // formShowComanda();
+        }
     });
-    // formShowComanda();
-
 
     // FIN AJAX CREAR COMANDA 
 
@@ -1207,39 +1276,39 @@ $(function () {
 
     agregarQuitarProductos();
 
-    function cambiar(borrado = null) {
+    // function cambiar(borrado = null) {
 
-        var valorAnterior;
-        $("select").not('#registrarRol').on('focus', function () {
-            valorAnterior = this.value;
-        }).on('change', function () {
+    //     var valorAnterior;
+    //     $("select").not('#registrarRol').on('focus', function () {
+    //         valorAnterior = this.value;
+    //     }).on('change', function () {
 
-            let valor = $(this).val();
+    //         let valor = $(this).val();
 
-            $('option').each(function () {
-                if ($(this).val() == valor) {
-                    // $(this).attr('disabled', 'disabled');
-                    // $(this).attr("selected", "selected");
-                }
+    //         $('option').each(function () {
+    //             if ($(this).val() == valor) {
+    //                 // $(this).attr('disabled', 'disabled');
+    //                 // $(this).attr("selected", "selected");
+    //             }
 
-                if ($(this).val() == valorAnterior) {
-                    $(this).removeAttr('disabled');
-                }
-                // if (borrado != null) {
-                //     if ($(this).val() == borrado) {
-                //         $(this).removeAttr('disabled');
-                //     }
-                // }
+    //             if ($(this).val() == valorAnterior) {
+    //                 $(this).removeAttr('disabled');
+    //             }
+    //             // if (borrado != null) {
+    //             //     if ($(this).val() == borrado) {
+    //             //         $(this).removeAttr('disabled');
+    //             //     }
+    //             // }
 
-            });
-            valorAnterior = this.value;
-        });
-    }
+    //         });
+    //         valorAnterior = this.value;
+    //     });
+    // }
 
-    $("select").on('focus', function () {
-        cambiar();
+    // $("select").on('focus', function () {
+    //     cambiar();
 
-    });
+    // });
 
     // FIN BOTONES AGREGAR/QUITAR PRODUCTOS
 
@@ -1319,7 +1388,6 @@ $(function () {
     let estadoBotonCerradas = true;
 
     $('#ocultarCerradas').on('click', function () {
-
 
         if (estadoBotonCerradas == true) {
 
@@ -1413,7 +1481,6 @@ $(function () {
     let estadoBotonCrearCocinero = true;
 
     $('#ocultarCanceladasCocinero').on('click', function () {
-
 
         if (estadoBotonCrearCocinero == true) {
 

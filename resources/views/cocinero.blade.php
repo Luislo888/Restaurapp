@@ -90,10 +90,6 @@
                                         @endif
                                     @endforeach
                                     <br>
-                                    {{-- <strong class="categoriaProducto"><i class="fa-solid fa-comment"></i>
-                                        Comentarios:</strong>
-                                    <div><br>{{ $comanda->comentarios }}</div>
-                                    <br> --}}
                                     @if ($comanda->comentarios != null)
                                         <strong class="comentarioProducto"><i class="fa-solid fa-comment"></i>
                                             Comentarios:</strong>
@@ -102,15 +98,11 @@
                                     <br>
 
                                     <div class="row mb-1 mt-1 botonesComandas">
-                                        <div class="col-md-12 offset-md-1 mb-1 mt-1 justify-content-center">
-                                            <button type="submit" class="btn btn-primary botonShowComanda"
-                                                name="showComanda" data-bs-toggle="modal" data-bs-target="#showComanda">
-                                                {{ __('Editar ') }}
-                                            </button>
-
-                                            <button type="submit" class="btn btn-danger botonShowCancelar"
-                                                data-bs-toggle="modal" data-bs-target="#cancelComanda">
-                                                {{ __('Cancelar ') }}
+                                        <div class="col-md-12 offset-md-4 mb-1 mt-1 justify-content-center">
+                                            <button type="submit" class="btn btn-primary botonCocinarComanda"
+                                                name="cocinarComanda" data-bs-toggle="modal"
+                                                data-bs-target="#cocinarComanda">
+                                                {{ __('Cocinar ') }}
                                             </button>
                                         </div>
                                     </div>
@@ -411,9 +403,9 @@
 
     <!-- INICIO MODAL CANCELAR COMANDA -->
 
-    <div class="modal fade" id="cancelComanda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cocinarComanda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content" id="cancelComandaContent">
+            <div class="modal-content" id="cocinarComandaContent">
             </div>
         </div>
     </div>
