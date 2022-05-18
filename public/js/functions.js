@@ -11,14 +11,14 @@ $(function () {
             // $('.fa-spinner').hide();
             $('#spinCancelComanda').show();
 
-
+            let urlEstado = url + '/estado/' + 'curso';
             // let url = $(this).closest('form').attr('action');
 
             // alert(url);
 
             $.ajax({
 
-                url: url,
+                url: urlEstado,
                 type: 'PATCH',
                 data: {
                     "_token": $("meta[name='csrf-token']").attr("content")
@@ -33,12 +33,73 @@ $(function () {
                     $('#spinCancelComanda').hide();
 
                     $('#notificacionCancelarSuccess').show();
-                    $('#notificacionCancelarSuccess').fadeOut(2000);
+                    $('#notificacionCancelarSuccess').delay(2000).fadeOut(2000);
 
-                    cardBorrar.fadeOut(2000);
+                    $.ajax({
 
+                        type: "GET",
+                        url: url,
+                        success: function (resultado) {
+
+                            let obj = JSON.parse(resultado);
+
+                            let fecha = new Date(obj.comanda.created_at);
+
+                            alert(obj.comanda.estado);
+
+                            // $('#showComandaContent').empty();
+
+                            // let anio = fecha.getFullYear();
+                            // let mes = fecha.getMonth() + 1;
+                            // if (mes < 10) {
+                            //     mes = '0' + mes;
+                            // }
+                            // let dia = fecha.getDate();
+                            // if (dia < 10) {
+                            //     dia = '0' + dia;
+                            // }
+                            // let hora = fecha.getHours();
+                            // if (hora < 10) {
+                            //     hora = '0' + hora;
+                            // }
+                            // let minutos = fecha.getMinutes();
+                            // if (minutos < 10) {
+                            //     minutos = '0' + minutos;
+                            // }
+                            // let segundosFecha = fecha.getSeconds();
+                            // if (segundosFecha < 10) {
+                            //     segundosFecha = '0' + segundosFecha;
+                            // }
+
+                            // let entrantes = "";
+                            // let primeros = "";
+                            // let segundos = "";
+                            // let postres = "";
+                            // let bebidas = "";
+                            // let comentarios = "";
+                            // let estado = "";
+
+
+
+                        },
+                        error: function (xhr, status) {
+                            $('#notificacionEditarError').show().text('Se debe rellenar correctamente la comanda');
+                            $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
+                            $('#spinEditarComanda').hide();
+                        },
+                    });
+
+
+
+
+                    cardBorrar.fadeOut(2000, function () {
+                        $('#comandasEnCurso').append(cardBorrar);
+                        cardBorrar.fadeIn(2000);
+                    });
                 }
             });
+
+
         });
     }
 
@@ -70,7 +131,7 @@ $(function () {
                     <div class="col-md-auto" id="crearComanda">
                         <div class="card cardCrear cardEditar" id="cardCrear">
                             <div class="card-header">
-                                <h6 class="" id="tituloCancelarComanda"><i class="fa-solid fa-fire-burner"></i> Cocinar Comanda</h6>
+                                <h6 class="" id="tituloCocinarComanda"><i class="fa-solid fa-fire-burner"></i> Cocinar Comanda</h6>
                             </div>
                             <div class="card-body" id="bodyCrearComanda">         
 
@@ -234,21 +295,16 @@ $(function () {
     function formShowComanda() {
 
         $(".formShowComanda").on('submit', function (e) {
-            // $(".botonShowComanda").on('submit', function (e) {
-
-            // alert("entro");
 
             e.preventDefault();
 
             $('#spinEditarComanda').show();
-
 
             // $('input').each(function () {
             //     if ($(this).val() == '') {
             //         $(this).val(false);
             //     }
             // });
-
 
             $('option').each(function () {
                 if ($(this).val() != 0) {

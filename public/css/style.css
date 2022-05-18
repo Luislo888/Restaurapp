@@ -374,13 +374,22 @@ br{
     color: #df4957;
 }
 
-#tituloCancelarComanda{
-    color: #0a58ca;
+#tituloCocinarComanda{
+    color: #ff8001;
 }
 
 .botonesCancelarComandas{
     /* margin-left: 50px; */
     text-align: center;
+}
+
+.botonCocinarComanda{
+    margin-left: 34px;
+}
+
+.botonCocinarComanda, .botonCocinar{
+    background-color: #ff8001!important;
+    border: none!important;
 }
 
 #spinCancelarComanda{
