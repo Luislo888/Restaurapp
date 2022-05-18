@@ -194,14 +194,9 @@
                                     <br>
                                     <div class="row mb-1 mt-1 botonesComandas">
                                         <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
-                                            <button type="submit" class="btn btn-primary botonShowComanda"
-                                                name="showComanda" data-bs-toggle="modal" data-bs-target="#showComanda">
-                                                {{ __('Editar ') }}
-                                            </button>
-
-                                            <button type="submit" class="btn btn-danger botonShowCancelar"
-                                                data-bs-toggle="modal" data-bs-target="#cancelComanda">
-                                                {{ __('Cancelar ') }}
+                                            <button type="submit" class="btn btn-success botonFinalizarComanda"
+                                                data-bs-toggle="modal" data-bs-target="#cocinarComanda">
+                                                Finalizar
                                             </button>
                                         </div>
                                     </div>

@@ -264,9 +264,9 @@ class ComandaController extends Controller
 
     public function curso($id)
     {
-        $comanda = Comanda::find($id);
-        $comanda->estado = 'en curso';
-        $comanda->update();
+        // $comanda = Comanda::find($id);
+        // $comanda->estado = 'en curso';
+        // $comanda->update();
         echo json_encode($id);
     }
 }

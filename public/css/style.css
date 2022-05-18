@@ -392,6 +392,10 @@ br{
     border: none!important;
 }
 
+.botonFinalizarComanda{
+    margin-left: 57px;
+}
+
 #spinCancelarComanda{
     display: none;
 }
