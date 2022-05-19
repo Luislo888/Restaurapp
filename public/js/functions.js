@@ -6,16 +6,23 @@ $(function () {
 
     function cocinarComanda(url, cardBorrar) {
 
-        $('.botonCocinar').on('click', function () {
-            // alert();
+        $('.botonCocinar').on('click', function (e) {
 
-            // $('.fa-spinner').hide();
+
+            // $(this).attr('disabled', 'disabled');
+
             $('#spinCancelComanda').show();
 
-            let urlEstado = url + '/estado/' + 'curso';
-            // let url = $(this).closest('form').attr('action');
+            let urlEstado = "";
+            let estadoComanda = "";
 
-            // alert(url);
+            if ($(this).hasClass('abierta')) {
+                estadoComanda = '/curso';
+            } else {
+                estadoComanda = '/cerrada';
+            }
+
+            urlEstado = url + estadoComanda;
 
             $.ajax({
 
@@ -43,7 +50,6 @@ $(function () {
                         success: function (resultado) {
 
                             let obj = JSON.parse(resultado);
-
 
                             let fecha = new Date(obj.comanda.created_at);
                             let anio = fecha.getFullYear();
@@ -85,12 +91,11 @@ $(function () {
                                 }
                             }
 
-                            if (obj.comanda.estado == 'abierta') {
+                            if (obj.comanda.estado == 'en curso') {
                                 estado = 'bodyComandasEnCurso'
                             } else {
                                 estado = 'bodyComandasCerradas'
                             }
-
 
                             let formulario = `
                             <form method="GET" action="http://127.0.0.1:8000/comanda/${obj.comanda.id}" class="formShowComanda" >
@@ -154,11 +159,18 @@ $(function () {
                             </form > `;
 
                             cardBorrar.fadeOut(2000, function () {
-                                $('#comandasEnCurso').append(formulario);
+
+                                if (estadoComanda == '/curso') {
+                                    $('#comandasEnCurso').append(formulario);
+                                } else {
+                                    $('#comandasCerradas').append(formulario);
+                                }
                                 // formulario.fadeIn(2000);
                             });
 
                             showCocinarComanda();
+                            showFinalizarComanda();
+                            cocinarComanda();
 
                         },
                         error: function (xhr, status) {
@@ -173,7 +185,74 @@ $(function () {
         });
     }
 
+    function showFinalizarComanda() {
 
+        $('.botonFinalizarComanda').each(function () {
+
+            $(this).on('click', function () {
+
+                $('#cocinarComandaContent').empty();
+
+                let url = $(this).closest('form').attr('action');
+                let cardBorrar = $(this).closest('form');
+
+                let id = "";
+
+                for (let i = url.length - 1; i >= 0; i--) {
+                    if (url[i] != '/') {
+                        id += url[i];
+                    } else {
+                        break;
+                    }
+                }
+
+                id = id.split('').reverse().join('');
+
+                let formulario = `
+
+                    <div class="col-md-auto" id="crearComanda">
+                        <div class="card cardCrear cardEditar" id="cardCrear">
+                            <div class="card-header">
+                                <h6 class="" id="tituloCocinarComanda"><i class="fa-solid fa-fire-burner"></i> Cocinar Comanda</h6>
+                            </div>
+                            <div class="card-body" id="bodyCrearComanda">         
+
+                                <h6 style="display:none" class="alert alert-success notificacionCrearComanda" id="notificacionCancelarSuccess">Comanda asignada en curso correctamente</h6>
+
+                                <h6 style="display:none" class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionCancelarError">Ha habido un fallo a la hora de asignar en curso la comanda</h6>
+
+                                <div class="row justify-content-center">
+                                    <i class="fas fa-spinner fa-spin text-center" id="spinCancelComanda" style="display:none!important"></i>
+                                </div>                                        
+                                
+                                <div class="row mb-1 mt-1 botonesCancelarComandas">
+                                    <div class="col-md-12 mb-1 mt-1 justify-content-center ">
+                                        <div class="justify-content-center">
+                                            ¿Deseas cocinar la comnada <img class="orderList" src="http://127.0.0.1:8000/images/comanda.png"> Nº <strong>${id}</strong>? 
+                                        </div>
+                                        <div class="mt-4">
+                                            <button type="submit" class="btn btn-primary botonCocinar enCurso">
+                                                Cocinar
+                                            </button>
+                                            <button type="submit" class="btn btn-secondary botonShowComanda" name="showComanda"  data-bs-dismiss="modal">
+                                                Cerrar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>                                       
+                            </div>
+                        </div>
+                    </div>`;
+
+                $('#cocinarComandaContent').append(formulario);
+
+                cocinarComanda(url, cardBorrar);
+            });
+
+        });
+    }
+
+    showFinalizarComanda();
 
     function showCocinarComanda() {
 
@@ -221,7 +300,7 @@ $(function () {
                                             ¿Deseas cocinar la comnada <img class="orderList" src="http://127.0.0.1:8000/images/comanda.png"> Nº <strong>${id}</strong>? 
                                         </div>
                                         <div class="mt-4">
-                                            <button type="submit" class="btn btn-primary botonCocinar">
+                                            <button type="submit" class="btn btn-primary botonCocinar abierta">
                                                 Cocinar
                                             </button>
                                             <button type="submit" class="btn btn-secondary botonShowComanda" name="showComanda"  data-bs-dismiss="modal">

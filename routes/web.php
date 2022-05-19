@@ -51,7 +51,8 @@ Route::resource('/cocinero', CocineroController::class);
 Route::post('/comanda', [App\Http\Controllers\ComandaController::class, 'store'])->name('comanda');
 Route::get('/comanda/{id}', [App\Http\Controllers\ComandaController::class, 'show'])->name('comanda-edit');
 Route::patch('/comanda/{id}', [App\Http\Controllers\ComandaController::class, 'update'])->name('comanda-update');
-Route::patch('/comanda/{id}/estado/{estado}', [App\Http\Controllers\ComandaController::class, 'curso'])->name('comanda-update');
+// Route::patch('/comanda/{id}/{estado}', [App\Http\Controllers\ComandaController::class, 'curso'])->where('estado', 'curso')->name('comanda-update');
+Route::patch('/comanda/{id}/{estado}', [App\Http\Controllers\ComandaController::class, 'cambiarEstadoComanda'])->name('comanda-update');
 Route::delete('/comanda/{id}', [App\Http\Controllers\ComandaController::class, 'cancelar'])->name('comanda-update');
 Route::post('/comanda/{id}', [App\Http\Controllers\ComandaController::class, 'update'])->name('comanda-update');
 

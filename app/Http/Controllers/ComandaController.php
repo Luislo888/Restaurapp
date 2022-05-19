@@ -262,11 +262,18 @@ class ComandaController extends Controller
         echo json_encode($id);
     }
 
-    public function curso($id)
+    public function cambiarEstadoComanda($id, $estado)
     {
-        // $comanda = Comanda::find($id);
-        // $comanda->estado = 'en curso';
-        // $comanda->update();
+        $comanda = Comanda::find($id);
+
+        if ($estado == 'curso') {
+            $comanda->estado = 'en curso';
+        } else {
+            $comanda->estado = 'cerrada';
+        }
+
+        $comanda->update();
+
         echo json_encode($id);
     }
 }
