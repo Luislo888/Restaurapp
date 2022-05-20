@@ -195,7 +195,7 @@
                                     <div class="row mb-1 mt-1 botonesComandas">
                                         <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
                                             <button type="submit" class="btn btn-success botonFinalizarComanda"
-                                                data-bs-toggle="modal" data-bs-target="#cocinarComanda">
+                                                data-bs-toggle="modal" data-bs-target="#finalizarComanda">
                                                 Finalizar
                                             </button>
                                         </div>
@@ -384,7 +384,7 @@
         class="btn alert alert-secondary botonOcultar sinFocus">Canceladas</button>
 
 
-    <!-- INICIO MODAL EDITAR COMANDA -->
+    {{-- <!-- INICIO MODAL EDITAR COMANDA -->
 
     <div class="modal fade" id="showComanda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -393,7 +393,7 @@
         </div>
     </div>
 
-    <!-- FIN MODAL EDITAR COMANDA -->
+    <!-- FIN MODAL EDITAR COMANDA --> --}}
 
 
     <!-- INICIO MODAL CANCELAR COMANDA -->
@@ -406,4 +406,16 @@
     </div>
 
     <!-- FIN MODAL CANCELAR COMANDA -->
+
+
+    <!-- INICIO MODAL FINALIZAR COMANDA -->
+
+    <div class="modal fade" id="finalizarComanda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="finalizarComandaContent">
+            </div>
+        </div>
+    </div>
+
+    <!-- FIN MODAL FINALIZAR COMANDA -->
 @endsection

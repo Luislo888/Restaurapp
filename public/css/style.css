@@ -176,6 +176,10 @@ button{
     color: #e5ad06;
 }
 
+#tituloFinalizarComanda{
+    color: #26a46c;
+}
+
 .bodyComandas div{
     margin-left: 30px;
     margin-top: -28px;
