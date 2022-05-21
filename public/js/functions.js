@@ -4,22 +4,38 @@
 
 $(function () {
 
+    function completarProductos() {
+
+        $('input:checkbox').on('change', function () {
+            if ($(this).is(':checked')) {
+                $(this).next().addClass('tachado');
+                alert($(this).val());
+            } else {
+                $(this).next().removeClass('tachado');
+            }
+
+
+
+        });
+    }
+
+    completarProductos();
+
+
+    // INICIO FINALIZAR COMANDA
+
     function finalizarComanda(url, cardBorrar) {
 
         $('.botonFinalizar').on('click', function (e) {
 
-            // $(this).attr('disabled', 'disabled');
+            let boton = $(this);
 
-            $('#spinCancelComanda').show();
+            $('#spinFinalizarComanda').show();
 
             let urlEstado = "";
             let estadoComanda = "";
 
-            // if ($(this).hasClass('abierta')) {
-            //     estadoComanda = '/curso';
-            // } else {
             estadoComanda = '/cerrada';
-            // }
 
             urlEstado = url + estadoComanda;
 
@@ -37,10 +53,12 @@ $(function () {
                 success: function (resultado) {
                     // alert(resultado);
 
-                    $('#spinCancelComanda').hide();
+                    boton.attr('disabled', 'disabled');
+
+                    $('#spinFinalizarComanda').hide();
 
                     $('#notificacionCancelarSuccess').show();
-                    $('#notificacionCancelarSuccess').delay(2000).fadeOut(2000);
+                    // $('#notificacionCancelarSuccess').delay(2000).fadeOut(2000);
 
                     $.ajax({
 
@@ -144,36 +162,14 @@ $(function () {
                                 formulario += `
                             ${comentarios}`
                             }
-                            // formulario += `
-                            //             <div class="row mb-1 mt-1 botonesComandas">
-                            //                 <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
-                            //                     <button type="submit" class="btn btn-success botonFinalizarComanda"
-                            //                         data-bs-toggle="modal" data-bs-target="#cocinarComanda">
-                            //                         Finalizar
-                            //                     </button>
-                            //                 </div>
-                            //             </div>
-                            //         </div>
-                            //     </div>
-                            // </form > `;
 
                             cardBorrar.fadeOut(2000, function () {
-
-                                // if (estadoComanda == '/curso') {
-                                //     $('#comandasEnCurso').append(formulario);
-                                // } else {
                                 $('#comandasCerradas').append(formulario);
-                                // }
-                                // formulario.fadeIn(2000);
                             });
-
-                            // showCocinarComanda();
-                            // showFinalizarComanda();
-                            // cocinarComanda();
 
                         },
                         error: function (xhr, status) {
-                            $('#notificacionEditarError').show().text('Se debe rellenar correctamente la comanda');
+                            $('#notificacionEditarError').show().text('No se pudo actualizar correctamente la comanda');
                             $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                             $('#spinEditarComanda').hide();
                         },
@@ -184,23 +180,22 @@ $(function () {
         });
     }
 
+    // FIN FINALIZAR COMANDA
+
+
+
+    // INICIO SHOW FINALIZAR COMANDA
+
     function showFinalizarComanda() {
 
         $('.botonFinalizarComanda').each(function (e) {
 
             $(this).on('click', function (e) {
 
-                // e.preventDefault();
-
-                // alert('hola');
-
                 $('#finalizarComandaContent').empty();
-
-                alert(this.value);
 
                 let url = $(this).closest('form').attr('action');
                 let cardBorrar = $(this).closest('form');
-
 
                 let id = "";
 
@@ -223,12 +218,12 @@ $(function () {
                             </div>
                             <div class="card-body" id="bodyCrearComanda">         
 
-                                <h6 style="display:none" class="alert alert-success notificacionCrearComanda" id="notificacionCancelarSuccess">Comanda asignada en curso correctamente</h6>
+                                <h6 style="display:none" class="alert alert-success notificacionCrearComanda" id="notificacionCancelarSuccess">Comanda Finalizada correctamente</h6>
 
                                 <h6 style="display:none" class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionCancelarError">Ha habido un fallo a la hora de asignar en curso la comanda</h6>
 
                                 <div class="row justify-content-center">
-                                    <i class="fas fa-spinner fa-spin text-center" id="spinCancelComanda" style="display:none!important"></i>
+                                    <i class="fas fa-spinner fa-spin text-center" id="spinFinalizarComanda" style="display:none!important"></i>
                                 </div>                                        
                                 
                                 <div class="row mb-1 mt-1 botonesCancelarComandas">
@@ -261,28 +256,28 @@ $(function () {
 
     showFinalizarComanda();
 
+    // FIN SHOW FINALIZAR COMANDA
+
+
+
+    // INICIO COCINAR COMANDA
+
     function cocinarComanda(url, cardBorrar) {
 
         $('.botonCocinar').on('click', function (e) {
 
-
-            // $(this).attr('disabled', 'disabled');
+            let boton = $(this);
 
             $('#spinCancelComanda').show();
 
             let urlEstado = "";
             let estadoComanda = "";
 
-            // if ($(this).hasClass('abierta')) {
             estadoComanda = '/curso';
-            // } else {
-            // estadoComanda = '/cerrada';
-            // }
 
             urlEstado = url + estadoComanda;
 
             $.ajax({
-
                 url: urlEstado,
                 type: 'PATCH',
                 data: {
@@ -291,17 +286,15 @@ $(function () {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                // data: form.serialize(),
                 success: function (resultado) {
-                    // alert(resultado);
+                    boton.attr('disabled', 'disabled');
 
                     $('#spinCancelComanda').hide();
 
                     $('#notificacionCancelarSuccess').show();
-                    $('#notificacionCancelarSuccess').delay(2000).fadeOut(2000);
+                    // $('#notificacionCancelarSuccess').delay(2000).fadeOut(2000);
 
                     $.ajax({
-
                         type: "GET",
                         url: url,
                         success: function (resultado) {
@@ -337,7 +330,8 @@ $(function () {
                                 switch (obj.productosComanda[i].categoria) {
                                     case 'entrantes': entrantes += '<div><br>' + obj.productosComanda[i].nombre + ' x ' + obj.productosComanda[i].cantidad + '</div>';
                                         break;
-                                    case 'primeros': primeros += '<div><br>' + obj.productosComanda[i].nombre + ' x ' + obj.productosComanda[i].cantidad + '</div>';
+
+                                    case 'primeros': primeros += `<div><br><input class='form-check-input' type='checkbox' value='${obj.comandasProductos[i].id}' id='flexCheckDefault'> <span>` + obj.productosComanda[i].nombre + ' x ' + obj.productosComanda[i].cantidad + "</span></div>";
                                         break;
                                     case 'segundos': segundos += '<div><br>' + obj.productosComanda[i].nombre + ' x ' + obj.productosComanda[i].cantidad + '</div>';
                                         break;
@@ -348,11 +342,7 @@ $(function () {
                                 }
                             }
 
-                            // if (obj.comanda.estado == 'en curso') {
                             estado = 'bodyComandasEnCurso'
-                            // } else {
-                            // estado = 'bodyComandasCerradas'
-                            // }
 
                             let formulario = `
                             <form method="GET" action="http://127.0.0.1:8000/comanda/${obj.comanda.id}" class="formShowComanda" >
@@ -415,56 +405,38 @@ $(function () {
                                 </div>
                             </form > `;
 
-                            //     let formulario = `
-
-
-                            //     <button value="asdf" type="" class="btn btn-success botonFinalizarComanda"
-                            //                         data-bs-toggle="modal" data-bs-target="#finalizarComanda">
-                            //                         Finalizar
-                            //                     </button>
-                            // `;
-
-
-
                             cardBorrar.fadeOut(2000, function () {
-
-                                // if (estadoComanda == '/curso') {
-                                $('#comandasEnCurso').append(formulario);
                                 showFinalizarComanda();
-                                showCocinarComanda();
-                                showCancelarComanda();
                                 formShowComanda();
-                                // } else {
-                                // $('#comandasCerradas').append(formulario);
-                                // }
-                                // formulario.fadeIn(2000);
+                                completarProductos();
                             });
 
-                            // showCocinarComanda();
-                            showFinalizarComanda();
-                            showCocinarComanda();
-                            showCancelarComanda();
-                            formShowComanda();
-                            // cocinarComanda();
+                            cardBorrar.remove();
 
+                            $('#comandasEnCurso').append(formulario).fadeIn(2000);
+
+                            $('form').each(function () {
+                                if ($(this).attr('action') == `http://127.0.0.1:8000/comanda/${obj.comanda.id}`) {
+                                    $(this).hide();
+                                    $(this).fadeIn(2000);
+                                }
+                            });
                         },
                         error: function (xhr, status) {
-                            $('#notificacionEditarError').show().text('Se debe rellenar correctamente la comanda');
+                            $('#notificacionEditarError').show().text('No se pudo actualizar correctamente la comanda');
                             $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                             $('#spinEditarComanda').hide();
                         },
                     });
-                    // showFinalizarComanda();
                 }
             });
-            // showFinalizarComanda();
-
         });
-        // showFinalizarComanda();
     }
-    // showFinalizarComanda();
+
+    // FIN COCINAR COMANDA
 
 
+    // INICIO SHOW COCINAR COMANDA
 
     function showCocinarComanda() {
 
@@ -498,7 +470,7 @@ $(function () {
                             </div>
                             <div class="card-body" id="bodyCrearComanda">         
 
-                                <h6 style="display:none" class="alert alert-success notificacionCrearComanda" id="notificacionCancelarSuccess">Comanda asignada en curso correctamente</h6>
+                                <h6 style="display:none" class="alert alert-success notificacionCrearComanda" id="notificacionCancelarSuccess">Comanda asignada En Curso correctamente</h6>
 
                                 <h6 style="display:none" class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionCancelarError">Ha habido un fallo a la hora de asignar en curso la comanda</h6>
 
@@ -529,12 +501,14 @@ $(function () {
 
                 cocinarComanda(url, cardBorrar);
             });
-
         });
-        // showFinalizarComanda();
     }
 
     showCocinarComanda();
+
+    // FIN SHOW COCINAR COMANDA
+
+
 
     // INICIO SHOW CANCELAR COMANDA
 
@@ -615,15 +589,9 @@ $(function () {
     function cancelarComanda(url, cardBorrar) {
 
         $('.botonCancelar').on('click', function () {
-            // alert();
 
-            // $('.fa-spinner').hide();
+            let boton = $(this);
             $('#spinCancelComanda').show();
-
-
-            // let url = $(this).closest('form').attr('action');
-
-            // alert(url);
 
             $.ajax({
 
@@ -638,6 +606,8 @@ $(function () {
                 // data: form.serialize(),
                 success: function (resultado) {
                     // alert(resultado);
+
+                    boton.attr('disabled', 'disabled');
 
                     $('#spinCancelComanda').hide();
 

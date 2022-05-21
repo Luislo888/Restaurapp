@@ -388,7 +388,7 @@ br{
 }
 
 .botonCocinarComanda{
-    margin-left: 34px;
+    margin-left: 57px;
 }
 
 .botonCocinarComanda, .botonCocinar{
@@ -397,7 +397,7 @@ br{
 }
 
 .botonFinalizarComanda{
-    margin-left: 57px;
+    margin-left: 36px;
 }
 
 #spinCancelarComanda{
@@ -407,6 +407,17 @@ br{
 .fas, .fa-solid { 
     opacity: 0.9!important;
 }
+
+.form-check-input:checked {
+    background-color: dimgray;
+    border-color: dimgray;
+}
+
+.tachado{
+    /* color: red!important; */
+    text-decoration:line-through!important;
+}
+
 
 
 /* @media (max-width: 767px)
@@ -544,5 +555,4 @@ cardEditar .botonMas {
     }
 
 }
- 
 

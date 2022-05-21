@@ -148,7 +148,11 @@
                                         Entrantes:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
-                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                            <div><br><input class="form-check-input" type="checkbox" value=""
+                                                    id="flexCheckDefault">
+                                                <span>{{ $producto->id }} {{ $producto->nombre }} x
+                                                    {{ $producto->cantidad }}</span>
+                                            </div>
                                         @endif
                                     @endforeach
                                     <br>
@@ -157,7 +161,10 @@
                                         Primeros:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
-                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                            <div><br><input class="form-check-input" type="checkbox"
+                                                    value="{{ $producto->id }}" id="{{ $producto->id }}"> <span>
+                                                    {{ $producto->nombre }} x
+                                                    {{ $producto->cantidad }}</span></div>
                                         @endif
                                     @endforeach
                                     <br>

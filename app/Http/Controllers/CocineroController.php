@@ -63,9 +63,10 @@ class CocineroController extends Controller
             ->select('productos.*', 'comandas_productos.*')->get();
 
 
+        // dd($productos);
         return view('cocinero', ['cocinero' => $cocinero, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'postres' => $postres, 'bebidas' => $bebidas, 'comandas' => $comandas, 'productos' => $productos]);
 
-        return view('cocinero');
+        // return view('cocinero');
     }
 
     /**
