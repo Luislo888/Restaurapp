@@ -52,9 +52,9 @@ $(function () {
             $.ajax({
                 url: urlProducto,
                 type: 'PATCH',
-                data: {
-                    "_token": $("meta[name='csrf-token']").attr("content")
-                },
+                // data: {
+                //     "_token": $("meta[name='csrf-token']").attr("content")
+                // },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -105,9 +105,9 @@ $(function () {
 
                 url: urlEstado,
                 type: 'PATCH',
-                data: {
-                    "_token": $("meta[name='csrf-token']").attr("content")
-                },
+                // data: {
+                //     "_token": $("meta[name='csrf-token']").attr("content")
+                // },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -342,9 +342,9 @@ $(function () {
             $.ajax({
                 url: urlEstado,
                 type: 'PATCH',
-                data: {
-                    "_token": $("meta[name='csrf-token']").attr("content")
-                },
+                // data: {
+                //     "_token": $("meta[name='csrf-token']").attr("content")
+                // },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -475,6 +475,7 @@ $(function () {
                                 showFinalizarComanda();
                                 formShowComanda();
                                 completarProductos();
+                                habilitarBotonFinalizar();
                             });
 
                             cardBorrar.remove();
@@ -663,9 +664,9 @@ $(function () {
 
                 url: url,
                 type: 'DELETE',
-                data: {
-                    "_token": $("meta[name='csrf-token']").attr("content")
-                },
+                // data: {
+                //     "_token": $("meta[name='csrf-token']").attr("content")
+                // },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -1232,9 +1233,9 @@ $(function () {
             $.ajax({
                 type: "PATCH",
                 url: url,
-                data: {
-                    "_token": $("meta[name='csrf-token']").attr("content")
-                },
+                // data: {
+                //     "_token": $("meta[name='csrf-token']").attr("content")
+                // },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
