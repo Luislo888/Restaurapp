@@ -133,6 +133,10 @@
                             class="formShowComanda">
                             <div class="card mb-3">
                                 <div class="card-header">
+                                    <h6 class="alert alert-danger notificacionEditarProducto mb-3" style="display: none"
+                                        id="notificacionCrearError">Error al
+                                        actualizar el producto
+                                    </h6>
                                     <img class="iconIzquierda" src="{{ asset('images/mesa.png') }}" alt="">
                                     <strong>Mesa:</strong> {{ $comanda->mesa }}
                                     <span class="textoDerecha"><img class="orderList"
@@ -148,11 +152,21 @@
                                         Entrantes:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
-                                            <div><br><input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefault">
-                                                <span>{{ $producto->id }} {{ $producto->nombre }} x
-                                                    {{ $producto->cantidad }}</span>
-                                            </div>
+                                            @if ($producto->estado_producto == true)
+                                                @php
+                                                    $tachado = 'tachado';
+                                                    $checked = 'checked';
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $tachado = '';
+                                                    $checked = '';
+                                                @endphp
+                                            @endif
+                                            <div><br><input {{ $checked }} class="form-check-input" type="checkbox"
+                                                    value="{{ $producto->id }}" id=""> <span
+                                                    class="{{ $tachado }}"> {{ $producto->nombre }} x
+                                                    {{ $producto->cantidad }}</span></div>
                                         @endif
                                     @endforeach
                                     <br>
@@ -161,9 +175,20 @@
                                         Primeros:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
-                                            <div><br><input class="form-check-input" type="checkbox"
-                                                    value="{{ $producto->id }}" id="{{ $producto->id }}"> <span>
-                                                    {{ $producto->nombre }} x
+                                            @if ($producto->estado_producto == true)
+                                                @php
+                                                    $tachado = 'tachado';
+                                                    $checked = 'checked';
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $tachado = '';
+                                                    $checked = '';
+                                                @endphp
+                                            @endif
+                                            <div><br><input {{ $checked }} class="form-check-input" type="checkbox"
+                                                    value="{{ $producto->id }}" id=""> <span
+                                                    class="{{ $tachado }}"> {{ $producto->nombre }} x
                                                     {{ $producto->cantidad }}</span></div>
                                         @endif
                                     @endforeach
@@ -173,7 +198,21 @@
                                         Segundos:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
-                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                            @if ($producto->estado_producto == true)
+                                                @php
+                                                    $tachado = 'tachado';
+                                                    $checked = 'checked';
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $tachado = '';
+                                                    $checked = '';
+                                                @endphp
+                                            @endif
+                                            <div><br><input {{ $checked }} class="form-check-input" type="checkbox"
+                                                    value="{{ $producto->id }}" id=""> <span
+                                                    class="{{ $tachado }}"> {{ $producto->nombre }} x
+                                                    {{ $producto->cantidad }}</span></div>
                                         @endif
                                     @endforeach
                                     <br>
@@ -181,7 +220,21 @@
                                         Postres:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'postres')
-                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                            @if ($producto->estado_producto == true)
+                                                @php
+                                                    $tachado = 'tachado';
+                                                    $checked = 'checked';
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $tachado = '';
+                                                    $checked = '';
+                                                @endphp
+                                            @endif
+                                            <div><br><input {{ $checked }} class="form-check-input" type="checkbox"
+                                                    value="{{ $producto->id }}" id=""> <span
+                                                    class="{{ $tachado }}"> {{ $producto->nombre }} x
+                                                    {{ $producto->cantidad }}</span></div>
                                         @endif
                                     @endforeach
                                     <br>
@@ -189,7 +242,21 @@
                                         Bebidas:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'bebidas')
-                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                            @if ($producto->estado_producto == true)
+                                                @php
+                                                    $tachado = 'tachado';
+                                                    $checked = 'checked';
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $tachado = '';
+                                                    $checked = '';
+                                                @endphp
+                                            @endif
+                                            <div><br><input {{ $checked }} class="form-check-input" type="checkbox"
+                                                    value="{{ $producto->id }}" id=""> <span
+                                                    class="{{ $tachado }}"> {{ $producto->nombre }} x
+                                                    {{ $producto->cantidad }}</span></div>
                                         @endif
                                     @endforeach
                                     <br>
@@ -201,7 +268,7 @@
                                     <br>
                                     <div class="row mb-1 mt-1 botonesComandas">
                                         <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
-                                            <button type="submit" class="btn btn-success botonFinalizarComanda"
+                                            <button type="submit" class="btn btn-success botonFinalizarComanda disabled"
                                                 data-bs-toggle="modal" data-bs-target="#finalizarComanda">
                                                 Finalizar
                                             </button>

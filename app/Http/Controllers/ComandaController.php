@@ -276,4 +276,15 @@ class ComandaController extends Controller
 
         echo json_encode($id);
     }
+
+    public function cambiarEstadoProducto($id, $producto, $estado)
+    {
+        $producto = ComandasProductos::find($producto);
+
+        $producto->estado_producto = $estado;
+
+        $producto->update();
+
+        echo json_encode($id);
+    }
 }

@@ -20,11 +20,13 @@ class ComandasProductosSeeder extends Seeder
             'comanda_id' => 1,
             'producto_id' => 1,
             'cantidad' => 1,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 1,
             'producto_id' => 2,
             'cantidad' => 2,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 1,
@@ -35,11 +37,13 @@ class ComandasProductosSeeder extends Seeder
             'comanda_id' => 1,
             'producto_id' => 4,
             'cantidad' => 1,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 1,
             'producto_id' => 5,
             'cantidad' => 2,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 1,
@@ -50,11 +54,13 @@ class ComandasProductosSeeder extends Seeder
             'comanda_id' => 1,
             'producto_id' => 7,
             'cantidad' => 1,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 1,
             'producto_id' => 8,
             'cantidad' => 2,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 1,
@@ -65,11 +71,13 @@ class ComandasProductosSeeder extends Seeder
             'comanda_id' => 1,
             'producto_id' => 10,
             'cantidad' => 1,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 1,
             'producto_id' => 11,
             'cantidad' => 2,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 1,
@@ -80,16 +88,19 @@ class ComandasProductosSeeder extends Seeder
             'comanda_id' => 1,
             'producto_id' => 13,
             'cantidad' => 1,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 1,
             'producto_id' => 14,
             'cantidad' => 2,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 1,
             'producto_id' => 15,
             'cantidad' => 1,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 1,
@@ -143,16 +154,19 @@ class ComandasProductosSeeder extends Seeder
             'comanda_id' => 4,
             'producto_id' => 4,
             'cantidad' => 1,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 4,
             'producto_id' => 3,
             'cantidad' => 1,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 4,
             'producto_id' => 5,
             'cantidad' => 2,
+            'estado_producto' => true,
         ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 4,

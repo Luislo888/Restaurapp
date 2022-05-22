@@ -4,22 +4,84 @@
 
 $(function () {
 
+    // INICIO HABILITAR BOTON FINALIZAR
+
+    function habilitarBotonFinalizar() {
+
+        $('form').each(function () {
+
+            let cantidadProductosTerminados = $(this).find('input[type=checkbox]:checked').length;
+
+            let cantidadProductos = $(this).find('input[type=checkbox]').length;
+
+            if (cantidadProductosTerminados == cantidadProductos) {
+
+                $(this).find('.botonFinalizarComanda').removeClass('disabled');
+            } else {
+                $(this).find('.botonFinalizarComanda').addClass('disabled');
+            }
+        });
+    }
+
+    habilitarBotonFinalizar();
+
+    // FIN HABILITAR BOTON FINALIZAR
+
+
+
+    // INICIO COMPLETAR PRODUCTOS
+
     function completarProductos() {
 
         $('input:checkbox').on('change', function () {
+
+            let estadoProducto = 0;
+            let comandasProductosID = $(this).val();
+
             if ($(this).is(':checked')) {
                 $(this).next().addClass('tachado');
-                alert($(this).val());
+                estadoProducto = 1;
             } else {
                 $(this).next().removeClass('tachado');
             }
 
+            let url = $(this).closest('form').attr('action');
 
+            let urlProducto = url + `/${comandasProductosID}/${estadoProducto}`
 
+            $.ajax({
+                url: urlProducto,
+                type: 'PATCH',
+                data: {
+                    "_token": $("meta[name='csrf-token']").attr("content")
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function () {
+                    habilitarBotonFinalizar();
+                    $('.notificacionEditarProducto').each(function () {
+                        if ($(this).closest('form').attr('action') == url) {
+                            $(this).hide();
+                        }
+                    });
+                },
+                error: function (xhr, status) {
+
+                    $('.notificacionEditarProducto').each(function () {
+                        if ($(this).closest('form').attr('action') == url) {
+                            $(this).show();
+                        }
+                    });
+                },
+            });
         });
     }
 
     completarProductos();
+
+    // FIN COMPLETAR PRODUCTOS
+
 
 
     // INICIO FINALIZAR COMANDA
@@ -328,16 +390,16 @@ $(function () {
                             for (let i = 0; i < obj.productosComanda.length; i++) {
 
                                 switch (obj.productosComanda[i].categoria) {
-                                    case 'entrantes': entrantes += '<div><br>' + obj.productosComanda[i].nombre + ' x ' + obj.productosComanda[i].cantidad + '</div>';
+                                    case 'entrantes': entrantes += `<div><br><input class='form-check-input' type='checkbox' value='${obj.comandasProductos[i].id}' id='flexCheckDefault'> <span>` + obj.productosComanda[i].nombre + ' x ' + obj.productosComanda[i].cantidad + "</span></div>";
                                         break;
 
                                     case 'primeros': primeros += `<div><br><input class='form-check-input' type='checkbox' value='${obj.comandasProductos[i].id}' id='flexCheckDefault'> <span>` + obj.productosComanda[i].nombre + ' x ' + obj.productosComanda[i].cantidad + "</span></div>";
                                         break;
-                                    case 'segundos': segundos += '<div><br>' + obj.productosComanda[i].nombre + ' x ' + obj.productosComanda[i].cantidad + '</div>';
+                                    case 'segundos': segundos += `<div><br><input class='form-check-input' type='checkbox' value='${obj.comandasProductos[i].id}' id='flexCheckDefault'> <span>` + obj.productosComanda[i].nombre + ' x ' + obj.productosComanda[i].cantidad + "</span></div>";
                                         break;
-                                    case 'postres': postres += '<div><br>' + obj.productosComanda[i].nombre + ' x ' + obj.productosComanda[i].cantidad + '</div>';
+                                    case 'postres': postres += `<div><br><input class='form-check-input' type='checkbox' value='${obj.comandasProductos[i].id}' id='flexCheckDefault'> <span>` + obj.productosComanda[i].nombre + ' x ' + obj.productosComanda[i].cantidad + "</span></div>";
                                         break;
-                                    case 'bebidas': bebidas += '<div><br>' + obj.productosComanda[i].nombre + ' x ' + obj.productosComanda[i].cantidad + '</div>';
+                                    case 'bebidas': bebidas += `<div><br><input class='form-check-input' type='checkbox' value='${obj.comandasProductos[i].id}' id='flexCheckDefault'> <span>` + obj.productosComanda[i].nombre + ' x ' + obj.productosComanda[i].cantidad + "</span></div>";
                                         break;
                                 }
                             }
@@ -348,6 +410,10 @@ $(function () {
                             <form method="GET" action="http://127.0.0.1:8000/comanda/${obj.comanda.id}" class="formShowComanda" >
                                 <div class="card mb-3">
                                     <div class="card-header">
+                                        <h6 class="alert alert-danger notificacionEditarProducto mb-3" style="display: none"
+                                            id="notificacionCrearError">Error al
+                                            actualizar el producto
+                                        </h6>
                                         <strong><img src="http://127.0.0.1:8000/images/mesa.png" alt=""> Mesa:</strong>
                                         ${obj.comanda.mesa}
                                         <span class="textoDerecha"><strong>

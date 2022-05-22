@@ -409,8 +409,8 @@ br{
 }
 
 .form-check-input:checked {
-    background-color: dimgray;
-    border-color: dimgray;
+    background-color: rgb(144, 144, 144);
+    border-color: rgb(144, 144, 144);
 }
 
 .tachado{

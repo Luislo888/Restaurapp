@@ -32,27 +32,17 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/auth.register', [App\Http\Controllers\AdminController::class, 'index'])->name('register');
 Route::get('/register', [App\Http\Controllers\AdminController::class, 'index'])->name('register');
-// Route::get('/camarero', [App\Http\Controllers\CamareroController::class, 'index'])->name('camarero');
-
-// Route::get('/camarero', function () {
-//     return view('camarero');
-// });
 
 Route::resource('/admin', AdminController::class);
 Route::resource('/camarero', CamareroController::class);
 Route::resource('/cocinero', CocineroController::class);
-// Route::resource('/comanda', ComandaController::class);
-
-// Route::get('/camarero', [App\Http\Controllers\CamareroController::class, 'index'])->name('camarero');
-// Route::post('/camarero/{id}', [App\Http\Controllers\ComandaController::class, 'store'])->name('comanda-edit');
 
 Route::post('/comanda', [App\Http\Controllers\ComandaController::class, 'store'])->name('comanda');
 Route::get('/comanda/{id}', [App\Http\Controllers\ComandaController::class, 'show'])->name('comanda-edit');
 Route::patch('/comanda/{id}', [App\Http\Controllers\ComandaController::class, 'update'])->name('comanda-update');
-// Route::patch('/comanda/{id}/{estado}', [App\Http\Controllers\ComandaController::class, 'curso'])->where('estado', 'curso')->name('comanda-update');
 Route::patch('/comanda/{id}/{estado}', [App\Http\Controllers\ComandaController::class, 'cambiarEstadoComanda'])->name('comanda-update');
+Route::patch('/comanda/{id}/{comandasProductosID}/{estadoProducto}', [App\Http\Controllers\ComandaController::class, 'cambiarEstadoProducto'])->name('comanda-update');
 Route::delete('/comanda/{id}', [App\Http\Controllers\ComandaController::class, 'cancelar'])->name('comanda-update');
 Route::post('/comanda/{id}', [App\Http\Controllers\ComandaController::class, 'update'])->name('comanda-update');
 

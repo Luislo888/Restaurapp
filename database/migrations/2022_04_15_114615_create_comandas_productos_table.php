@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('comanda_id')->constrained('comandas');
             $table->foreignId('producto_id')->constrained('productos');
             $table->integer('cantidad')->default(1);
+            $table->boolean('estado_producto')->default(false);
             $table->timestamps();
         });
     }

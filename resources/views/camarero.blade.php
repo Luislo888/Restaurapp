@@ -477,7 +477,17 @@
                                         Entrantes:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'entrantes')
-                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                            @if ($producto->estado_producto == true)
+                                                @php
+                                                    $tachado = 'tachado';
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $tachado = '';
+                                                @endphp
+                                            @endif
+                                            <div class="{{ $tachado }}"><br>{{ $producto->nombre }} x
+                                                {{ $producto->cantidad }}</div>
                                         @endif
                                     @endforeach
                                     <br>
@@ -486,7 +496,17 @@
                                         Primeros:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'primeros')
-                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                            @if ($producto->estado_producto == true)
+                                                @php
+                                                    $tachado = 'tachado';
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $tachado = '';
+                                                @endphp
+                                            @endif
+                                            <div class="{{ $tachado }}"><br>{{ $producto->nombre }} x
+                                                {{ $producto->cantidad }}</div>
                                         @endif
                                     @endforeach
                                     <br>
@@ -495,7 +515,17 @@
                                         Segundos:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'segundos')
-                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                            @if ($producto->estado_producto == true)
+                                                @php
+                                                    $tachado = 'tachado';
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $tachado = '';
+                                                @endphp
+                                            @endif
+                                            <div class="{{ $tachado }}"><br>{{ $producto->nombre }} x
+                                                {{ $producto->cantidad }}</div>
                                         @endif
                                     @endforeach
                                     <br>
@@ -503,7 +533,17 @@
                                         Postres:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'postres')
-                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                            @if ($producto->estado_producto == true)
+                                                @php
+                                                    $tachado = 'tachado';
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $tachado = '';
+                                                @endphp
+                                            @endif
+                                            <div class="{{ $tachado }}"><br>{{ $producto->nombre }} x
+                                                {{ $producto->cantidad }}</div>
                                         @endif
                                     @endforeach
                                     <br>
@@ -511,7 +551,17 @@
                                         Bebidas:</strong>
                                     @foreach ($productos as $producto)
                                         @if ($producto->comanda_id == $comanda->id && $producto->categoria == 'bebidas')
-                                            <div><br>{{ $producto->nombre }} x {{ $producto->cantidad }}</div>
+                                            @if ($producto->estado_producto == true)
+                                                @php
+                                                    $tachado = 'tachado';
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $tachado = '';
+                                                @endphp
+                                            @endif
+                                            <div class="{{ $tachado }}"><br>{{ $producto->nombre }} x
+                                                {{ $producto->cantidad }}</div>
                                         @endif
                                     @endforeach
                                     <br>
@@ -656,42 +706,3 @@
 
     <!-- FIN MODAL CANCELAR COMANDA -->
 @endsection
-
-{{-- <form method="GET" action="http://127.0.0.1:8000/comanda/15" class="formShowComanda">
-    <div class="card mb-3">
-        <div class="card-header">
-            <strong><img src="http://127.0.0.1:8000/images/mesa.png" alt=""> Mesa:</strong>
-            1
-            <span class="textoDerecha"><strong>
-                    <img class="orderList" src="http://127.0.0.1:8000/images/comanda.png">
-                    Nº Comanda:</strong>
-                15</span>
-            <br><strong><i class="fa-solid fa-clock iconClock"></i></strong>
-            <span class="fechaFormateada">14:58:42 - 16/05/2022</span>
-        </div>
-
-        <div class="card-body bodyComandas bodyComandasAbiertas">
-            <strong class="categoriaProducto">
-                <img class="iconIzquierda" src="http://127.0.0.1:8000/images/entrantes.png" alt="">
-
-                Entrantes:</strong>
-            <div><br>Cebiche x 1</div>
-
-            <br>
-
-            <div class="row mb-1 mt-1 botonesComandas">
-                <div class="col-md-12 offset-md-1 mb-1 mt-1 justify-content-center">
-                    <button type="submit" class="btn btn-primary botonShowComanda" name="showComanda"
-                        data-bs-toggle="modal" data-bs-target="#showComanda">
-                        Editar
-                    </button>
-
-                    <button type="submit" class="btn btn-danger botonShowCancelar" data-bs-toggle="modal"
-                        data-bs-target="#cancelComanda">
-                        Cancelar
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form> --}}
