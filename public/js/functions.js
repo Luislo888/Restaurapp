@@ -113,7 +113,10 @@ $(function () {
                 },
                 // data: form.serialize(),
                 success: function (resultado) {
-                    // alert(resultado);
+
+                    let audio = document.createElement("audio");
+                    audio.src = "http://127.0.0.1:8000/sounds/door_bell.wav";
+                    audio.play();
 
                     boton.attr('disabled', 'disabled');
 
@@ -228,6 +231,7 @@ $(function () {
                             cardBorrar.fadeOut(2000, function () {
                                 $('#comandasCerradas').append(formulario);
                             });
+
 
                         },
                         error: function (xhr, status) {
