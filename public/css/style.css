@@ -418,13 +418,26 @@ br{
     text-decoration:line-through!important;
 }
 
+#botonCookie{
+    font-weight: 600;
+    margin-left: 4px;
+}
 
+#cookieBanner {
+    display: none;
+}
 
-/* @media (max-width: 767px)
-cardEditar .botonMas {
-    margin-left: 208px;
-    width: 10px;
-    margin-top: 4px!important; */
+.colBanner{
+    border-radius: 4px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
+
+.bannerContenido{
+    background-color: rgb(117, 1, 1);
+    border-radius: 0.25rem;
+}
 
 
 /* RESPONSIVE */
@@ -555,4 +568,3 @@ cardEditar .botonMas {
     }
 
 }
-

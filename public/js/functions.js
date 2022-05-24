@@ -68,6 +68,10 @@ $(function () {
                 },
                 error: function (xhr, status) {
 
+                    let audio = document.createElement("audio");
+                    audio.src = "http://127.0.0.1:8000/sounds/errorComanda.wav";
+                    audio.play();
+
                     $('.notificacionEditarProducto').each(function () {
                         if ($(this).closest('form').attr('action') == url) {
                             $(this).show();
@@ -115,7 +119,7 @@ $(function () {
                 success: function (resultado) {
 
                     let audio = document.createElement("audio");
-                    audio.src = "http://127.0.0.1:8000/sounds/door_bell.wav";
+                    audio.src = "http://127.0.0.1:8000/sounds/finalizarComanda.wav";
                     audio.play();
 
                     boton.attr('disabled', 'disabled');
@@ -235,6 +239,11 @@ $(function () {
 
                         },
                         error: function (xhr, status) {
+
+                            let audio = document.createElement("audio");
+                            audio.src = "http://127.0.0.1:8000/sounds/errorComanda.wav";
+                            audio.play();
+
                             $('#notificacionEditarError').show().text('No se pudo actualizar correctamente la comanda');
                             $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                             $('#spinEditarComanda').hide();
@@ -353,6 +362,11 @@ $(function () {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (resultado) {
+
+                    let audio = document.createElement("audio");
+                    audio.src = "http://127.0.0.1:8000/sounds/cocinarComanda.wav";
+                    audio.play();
+
                     boton.attr('disabled', 'disabled');
 
                     $('#spinCancelComanda').hide();
@@ -494,6 +508,11 @@ $(function () {
                             });
                         },
                         error: function (xhr, status) {
+
+                            let audio = document.createElement("audio");
+                            audio.src = "http://127.0.0.1:8000/sounds/errorComanda.wav";
+                            audio.play();
+
                             $('#notificacionEditarError').show().text('No se pudo actualizar correctamente la comanda');
                             $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                             $('#spinEditarComanda').hide();
@@ -676,7 +695,10 @@ $(function () {
                 },
                 // data: form.serialize(),
                 success: function (resultado) {
-                    // alert(resultado);
+
+                    let audio = document.createElement("audio");
+                    audio.src = "http://127.0.0.1:8000/sounds/cancelarComanda.wav";
+                    audio.play();
 
                     boton.attr('disabled', 'disabled');
 
@@ -1172,6 +1194,11 @@ $(function () {
 
                 },
                 error: function (xhr, status) {
+
+                    let audio = document.createElement("audio");
+                    audio.src = "http://127.0.0.1:8000/sounds/errorComanda.wav";
+                    audio.play();
+
                     $('#notificacionEditarError').show().text('Se debe rellenar correctamente la comanda');
                     $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                     $('#spinEditarComanda').hide();
@@ -1248,6 +1275,11 @@ $(function () {
 
                 },
                 success: function (resultado) {
+
+                    let audio = document.createElement("audio");
+                    audio.src = "http://127.0.0.1:8000/sounds/editarComanda.wav";
+                    audio.play();
+
                     $('#notificacionEditarSuccess').show().text('Comanda editada correctamente');
                     $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                     $('#spinEditarComanda').hide();
@@ -1405,6 +1437,11 @@ $(function () {
 
                 },
                 error: function (xhr, status) {
+
+                    let audio = document.createElement("audio");
+                    audio.src = "http://127.0.0.1:8000/sounds/errorComanda.wav";
+                    audio.play();
+
                     $('#notificacionEditarError').show().text('Se debe rellenar correctamente la comanda');
                     $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                     $('#spinEditarComanda').hide();
@@ -1484,6 +1521,11 @@ $(function () {
         }
 
         if (contadorProductos != contadorCantidades || contadorProductos == 0 || contadorCantidades == 0) {
+
+            let audio = document.createElement("audio");
+            audio.src = "http://127.0.0.1:8000/sounds/errorComanda.wav";
+            audio.play();
+
             $('#spinCrearComanda').hide();
             $('#notificacionCrearError').show();
             $('#notificacionCrearError').delay(2000).fadeOut(2000);
@@ -1494,6 +1536,11 @@ $(function () {
                 url: url,
                 data: form.serialize(),
                 success: function (resultado) {
+
+                    let audio = document.createElement("audio");
+                    audio.src = "http://127.0.0.1:8000/sounds/crearComanda.wav";
+                    audio.play();
+
                     $('#notificacionCrearSuccess').show().text('Comanda creada correctamente');
                     $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                     $('#spinCrearComanda').hide();
@@ -1590,6 +1637,11 @@ $(function () {
                     quitarCategoriasProductosVacios();
                 },
                 error: function (xhr, status) {
+
+                    let audio = document.createElement("audio");
+                    audio.src = "http://127.0.0.1:8000/sounds/errorComanda.wav";
+                    audio.play();
+
                     $('#notificacionCrearError').show().text('Se debe rellenar correctamente la comanda');
                     $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                     $('#spinCrearComanda').hide();
@@ -2118,40 +2170,35 @@ $(function () {
 
     $('#notificacionCrearError').hide();
 
+
+    // INICIO COOKIES
+
+    function ocultarCookieBanner() {
+        localStorage.setItem("cookieAceptada", "si");
+        $("#cookieBanner").hide();
+    }
+
+    function mostrarCookieBanner() {
+        $("#cookieBanner").show();
+    }
+
+    function cookieBanner() {
+
+        let cookieAceptada = localStorage.getItem("cookieAceptada");
+
+        if (cookieAceptada === null) {
+            localStorage.setItem("cookieAceptada", "no");
+            mostrarCookieBanner();
+        }
+        if (cookieAceptada === "no") {
+            mostrarCookieBanner();
+        }
+    }
+
+    cookieBanner();
+
+    $('#botonCookie').on('click', ocultarCookieBanner);
+
+    // FIN COOKIES
+
 });
-
-
-// INICIO VALIDAR CREAR COMANDA
-
-    // $('#formCrearComanda').on('submit', function (e) {
-
-    //     e.preventDefault();
-
-    //     var form = $(this);
-
-    //     let contadorProductos = 0;
-    //     let contadorCantidades = 0;
-
-    //     $('#formCrearComanda').children().children().children().children('option').each(function () {
-    //         if ($(this).is(':selected') && $(this).val() != 0) {
-    //             contadorProductos++;
-    //         }
-    //     });
-
-    //     let cantidades = $('#formCrearComanda').children().children('.cantidad').children('input');
-
-    //     for (let i = 1; i < cantidades.length; i++) {
-    //         if (cantidades[i].value != '') {
-    //             contadorCantidades++;
-    //         }
-    //     }
-
-    //     if (contadorProductos != contadorCantidades) {
-    //         $('#notificacionCrearError').show();
-    //         $('#notificacionCrearError').delay(2000).fadeOut(2000);
-    //     } else {
-    //         form.unbind('submit').submit();
-    //     }
-    // });
-
-    // FIN VALIDAR CREAR COMANDA

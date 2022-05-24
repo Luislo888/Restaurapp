@@ -106,7 +106,7 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                     document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                             document.getElementById('logout-form').submit();">
                                         <i class="fa-solid fa-right-from-bracket"></i> {{ __('Cerrar Sesión') }}
                                     </a>
 
@@ -126,6 +126,29 @@
             @yield('content')
         </main>
     </div>
+
+
+    {{-- INICIO COOKIES --}}
+
+    <div class="row" id="cookieBanner">
+        <div class="col-md-5 col-sm-12 colBanner">
+            <div class="p-3 pb-4 bannerContenido text-white">
+                <div class="row">
+                    <div class="col-10">
+                        <h4>Permitir Cookies</h4>
+                    </div>
+                </div>
+                <p>&#x1F36A; Esta web utiliza cookies para asegurarte una mejor experiencia en nuestra web. &#x1F36A;
+                </p>
+                <button id="botonCookie" type="button" class="btn btn-light">Aceptar
+                    Cookies</button>
+            </div>
+        </div>
+    </div>
+
+    {{-- FIN COOKIES --}}
+
+
 </body>
 
 </html>
