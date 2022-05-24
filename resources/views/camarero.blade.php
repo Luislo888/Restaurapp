@@ -352,7 +352,7 @@
                     @if ($comanda->id != null && $comanda->estado == 'abierta')
                         <form method="GET" action="{{ route('comanda-edit', ['id' => $comanda->id]) }}"
                             class="formShowComanda">
-                            <div class="card mb-3">
+                            <div class="card mb-3 cmdHover">
                                 <div class="card-header">
                                     <strong><img src="{{ asset('images/mesa.png') }}" alt=""> Mesa:</strong>
                                     {{ $comanda->mesa }}
@@ -460,7 +460,7 @@
                     @if ($comanda->id != null && $comanda->estado == 'en curso')
                         <form method="GET" action="{{ route('comanda-edit', ['id' => $comanda->id]) }}"
                             class="formShowComanda">
-                            <div class="card mb-3">
+                            <div class="card mb-3 cmdHover">
                                 <div class="card-header">
                                     <img class="iconIzquierda" src="{{ asset('images/mesa.png') }}" alt="">
                                     <strong>Mesa:</strong> {{ $comanda->mesa }}
@@ -571,7 +571,7 @@
                                         {{ $comanda->comentarios }}
                                     @endif
                                     <br>
-                                    <div class="row mb-1 mt-1 botonesComandas">
+                                    <div class="row mb-1 mt-1 botonesComandas botonesEnCurso">
                                         <div class="col-md-12 offset-md-3 mb-1 mt-1 justify-content-center">
                                             <button type="submit" class="btn btn-primary botonShowComanda"
                                                 name="showComanda" data-bs-toggle="modal" data-bs-target="#showComanda">
@@ -606,7 +606,7 @@
                 </div>
                 @foreach ($comandas as $comanda)
                     @if ($comanda->id != null && $comanda->estado == 'cerrada')
-                        <div class="card mb-3">
+                        <div class="card mb-3 cmdHover">
                             <div class="card-header">
                                 <img class="iconIzquierda" src="{{ asset('images/mesa.png') }}" alt="">
                                 <strong>Mesa:</strong> {{ $comanda->mesa }}

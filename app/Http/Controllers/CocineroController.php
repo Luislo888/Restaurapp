@@ -27,7 +27,6 @@ class CocineroController extends Controller
      */
     public function index()
     {
-
         $entrantes = Producto::all()->where('categoria', 'entrantes');
         $primeros = Producto::all()->where('categoria', 'primeros');
         $segundos = Producto::all()->where('categoria', 'segundos');
@@ -40,6 +39,7 @@ class CocineroController extends Controller
             $comandas =  Comanda::addSelect([
                 'id' => UsersComandas::select('id')
                     ->whereColumn('comanda_id', 'comandas.id')
+                // ->where('created_at', '>', $hoy)
                 //     , 
                 // 'rol' => User::select('rol')
                 //     ->whereColumn('users_comandas.user_id', 'users.id'),
@@ -51,8 +51,20 @@ class CocineroController extends Controller
                 'id' => UsersComandas::select('id')
                     ->whereColumn('comanda_id', 'comandas.id')
                     ->where('user_id', Auth::user()->id)
+                // ->where('created_at', '>=', $hoy)
                 // ->where('comandas.estado', 'abierta')
             ])->get();
+        }
+
+        // dd($comandas);
+        $hoy = date('Y-m-d');
+
+        $comandasHoy = [];
+
+        foreach ($comandas as $comanda) {
+            if ($comanda->created_at >= $hoy) {
+                array_push($comandasHoy, $comanda);
+            }
         }
 
 
@@ -64,7 +76,7 @@ class CocineroController extends Controller
 
 
         // dd($productos);
-        return view('cocinero', ['cocinero' => $cocinero, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'postres' => $postres, 'bebidas' => $bebidas, 'comandas' => $comandas, 'productos' => $productos]);
+        return view('cocinero', ['cocinero' => $cocinero, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'postres' => $postres, 'bebidas' => $bebidas, 'comandas' => $comandasHoy, 'productos' => $productos]);
 
         // return view('cocinero');
     }

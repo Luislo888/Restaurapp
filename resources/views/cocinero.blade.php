@@ -31,7 +31,7 @@
                     @if ($comanda->id != null && $comanda->estado == 'abierta')
                         <form method="GET" action="{{ route('comanda-edit', ['id' => $comanda->id]) }}"
                             class="formShowComanda">
-                            <div class="card mb-3">
+                            <div class="card mb-3 cmdHover">
                                 <div class="card-header">
                                     <strong><img src="{{ asset('images/mesa.png') }}" alt=""> Mesa:</strong>
                                     {{ $comanda->mesa }}
@@ -131,7 +131,7 @@
                     @if ($comanda->id != null && $comanda->estado == 'en curso')
                         <form method="GET" action="{{ route('comanda-edit', ['id' => $comanda->id]) }}"
                             class="formShowComanda">
-                            <div class="card mb-3">
+                            <div class="card mb-3 cmdHover">
                                 <div class="card-header">
                                     <h6 class="alert alert-danger notificacionEditarProducto mb-3" style="display: none"
                                         id="notificacionCrearError">Error al
@@ -296,7 +296,7 @@
                 </div>
                 @foreach ($comandas as $comanda)
                     @if ($comanda->id != null && $comanda->estado == 'cerrada')
-                        <div class="card mb-3">
+                        <div class="card mb-3 cmdHover">
                             <div class="card-header">
                                 <img class="iconIzquierda" src="{{ asset('images/mesa.png') }}" alt="">
                                 <strong>Mesa:</strong> {{ $comanda->mesa }}
@@ -377,7 +377,7 @@
                 </div>
                 @foreach ($comandas as $comanda)
                     @if ($comanda->id != null && $comanda->estado == 'cancelada')
-                        <div class="card mb-3">
+                        <div class="card mb-3 cmdHover">
                             <div class="card-header">
                                 <img class="iconIzquierda" src="{{ asset('images/mesa.png') }}" alt="">
                                 <strong>Mesa:</strong> {{ $comanda->mesa }}

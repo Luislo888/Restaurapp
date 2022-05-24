@@ -374,6 +374,10 @@ br{
     margin-left: initial!important;
 }
 
+.botonesEnCurso{
+    margin-left: 25px!important;
+}
+
 #tituloCancelarComanda{
     color: #df4957;
 }
@@ -388,7 +392,8 @@ br{
 }
 
 .botonCocinarComanda{
-    margin-left: 57px;
+    /* margin-left: 57px; */
+    margin-left: 32px;
 }
 
 .botonCocinarComanda, .botonCocinar{
@@ -437,6 +442,10 @@ br{
 .bannerContenido{
     background-color: rgb(117, 1, 1);
     border-radius: 0.25rem;
+}
+
+.cmdHover:hover{
+    box-shadow: 0px 0px 10px #636363!important;
 }
 
 
