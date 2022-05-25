@@ -456,7 +456,7 @@ br{
 }
 
 .cmdHover{
-    transition: transform .2s;
+    transition-delay: .1s, .3s;
 }
 
 .cmdHover:hover{
