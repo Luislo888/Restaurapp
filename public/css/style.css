@@ -58,13 +58,22 @@ h6{
     font-size: 24px;
 }
 
+
 button{
     height: 30px!important;
     padding-top: 0px!important;
     padding-bottom: 0px!important;
     font-size: 14px!important;
     margin-top: 10px!important;
+    transition: transform .2s;
 }
+
+button:hover{
+    box-shadow: 0px 0px 5px #636363!important;
+    transform: scale(1.03); 
+}
+
+
 
 .fa-circle-plus::before {
     content: "\f055";
@@ -77,6 +86,8 @@ button{
     font-size: 30px;
     color: green;
 }
+
+
 
 .fa-circle-minus::before {
     content: "\f056";
@@ -444,8 +455,18 @@ br{
     border-radius: 0.25rem;
 }
 
+.cmdHover{
+    transition: transform .2s;
+}
+
 .cmdHover:hover{
     box-shadow: 0px 0px 10px #636363!important;
+    transform: scale(1.03); 
+}
+
+.botonMasMenos:hover {
+    transform: scale(1)!important; 
+    box-shadow: none!important;
 }
 
 
