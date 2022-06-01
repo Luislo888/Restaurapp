@@ -303,6 +303,10 @@ button:hover{
     padding-bottom: 24px!important;
 }
 
+.botonOcultar:hover{
+    transform: rotate(-90deg);
+}
+
 #ocultarCrear{
     top: 200px;    
 }
@@ -598,3 +602,4 @@ br{
     }
 
 }
+
