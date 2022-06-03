@@ -52,9 +52,6 @@ $(function () {
             $.ajax({
                 url: urlProducto,
                 type: 'PATCH',
-                // data: {
-                //     "_token": $("meta[name='csrf-token']").attr("content")
-                // },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -109,13 +106,9 @@ $(function () {
 
                 url: urlEstado,
                 type: 'PATCH',
-                // data: {
-                //     "_token": $("meta[name='csrf-token']").attr("content")
-                // },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                // data: form.serialize(),
                 success: function (resultado) {
 
                     let audio = document.createElement("audio");
@@ -127,7 +120,6 @@ $(function () {
                     $('#spinFinalizarComanda').hide();
 
                     $('#notificacionCancelarSuccess').show();
-                    // $('#notificacionCancelarSuccess').delay(2000).fadeOut(2000);
 
                     $.ajax({
 
@@ -323,7 +315,6 @@ $(function () {
                 $('#finalizarComandaContent').append(formulario);
 
                 finalizarComanda(url, cardBorrar);
-                // alert('hola');
             });
 
         });
@@ -355,9 +346,6 @@ $(function () {
             $.ajax({
                 url: urlEstado,
                 type: 'PATCH',
-                // data: {
-                //     "_token": $("meta[name='csrf-token']").attr("content")
-                // },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -372,7 +360,6 @@ $(function () {
                     $('#spinCancelComanda').hide();
 
                     $('#notificacionCancelarSuccess').show();
-                    // $('#notificacionCancelarSuccess').delay(2000).fadeOut(2000);
 
                     $.ajax({
                         type: "GET",
@@ -687,13 +674,9 @@ $(function () {
 
                 url: url,
                 type: 'DELETE',
-                // data: {
-                //     "_token": $("meta[name='csrf-token']").attr("content")
-                // },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                // data: form.serialize(),
                 success: function (resultado) {
 
                     let audio = document.createElement("audio");
@@ -727,23 +710,11 @@ $(function () {
 
             $('#spinEditarComanda').show();
 
-            // $('input').each(function () {
-            //     if ($(this).val() == '') {
-            //         $(this).val(false);
-            //     }
-            // });
-
             $('option').each(function () {
                 if ($(this).val() != 0) {
                     $(this).removeAttr('disabled');
                 }
             });
-
-            // $('select').each(function () {
-            //     if ($(this).val() == 0) {
-            //         $(this).val(null);
-            //     }
-            // });
 
             var form = $(this);
             var url = form.attr('action');
@@ -984,14 +955,6 @@ $(function () {
                         }
                     }
 
-
-                    // if (obj.comanda.estado == 'en curso') {
-                    //     estado = 'bodyComandasEnCurso'
-                    // } else {
-                    //     estado = 'bodyComandasAbiertas'
-                    // }
-
-
                     let formulario = `
                         <div class="col-md-auto" id="crearComanda">
                             <div class="card cardCrear cardEditar" id="cardCrear">
@@ -1174,24 +1137,10 @@ $(function () {
                             </div>
                         </div>`;
 
-                    // $('form').each(function () {
-
-                    //     if ($(this).attr('action') == `http://127.0.0.1:8000/comanda/${obj.comanda.id}`) {
-
-                    //         $(this).fadeOut('slow').promise().done(function () {
-                    //             $(this).replaceWith(formulario);
-                    //             // $(logo).fadeIn('slow');
-                    //             quitarCategoriasProductosVacios();
-                    //         });
-                    //     }
-                    // });
                     $('#showComandaContent').append(formulario);
                     agregarQuitarProductos();
-                    // formatearFechaHora();
                     animacionBotonMasMenos();
-
                     editarComanda();
-
                 },
                 error: function (xhr, status) {
 
@@ -1204,23 +1153,6 @@ $(function () {
                     $('#spinEditarComanda').hide();
                 },
             });
-
-            // $('option').each(function () {
-
-            //     if ($(this).is(':selected') && $(this).val() != 0) {
-
-            //         let valor = $(this).val();
-
-            //         $('option').each(function () {
-
-            //             if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
-
-            //                 $(this).attr('disabled', 'disabled');
-            //             }
-            //         });
-            //     }
-            // });
-
         });
     };
 
@@ -1238,13 +1170,6 @@ $(function () {
 
             e.preventDefault();
 
-            // $('input').each(function () {
-            //     if ($(this).val() == '') {
-            //         $(this).val(false);
-            //     }
-            // });
-
-
             $('option').each(function () {
                 if ($(this).val() != 0) {
                     $(this).removeAttr('disabled');
@@ -1259,14 +1184,10 @@ $(function () {
 
             var form = $(this);
             var url = form.attr('action');
-            // alert(url);
 
             $.ajax({
                 type: "PATCH",
                 url: url,
-                // data: {
-                //     "_token": $("meta[name='csrf-token']").attr("content")
-                // },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -1324,23 +1245,7 @@ $(function () {
                         comentarios = `<strong><i class='fa-solid fa-comment'></i> Comentarios: </strong> ${obj.comanda.comentarios} <br>`;
                     }
 
-
                     for (let i = 0; i < obj.productosCompleto.length; i++) {
-
-                        // if (i == 0) {
-                        //     switch (obj.productosCompleto[i].categoria) {
-                        //         case 'entrantes': entrantes += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                        //             break;
-                        //         case 'primeros': primeros += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                        //             break;
-                        //         case 'segundos': segundos += '<strong>Segundos:</strong><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                        //             break;
-                        //         case 'bebidas': bebidas += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                        //             break;
-                        //         case 'postres': postres += '<br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i];
-                        //             break;
-                        //     }
-                        // } else {
 
                         switch (obj.productosCompleto[i].categoria) {
                             case 'entrantes': entrantes += '<div><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i] + '</div>';
@@ -1354,16 +1259,13 @@ $(function () {
                             case 'bebidas': bebidas += '<div><br>' + obj.productosCompleto[i].nombre + ' x ' + obj.cantidad[i] + '</div>';
                                 break;
                         }
-                        // }
                     }
-
 
                     if (obj.comanda.estado == 'en curso') {
                         estado = 'bodyComandasEnCurso'
                     } else {
                         estado = 'bodyComandasAbiertas'
                     }
-
 
                     let formulario = `
                     <form method="GET" action="http://127.0.0.1:8000/comanda/${obj.comanda.id}" class="formShowComanda" >
@@ -1409,32 +1311,17 @@ $(function () {
                         </div>
                     </form>`;
 
-                    // formShowComanda();
-
                     $('form').each(function () {
 
                         if ($(this).attr('action') == `http://127.0.0.1:8000/comanda/${obj.comanda.id}` && $(this).attr('method') == 'GET') {
 
-                            // $(this).fadeOut('slow').promise().done(function () {
-                            //     $(this).replaceWith(formulario);
-                            //     // $(logo).fadeIn('slow');
-                            // });
-
-                            // $(this).remove();
-
                             $(this).replaceWith(formulario);
                             quitarCategoriasProductosVacios();
-
-                            // $('#comandasAbiertas').append(formulario);
-                            // formShowComanda();
-
                         }
                     });
 
                     showCancelarComanda();
                     formShowComanda();
-                    // cancelarComanda();
-
                 },
                 error: function (xhr, status) {
 
@@ -1457,8 +1344,6 @@ $(function () {
                     $('option').each(function () {
 
                         if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
-
-                            // $(this).attr('disabled', 'disabled');
                         }
                     });
                 }
@@ -1481,24 +1366,6 @@ $(function () {
         $('#spinCrearComanda').show();
 
         e.preventDefault();
-
-        // $('input').each(function () {
-        //     if ($(this).val() == '') {
-        //         $(this).val(false);
-        //     }
-        // });
-
-        // $('option').each(function () {
-        //     if ($(this).val() != 0) {
-        //         $(this).removeAttr('disabled');
-        //     }
-        // });
-
-        // $('select').each(function () {
-        //     if ($(this).val() == 0) {
-        //         $(this).val(null);
-        //     }
-        // });
 
         var form = $(this);
         var url = form.attr('action');
@@ -1529,8 +1396,9 @@ $(function () {
             $('#spinCrearComanda').hide();
             $('#notificacionCrearError').show();
             $('#notificacionCrearError').delay(2000).fadeOut(2000);
+
         } else {
-            // form.unbind('submit').submit();
+
             $.ajax({
                 type: "POST",
                 url: url,
@@ -1646,34 +1514,7 @@ $(function () {
                     $('.notificacionCrearComanda').delay(2000).fadeOut(2000);
                     $('#spinCrearComanda').hide();
                 }
-                // ,
-                // done: function (data) {
-                //     formShowComanda();
-                // },
-                // complete: function (data) {
-                //     formShowComanda();
-                // }
-
             });
-
-            // formShowComanda();
-
-            // $('option').each(function () {
-
-            //     if ($(this).is(':selected') && $(this).val() != 0) {
-
-            //         let valor = $(this).val();
-
-            //         $('option').each(function () {
-
-            //             if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
-
-            //                 // $(this).attr('disabled', 'disabled');
-            //             }
-            //         });
-            //     }
-            // });
-            // formShowComanda();
         }
     });
 
@@ -1685,7 +1526,6 @@ $(function () {
 
     $('.btnResetComanda').on('click', function (e) {
         $('option').each(function () {
-            // $(this).attr('disabled', false);
         });
     });
 
@@ -1775,12 +1615,6 @@ $(function () {
                     let valor = $(this).val();
 
                     $('option').each(function () {
-
-                        // if ($(this).val() == valor && !$(this).attr('disabled', 'disabled')) {
-
-                        //     // $(this).attr('disabled', 'disabled');
-                        //     // $(this).attr('selected', 'selected');
-                        // }
                     });
                 }
             });
@@ -1788,40 +1622,6 @@ $(function () {
     }
 
     agregarQuitarProductos();
-
-    // function cambiar(borrado = null) {
-
-    //     var valorAnterior;
-    //     $("select").not('#registrarRol').on('focus', function () {
-    //         valorAnterior = this.value;
-    //     }).on('change', function () {
-
-    //         let valor = $(this).val();
-
-    //         $('option').each(function () {
-    //             if ($(this).val() == valor) {
-    //                 // $(this).attr('disabled', 'disabled');
-    //                 // $(this).attr("selected", "selected");
-    //             }
-
-    //             if ($(this).val() == valorAnterior) {
-    //                 $(this).removeAttr('disabled');
-    //             }
-    //             // if (borrado != null) {
-    //             //     if ($(this).val() == borrado) {
-    //             //         $(this).removeAttr('disabled');
-    //             //     }
-    //             // }
-
-    //         });
-    //         valorAnterior = this.value;
-    //     });
-    // }
-
-    // $("select").on('focus', function () {
-    //     cambiar();
-
-    // });
 
     // FIN BOTONES AGREGAR/QUITAR PRODUCTOS
 
@@ -1832,7 +1632,6 @@ $(function () {
     let estadoBotonCrear = true;
 
     $('#ocultarCrear').on('click', function () {
-
 
         if (estadoBotonCrear == true) {
 
@@ -1856,7 +1655,6 @@ $(function () {
 
     $('#ocultarAbiertas').on('click', function () {
 
-
         if (estadoBotonAbiertas == true) {
 
             $('#comandasAbiertas').toggle(500);
@@ -1878,7 +1676,6 @@ $(function () {
     let estadoBotonEnCurso = true;
 
     $('#ocultarEnCurso').on('click', function () {
-
 
         if (estadoBotonEnCurso == true) {
 
@@ -1972,7 +1769,6 @@ $(function () {
 
     $('#ocultarCerradasCocinero').on('click', function () {
 
-
         if (estadoBotonCerradasCocinero == true) {
 
             $('#comandasCerradas').toggle(500);
@@ -2000,14 +1796,12 @@ $(function () {
             $('#comandasCanceladas').toggle(500);
             $('#ocultarCanceladasCocinero').animate({
                 right: '-27px'
-
             }, 500);
             estadoBotonCrearCocinero = false;
         } else {
             $('#comandasCanceladas').toggle(500);
             $('#ocultarCanceladasCocinero').animate({
                 right: '-10px'
-
             }, 500);
             estadoBotonCrearCocinero = true;
         }
@@ -2104,12 +1898,12 @@ $(function () {
 
     // FIN ANIMACIÓN QUITAR NOTIFICACIÓN COMANDA CREADA
 
+
     // INICIO QUITAR CATEGORIAS PRODUCTOS VACÍOS
 
     function quitarCategoriasProductosVacios() {
 
         $('.categoriaProducto').each(function () {
-            // alert($(this).next().prop('nodeName'));
 
             if ($(this).next().is('BR')) {
                 $(this).remove();
@@ -2122,7 +1916,6 @@ $(function () {
                 }
             });
 
-
             $('br').each(function () {
                 if ($(this).prev().is('div') || $(this).parent().is('div')) {
                 } else {
@@ -2130,28 +1923,15 @@ $(function () {
                     $(this).remove();
                 }
             });
-            if ($(this).prev().is('BR') && $(this).prev().prev().not('div')) {
-                // $(this).prev().remove();
-                // $(this).next().remove();
-            }
-            $('.bodyComanda').each(function () {
-                if ($(this).children().first().is('strong')) {
-                    // $(this).remove();
-                }
-            });
         });
 
     }
-
-
-    // }
 
     quitarCategoriasProductosVacios();
 
     // FIN QUITAR CATEGORIAS PRODUCTOS VACÍOS
 
     formShowComanda();
-
 
     $('#botonCrearComanda').on('click', function () {
         $('option').each(function () {
@@ -2202,4 +1982,3 @@ $(function () {
     // FIN COOKIES
 
 });
-

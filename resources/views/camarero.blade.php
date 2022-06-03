@@ -19,7 +19,6 @@
 
             {{-- ----------------------------------- INICIO CREAR COMANDA --------------------------------- --}}
 
-            {{-- <div id="anchorCrearComanda"></div> --}}
             <div class="col-md-auto" id="crearComanda">
                 <div class="card cardCrear" id="cardCrear">
                     <div class="card-header">
@@ -32,17 +31,11 @@
                             <h6 class="alert alert-success notificacionSucces " id="notificacionCrearSuccess">
                                 {{ session('success') }}</h6>
                         @endif
-                        {{-- @if (session('error'))
-                            <h6 class="alert alert-success notificacionSucces " id="notificacionCrearSuccess">
-                                {{ session('error') }}asdf</h6>
-                        @endif --}}
+
                         @error(session('error'))
                             <h6 class="alert alert-danger mb-3">{{ $message }}</h6>
                         @enderror
-                        {{-- @if ($errors->any())
-                            <h4>{{ $errors->first() }}</h4>
-                        @endif --}}
-                        {{-- <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6> --}}
+
                         <h6 class="alert alert-success notificacionCrearComanda" id="notificacionCrearSuccess"></h6>
                         <h6 class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionCrearError">Error al
                             rellenar la comanda
@@ -78,7 +71,6 @@
 
                                 <label for="entrantes" id="labelEntrantes"
                                     class="col-md-3 col-form-label text-md-start"><strong>
-                                        {{-- <i class="fa-solid fa-bowl-food"></i> --}}
                                         <img class="iconIzquierda" src="{{ asset('images/entrantes.png') }}" alt="">
 
                                         {{ __('Entrantes ') }}</strong></label>
@@ -119,7 +111,6 @@
 
                             <div class="row mb-3">
                                 <label for="primeros" class="col-md-3 col-form-label text-md-start"><strong>
-                                        {{-- <i                                            class="fa-solid fa-seedling"></i> --}}
                                         <img class="iconIzquierda" src="{{ asset('images/primeros.png') }}" alt="">
                                         {{ __('Primeros ') }}</strong>
                                 </label>
@@ -315,7 +306,6 @@
                                 </div>
                             </div>
 
-
                             <div class="row mb-0 justify-content-center">
                                 <div class="col-md-12 offset-md-6">
                                     <button type="submit" class="btn btn-primary" id="botonCrearComanda">
@@ -328,7 +318,6 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -340,7 +329,6 @@
 
             {{-- ----------------------------------- INICIO COMANDAS ABIERTAS --------------------------------- --}}
 
-            {{-- <div id="anchorComandasAbiertas"></div> --}}
             <div class="col-md-auto" id="comandasAbiertas">
                 <div class="card">
                     <div class="card-header text-warning titulosComandas">
@@ -411,10 +399,7 @@
                                         @endif
                                     @endforeach
                                     <br>
-                                    {{-- <strong class="categoriaProducto"><i class="fa-solid fa-comment"></i>
-                                        Comentarios:</strong>
-                                    <div><br>{{ $comanda->comentarios }}</div>
-                                    <br> --}}
+
                                     @if ($comanda->comentarios != null)
                                         <strong class="comentarioProducto"><i class="fa-solid fa-comment"></i>
                                             Comentarios:</strong>
@@ -449,7 +434,6 @@
 
             {{-- ----------------------------------- INICIO COMANDAS EN CURSO --------------------------------- --}}
 
-            {{-- <div id="anchorComandasCerradas"></div> --}}
             <div class="col-md-auto" id="comandasEnCurso">
                 <div class="card">
                     <div class="card-header text-warning titulosComandas">
@@ -597,7 +581,6 @@
 
             {{-- ----------------------------------- INICIO COMANDAS CERRADAS --------------------------------- --}}
 
-            {{-- <div id="anchorComandasCerradas"></div> --}}
             <div class="col-md-auto" id="comandasCerradas">
                 <div class="card">
                     <div class="card-header text-warning titulosComandas">
@@ -677,10 +660,15 @@
 
         </div>
     </div>
+
+    {{-- INICIO BOTONES LATERALES --}}
+
     <button id="ocultarCrear" type="button" class="btn alert alert-primary botonOcultar sinFocus">Crear</button>
     <button id="ocultarAbiertas" type="button" class="btn alert alert-warning botonOcultar sinFocus">Abiertas</button>
     <button id="ocultarEnCurso" type="button" class="btn alert alert-danger botonOcultar sinFocus">En Curso</button>
     <button id="ocultarCerradas" type="button" class="btn alert alert-success botonOcultar sinFocus">Cerradas</button>
+
+    {{-- FIN BOTONES LATERALES --}}
 
 
     <!-- INICIO MODAL EDITAR COMANDA -->

@@ -3,16 +3,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Ath\RegisterController;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CamareroController;
 use App\Http\Controllers\CocineroController;
 
-use App\Models\Comanda;
-use App\Http\Controllers\ComandaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,10 +19,6 @@ use App\Http\Controllers\ComandaController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('/home');
-// });
 
 Auth::routes();
 
@@ -45,6 +37,3 @@ Route::patch('/comanda/{id}/{estado}', [App\Http\Controllers\ComandaController::
 Route::patch('/comanda/{id}/{comandasProductosID}/{estadoProducto}', [App\Http\Controllers\ComandaController::class, 'cambiarEstadoProducto'])->name('comanda-update');
 Route::delete('/comanda/{id}', [App\Http\Controllers\ComandaController::class, 'cancelar'])->name('comanda-update');
 Route::post('/comanda/{id}', [App\Http\Controllers\ComandaController::class, 'update'])->name('comanda-update');
-
-
-// Route::resource('/comanda', ComandaController::class);

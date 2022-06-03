@@ -1,21 +1,6 @@
-{{-- @extends('layouts.app') --}}
 @extends('camarero')
 
-{{-- @section('cabecera')
-    <h6 class="tituloRol">Editar Comanda</h6>
-    <div class="collapse navbar-collapse text-center justify-content-center comandasNavTabs" id="navbarSupportedContent">
-        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-            <button id="botonCrear" type="button" class="btn alert alert-primary">Crear</button>
-            <button id="botonAbiertas" type="button" class="btn alert alert-warning">Abiertas</button>
-            <button id="botonCurso" type="button" class="btn alert alert-danger">EnCurso</button>
-            <button id="botonCerradas" type="button" class="btn alert alert-success">Cerradas</button>
-
-        </div>
-    </div>
-@endsection --}}
-
 @section('asdf')
-    {{-- @if (isset($_GET['editarComanda'])) --}}
     <div class="container marginTopBody">
         <div class="row justify-content-center miDiv">
 
@@ -27,10 +12,6 @@
                     </div>
 
                     <div class="card-body" id="bodyCrearComanda">
-                        {{-- @if (session('success'))
-                        <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6>
-                    @endif
-                    <h6 class="alert alert-success notificacionSucces">{{ session('success') }}</h6> --}}
                         <h6 class="alert alert-success notificacionCrearComanda" id="notificacionEditarSuccess">
                             {{ session('success') }}</h6>
                         <h6 class="alert alert-danger notificacionCrearComanda mb-3" id="notificacionEditarError">
@@ -121,7 +102,6 @@
                                 </div>
                             </div>
 
-
                             @foreach ($productos as $producto)
                                 @if ($producto->categoria == 'entrantes' && $producto->comanda_id == $comanda->id)
                                     <div class="row mb-3" id="rowEntrantes">
@@ -197,7 +177,6 @@
                                 </div>
                             </div>
 
-
                             @foreach ($productos as $producto)
                                 @if ($producto->categoria == 'primeros' && $producto->comanda_id == $comanda->id)
                                     <div class="row mb-3" id="row">
@@ -262,7 +241,6 @@
                                     <input id="" min="1" type="number" class="form-control" name="cantidad[]">
                                 </div>
                             </div>
-
 
                             @foreach ($productos as $producto)
                                 @if ($producto->categoria == 'segundos' && $producto->comanda_id == $comanda->id)
@@ -330,7 +308,6 @@
                                 </div>
                             </div>
 
-
                             @foreach ($productos as $producto)
                                 @if ($producto->categoria == 'postres' && $producto->comanda_id == $comanda->id)
                                     <div class="row mb-3" id="row">
@@ -396,7 +373,6 @@
                                     <input id="" min="1" type="number" class="form-control" name="cantidad[]">
                                 </div>
                             </div>
-
 
                             @foreach ($productos as $producto)
                                 @if ($producto->categoria == 'bebidas' && $producto->comanda_id == $comanda->id)
@@ -475,5 +451,4 @@
 
         </div>
     </div>
-    {{-- @endif --}}
 @endsection

@@ -1,6 +1,5 @@
 
 body{
-    /* font-size: 15px; */
     color: #3b3b3b;
 }
 
@@ -11,13 +10,11 @@ body{
 img{    
     width: 18.5px;
     margin-bottom: 3px;
-    /* opacity: 0.65; */
     opacity: 0.6;
 }
 
 strong{
     font-weight: 600;
-    /* color: rgb(45, 45, 45); */
     color: rgb(78 77 77);
 }
 
@@ -38,9 +35,7 @@ h6{
 }
 
 .card{
-    /* max-width: 357px; */
     min-width: 256px;
-
 }
 
 .btn-primary{
@@ -58,7 +53,6 @@ h6{
     font-size: 24px;
 }
 
-
 button{
     height: 30px!important;
     padding-top: 0px!important;
@@ -73,8 +67,6 @@ button:hover{
     transform: scale(1.03); 
 }
 
-
-
 .fa-circle-plus::before {
     content: "\f055";
     font-size: 25px;
@@ -86,8 +78,6 @@ button:hover{
     font-size: 30px;
     color: green;
 }
-
-
 
 .fa-circle-minus::before {
     content: "\f056";
@@ -113,8 +103,6 @@ button:hover{
     margin-left: 10px;
 }
 
-/* CUSTOM IDS AND CLASSES ----------------------------------------------------------------------------- */
-
 .miDiv {
     margin-left: -111px!important;
     margin-right: -106px!important;
@@ -125,7 +113,6 @@ button:hover{
     text-align: center;
     margin-top: 10px;
 }
-
 
 .tituloRol{
     margin-right: 20px;
@@ -254,8 +241,6 @@ button:hover{
     margin-left: -17px!important;
 }
 
-/* LOGIN */
-
 #tituloLogin{
     margin-right: 160px;
     margin-top: 0px;
@@ -267,8 +252,6 @@ button:hover{
 #cardLogin{
     max-width: initial;
 }
-
-/* ADMINISTRADOR */
 
 #tituloAdministrador{
     margin-right: 160px;
@@ -303,6 +286,10 @@ button:hover{
     padding-bottom: 24px!important;
 }
 
+.botonOcultar:hover{
+    transform: rotate(-90deg);
+}
+
 #ocultarCrear{
     top: 200px;    
 }
@@ -321,8 +308,6 @@ button:hover{
     top: 451px;
     right: -21px;
 }
-
-
 
 #ocultarAbiertasCocinero{
     top: 189px;
@@ -398,12 +383,10 @@ br{
 }
 
 .botonesCancelarComandas{
-    /* margin-left: 50px; */
     text-align: center;
 }
 
 .botonCocinarComanda{
-    /* margin-left: 57px; */
     margin-left: 32px;
 }
 
@@ -430,7 +413,6 @@ br{
 }
 
 .tachado{
-    /* color: red!important; */
     text-decoration:line-through!important;
 }
 
@@ -468,7 +450,6 @@ br{
     transform: scale(1)!important; 
     box-shadow: none!important;
 }
-
 
 /* RESPONSIVE */
 
@@ -563,9 +544,8 @@ br{
     
     .botonMas{
         margin-left: 241px;
-    /* margin-bottom: z; */
-    width: 10px;
-    margin-top: 4px!important;
+        width: 10px;
+        margin-top: 4px!important;
     }
     
     .botonMenos{
@@ -596,5 +576,4 @@ br{
     .modal.show .modal-dialog {
         margin-bottom: 35px!important;
     }
-
 }

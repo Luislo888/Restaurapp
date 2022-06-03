@@ -8,7 +8,6 @@
             <button id="botonCurso" type="button" class="btn alert alert-danger">En Curso</button>
             <button id="botonCerradas" type="button" class="btn alert alert-success">Cerradas</button>
             <button id="botonCanceladas" type="button" class="btn alert alert-secondary">Canceladas</button>
-
         </div>
     </div>
 @endsection
@@ -19,7 +18,6 @@
 
             {{-- ----------------------------------- INICIO COMANDAS ABIERTAS --------------------------------- --}}
 
-            {{-- <div id="anchorComandasAbiertas"></div> --}}
             <div class="col-md-auto" id="comandasAbiertas">
                 <div class="card">
                     <div class="card-header text-warning titulosComandas">
@@ -120,7 +118,6 @@
 
             {{-- ----------------------------------- INICIO COMANDAS EN CURSO --------------------------------- --}}
 
-            {{-- <div id="anchorComandasCerradas"></div> --}}
             <div class="col-md-auto" id="comandasEnCurso">
                 <div class="card">
                     <div class="card-header text-warning titulosComandas">
@@ -368,7 +365,6 @@
 
             {{-- ----------------------------------- INICIO COMANDAS Canceladas --------------------------------- --}}
 
-            {{-- <div id="anchorComandasCerradas"></div> --}}
             <div class="col-md-auto" id="comandasCanceladas">
                 <div class="card">
                     <div class="card-header titulosComandas">
@@ -448,6 +444,9 @@
 
         </div>
     </div>
+
+    {{-- INICIO BOTONES LATERALES --}}
+
     <button id="ocultarAbiertasCocinero" type="button"
         class="btn alert alert-warning botonOcultar sinFocus">Abiertas</button>
     <button id="ocultarEnCursoCocinero" type="button" class="btn alert alert-danger botonOcultar sinFocus">En
@@ -457,17 +456,7 @@
     <button id="ocultarCanceladasCocinero" type="button"
         class="btn alert alert-secondary botonOcultar sinFocus">Canceladas</button>
 
-
-    {{-- <!-- INICIO MODAL EDITAR COMANDA -->
-
-    <div class="modal fade" id="showComanda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" id="showComandaContent">
-            </div>
-        </div>
-    </div>
-
-    <!-- FIN MODAL EDITAR COMANDA --> --}}
+    {{-- FIN BOTONES LATERALES --}}
 
 
     <!-- INICIO MODAL CANCELAR COMANDA -->

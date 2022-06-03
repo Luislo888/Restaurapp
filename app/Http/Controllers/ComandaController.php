@@ -7,18 +7,13 @@ use App\Models\Producto;
 use App\Models\UsersComandas;
 use App\Models\ComandasProductos;
 use App\Http\Controllers\UsersComandasController;
-use App\Http\Controllers\ProdutoController;
-use App\Http\Controllers\CamareroController;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ComandaController extends Controller
 {
-
     public function cantidadNueva($cantidad)
     {
-
         $cantidadNueva = array();
 
         for ($i = 0; $i < count($cantidad); $i++) {
@@ -26,27 +21,7 @@ class ComandaController extends Controller
                 $cantidadNueva[] = $cantidad[$i];
             }
         }
-
         return $cantidadNueva;
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -57,8 +32,6 @@ class ComandaController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-
         try {
             $comanda = new Comanda();
 
@@ -81,27 +54,14 @@ class ComandaController extends Controller
             $comandaCompleta = array();
             $comandaCompleta['comanda'] = $comanda;
             $comandaCompleta['productosCompleto'] = $productosCompleto;
-            // $comandaCompleta['comanda_producto'] = $comanda_producto;
             $comandaCompleta['cantidad'] = $cantidad;
 
-            // return redirect('/camarero')->with('success', 'Comanda creada correctamente');
             echo json_encode($comandaCompleta);
         } catch (\Throwable $th) {
-            //throw $th;
+
             $comanda::rollBack();
             return redirect('/camarero')->withErrors(['msg' => 'Se debe rellenar correctamente la comanda']);
         }
-
-
-        // echo json_encode($comandaCompleta);
-        // ->withErrors(['msg' => 'The Message'])
-        // return redirect('/camarero')->with('error', 'Mal');
-        // if($error){
-
-        // }
-        // return redirect('/camarero')->with('success', 'Comanda creada correctamente')->withErrors(['msg' => 'The Message']);
-        // return redirect('/camarero')->withErrors(['msg' => 'The Message']);
-        // return Camarero::back()->withErrors(['msg' => 'The Message']);
     }
 
     /**
@@ -112,22 +72,15 @@ class ComandaController extends Controller
      */
     public function show($id)
     {
-
-        // dd($entrantes);
         $primeros = Producto::all()->where('categoria', 'primeros');
         $entrantes = Producto::all()->where('categoria', 'entrantes');
         $segundos = Producto::all()->where('categoria', 'segundos');
         $postres = Producto::all()->where('categoria', 'postres');
         $bebidas = Producto::all()->where('categoria', 'bebidas');
 
-
         $comanda = Comanda::find($id);
-        // dd($comanda);
-        // La comanda buscada por ID
 
         $comandasProductos = ComandasProductos::where('comanda_id', $comanda->id)->get();
-        // dd($comandasProductos);
-        // Los productos de la comanda en cuestión
 
         $camarero = Auth::user()->name;
 
@@ -135,31 +88,20 @@ class ComandaController extends Controller
             $comandas =  Comanda::addSelect([
                 'id' => UsersComandas::select('id')
                     ->whereColumn('comanda_id', 'comandas.id')
-                // ->where('user_id', Auth::user()->id)
-                // ->where('comandas.estado', 'abierta')
             ])->get();
         } else {
             $comandas =  Comanda::addSelect([
                 'id' => UsersComandas::select('id')
                     ->whereColumn('comanda_id', 'comandas.id')
                     ->where('user_id', Auth::user()->id)
-                // ->where('comandas.estado', 'abierta')
             ])->get();
         }
-
-        // dd($comandas);
-        // Todas las comandas del usuario, usado para la vista camarero
 
         $productos = ComandasProductos::addSelect([
             'id' => Producto::select('id')
                 ->whereColumn('productos.id', 'comandas_productos.producto_id')
         ])->join('productos', 'comandas_productos.producto_id', '=', 'productos.id')
             ->select('productos.*', 'comandas_productos.*')->get();
-
-        // dd($productos);
-        // Todos las comandasProductos(comanda_id, producto_id, cantidad) uniéndole los productos(nombre, categoria)
-
-        // return view('comanda', ['comanda' => $comanda, 'comandas' => $comandas, 'todosProductos' => $productos, 'productos' => $productos, 'comandasProductos' => $comandasProductos, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'postres' => $postres, 'bebidas' => $bebidas]);
 
         $productosComanda = array();
 
@@ -171,9 +113,6 @@ class ComandaController extends Controller
         }
 
         $comandaCompleta = array();
-
-        // $productosCompleto = Producto::whereIn('id', $comandasProductos)->get();
-        // $comandaCompleta['productosCompleto'] = $productosCompleto;
 
         $comandaCompleta['comanda'] = $comanda;
         $comandaCompleta['comandas'] = $comandas;
@@ -187,23 +126,7 @@ class ComandaController extends Controller
         $comandaCompleta['productosComanda'] = $productosComanda;
         $comandaCompleta['productosCompleto'] = $productos;
 
-        // dd($comandaCompleta);
-
         echo json_encode($comandaCompleta);
-
-
-        // return view('comanda', ['comanda' => $comanda, 'comandas' => $comandas, 'productos' => $productos, 'comandasProductos' => $comandasProductos, 'entrantes' => $entrantes, 'primeros' => $primeros, 'segundos' => $segundos, 'postres' => $postres, 'bebidas' => $bebidas]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Comanda  $comanda
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comanda $comanda)
-    {
-        //
     }
 
     /**
@@ -215,8 +138,6 @@ class ComandaController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-
         $comanda = Comanda::find($id);
 
         $comanda->mesa = $request->input('mesa');
@@ -231,7 +152,6 @@ class ComandaController extends Controller
         $comanda_producto = new ComandasProductosController();
         $comanda_producto->update($comanda->id, $productos, $cantidad);
 
-
         $comandaCompleta = array();
         $productosCompleto = Producto::whereIn('id', $productos)->get();
         $comandaCompleta['comanda'] = $comanda;
@@ -239,19 +159,6 @@ class ComandaController extends Controller
         $comandaCompleta['cantidad'] = $cantidad;
 
         echo json_encode($comandaCompleta);
-
-        // return redirect('/camarero')->with('success', 'Comanda actualizada');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Comanda  $comanda
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Comanda $comanda)
-    {
-        //
     }
 
     public function cancelar($id)
