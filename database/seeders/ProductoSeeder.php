@@ -78,7 +78,7 @@ class ProductoSeeder extends Seeder
             'precio' => '5.75',
             'categoria' => 'primeros',
         ]);
-
+        // asdf
         $producto11 = Producto::create([
             'nombre' => 'Ensalada Caprese',
             'precio' => '6.35',
