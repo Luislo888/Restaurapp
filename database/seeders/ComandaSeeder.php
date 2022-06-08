@@ -63,34 +63,22 @@ class ComandaSeeder extends Seeder
             'estado' => 'abierta',
         ]);
         // COMANDA ID 9 -----------------------------------
-        // $comanda = Comanda::create([
-        //     'mesa' => 3,
-        //     'comentarios' => 'Sin pepinillos',
-        //     'estado' => 'abierta',
-        // ]);
-        // COMANDA ID 10 -----------------------------------
         $comanda = Comanda::create([
             'mesa' => 3,
-            'comentarios' => 'Con tomate',
+            'comentarios' => 'Sin roquefort ',
+            'estado' => 'cancelada',
+        ]);
+        // COMANDA ID 10 -----------------------------------
+        $comanda = Comanda::create([
+            'mesa' => 1,
+            'comentarios' => 'Sin albahaca',
             'estado' => 'cancelada',
         ]);
         // COMANDA ID 11 -----------------------------------
         $comanda = Comanda::create([
-            'mesa' => 1,
-            'comentarios' => 'Con tomate',
-            'estado' => 'cancelada',
-        ]);
-        // COMANDA ID 12 -----------------------------------
-        $comanda = Comanda::create([
             'mesa' => 6,
-            'comentarios' => 'Con tomate',
+            // 'comentarios' => 'Con tomate',
             'estado' => 'cancelada',
         ]);
-        // COMANDA ID 13 -----------------------------------
-        // $comanda = Comanda::create([
-        //     'mesa' => 3,
-        //     'comentarios' => 'Con tomate',
-        //     'estado' => 'abierta',
-        // ]);
     }
 }

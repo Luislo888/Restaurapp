@@ -122,11 +122,6 @@ class ComandasProductosSeeder extends Seeder
             'producto_id' => 6,
             'cantidad' => 2,
         ]);
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 2,
-        //     'producto_id' => 10,
-        //     'cantidad' => 1,
-        // ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 2,
             'producto_id' => 3,
@@ -179,11 +174,6 @@ class ComandasProductosSeeder extends Seeder
             'estado_producto' => true,
         ]);
         // COMANDA ID 5 -----------------------------------
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 5,
-        //     'producto_id' => 19,
-        //     'cantidad' => 2,
-        // ]);
         $comanda = ComandasProductos::create([
             'comanda_id' => 5,
             'producto_id' => 16,
@@ -293,31 +283,31 @@ class ComandasProductosSeeder extends Seeder
             'cantidad' => 1,
         ]);
         // COMANDA ID 9 -----------------------------------
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 9,
-        //     'producto_id' => 2,
-        //     'cantidad' => 1,
-        // ]);
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 9,
-        //     'producto_id' => 6,
-        //     'cantidad' => 1,
-        // ]);
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 9,
-        //     'producto_id' => 9,
-        //     'cantidad' => 1,
-        // ]);
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 9,
-        //     'producto_id' => 10,
-        //     'cantidad' => 1,
-        // ]);
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 9,
-        //     'producto_id' => 1,
-        //     'cantidad' => 1,
-        // ]);
+        $comanda = ComandasProductos::create([
+            'comanda_id' => 9,
+            'producto_id' => 2,
+            'cantidad' => 1,
+        ]);
+        $comanda = ComandasProductos::create([
+            'comanda_id' => 9,
+            'producto_id' => 6,
+            'cantidad' => 1,
+        ]);
+        $comanda = ComandasProductos::create([
+            'comanda_id' => 9,
+            'producto_id' => 9,
+            'cantidad' => 1,
+        ]);
+        $comanda = ComandasProductos::create([
+            'comanda_id' => 9,
+            'producto_id' => 10,
+            'cantidad' => 1,
+        ]);
+        $comanda = ComandasProductos::create([
+            'comanda_id' => 9,
+            'producto_id' => 1,
+            'cantidad' => 1,
+        ]);
         // COMANDA ID 10 -----------------------------------
         $comanda = ComandasProductos::create([
             'comanda_id' => 10,
@@ -365,47 +355,5 @@ class ComandasProductosSeeder extends Seeder
             'producto_id' => 11,
             'cantidad' => 1,
         ]);
-        // COMANDA ID 12 -----------------------------------
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 12,
-        //     'producto_id' => 2,
-        //     'cantidad' => 1,
-        // ]);
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 12,
-        //     'producto_id' => 10,
-        //     'cantidad' => 1,
-        // ]);
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 12,
-        //     'producto_id' => 10,
-        //     'cantidad' => 1,
-        // ]);
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 12,
-        //     'producto_id' => 11,
-        //     'cantidad' => 1,
-        // ]);
-        // COMANDA ID 13 -----------------------------------
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 13,
-        //     'producto_id' => 1,
-        //     'cantidad' => 1,
-        // ]);
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 13,
-        //     'producto_id' => 10,
-        //     'cantidad' => 1,
-        // ]);
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 13,
-        //     'producto_id' => 10,
-        //     'cantidad' => 1,
-        // ]);
-        // $comanda = ComandasProductos::create([
-        //     'comanda_id' => 13,
-        //     'producto_id' => 11,
-        //     'cantidad' => 1,
-        // ]);
     }
 }
