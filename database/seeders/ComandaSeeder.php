@@ -17,78 +17,80 @@ class ComandaSeeder extends Seeder
         // COMANDA ID 1 -----------------------------------
         $comanda = Comanda::create([
             'mesa' => 1,
-            'comentarios' => 'Solomillo poco hecho',
-            'estado' => 'en curso',
+            'estado' => 'cerrada',
+            'comentarios' => 'Cocacola no hielo',
         ]);
         // COMANDA ID 2 -----------------------------------
         $comanda = Comanda::create([
-            'mesa' => 1,
-            'comentarios' => 'Con tomate',
+            'mesa' => 2,
+            'comentarios' => 'Alitas muy picantes',
+            'estado' => 'cerrada',
         ]);
         // COMANDA ID 3 -----------------------------------
         $comanda = Comanda::create([
-            'mesa' => 1,
-            'comentarios' => 'Muy picante',
+            'mesa' => 4,
+            // 'comentarios' => 'Muy picante',
+            'estado' => 'cerrada',
         ]);
         // COMANDA ID 4 -----------------------------------
         $comanda = Comanda::create([
-            'mesa' => 2,
-            'comentarios' => 'Con almendras',
+            'mesa' => 6,
+            // 'comentarios' => 'Con almendras',
             'estado' => 'en curso',
         ]);
         // COMANDA ID 5 -----------------------------------
         $comanda = Comanda::create([
             'mesa' => 2,
-            'comentarios' => 'Con albondigas',
+            // 'comentarios' => '',
             'estado' => 'en curso',
         ]);
         // COMANDA ID 6 -----------------------------------
         $comanda = Comanda::create([
-            'mesa' => 2,
-            'comentarios' => 'Con tomate',
+            'mesa' => 3,
+            // 'comentarios' => 'Con tomate',
             'estado' => 'en curso',
         ]);
         // COMANDA ID 7 -----------------------------------
         $comanda = Comanda::create([
-            'mesa' => 3,
-            'comentarios' => 'Con tomate',
-            'estado' => 'cerrada',
+            'mesa' => 5,
+            'comentarios' => 'Solomillos punto',
+            'estado' => 'abierta',
         ]);
         // COMANDA ID 8 -----------------------------------
         $comanda = Comanda::create([
-            'mesa' => 3,
-            'comentarios' => 'Con tomate',
-            'estado' => 'cerrada',
+            'mesa' => 6,
+            'comentarios' => 'Agua grifo',
+            'estado' => 'abierta',
         ]);
         // COMANDA ID 9 -----------------------------------
-        $comanda = Comanda::create([
-            'mesa' => 3,
-            'comentarios' => 'Sin pepinillos',
-            'estado' => 'cerrada',
-        ]);
+        // $comanda = Comanda::create([
+        //     'mesa' => 3,
+        //     'comentarios' => 'Sin pepinillos',
+        //     'estado' => 'abierta',
+        // ]);
         // COMANDA ID 10 -----------------------------------
         $comanda = Comanda::create([
             'mesa' => 3,
             'comentarios' => 'Con tomate',
-            'estado' => 'abierta',
+            'estado' => 'cancelada',
         ]);
         // COMANDA ID 11 -----------------------------------
         $comanda = Comanda::create([
-            'mesa' => 3,
+            'mesa' => 1,
             'comentarios' => 'Con tomate',
             'estado' => 'cancelada',
         ]);
         // COMANDA ID 12 -----------------------------------
         $comanda = Comanda::create([
-            'mesa' => 3,
+            'mesa' => 6,
             'comentarios' => 'Con tomate',
             'estado' => 'cancelada',
         ]);
         // COMANDA ID 13 -----------------------------------
-        $comanda = Comanda::create([
-            'mesa' => 3,
-            'comentarios' => 'Con tomate',
-            'estado' => 'abierta',
-        ]);
+        // $comanda = Comanda::create([
+        //     'mesa' => 3,
+        //     'comentarios' => 'Con tomate',
+        //     'estado' => 'abierta',
+        // ]);
     }
 }
